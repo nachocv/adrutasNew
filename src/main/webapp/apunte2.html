@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Apunte</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="/stylesheets/main.css" type="text/css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css" type="text/css">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+	    $('#example').DataTable( {
+	        'dom': 'Bfrtip',
+	        'buttons': [
+	            'copyHtml5',
+	            'excelHtml5',
+	            'csvHtml5',
+	            'pdfHtml5'
+	        ],
+	    	'ajax': "/bbdd/persona",
+	        'columns': [
+	            { "data": "nombre" },
+	            { "data": "apellido1" },
+	            { "data": "apellido2" },
+	            { "data": "dni" },
+	            { "data": "poblacion" },
+	            { "data": "domicilio" }
+	        ]
+	    } );
+	} );
+	$.ajax({url: "/bbdd/persona", 
+        dataType: 'json', 
+        contentType: "application/json; charset=utf-8",
+		success: function(result) {
+			console.log("result: " + JSON.parse(result));
+		},
+	error : function(jqXHR, status, error) {
+		console.log("jqXHR: " + jqXHR +  " status: " + status + " error: " + error);
+	}});
+  </script>
+</head>
+<body>
+    <div class="center caja_l">
+      <h3>ALTA EN ACTIVIDAD (${cont} apuntados)</h3>
+      <article>
+        <table>
+          <tr>
+            <td><label for="actividad">Actividad: </label></td>
+            <td>
+              <select name="salida" class="input_500" onchange="this.form.submit()">
+                <s:iterator value="lsalidas" var="entry">
+                <option value="${entry.salida}">${entry.descripcion}</option>
+                </s:iterator>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2"><br/></td>
+          </tr>
+          <tr>
+            <td><label for="filtro">Filtro: </label></td>
+            <td><input id="filtro" class="input_500"></td>
+          </tr>
+          <tr>
+            <td><label for="filtro">Seleccionados: </label></td>
+            <td><select multiple="multiple" id="seleccionados" name="seleccionados" class="input_500"/></td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center">
+              <input type="button" name="todos" value="Grabar todos" onclick="graba_todos();"/>
+              <input type="submit" name="grabar" value="Grabar"/>
+              <input type="submit" name="cancel" value="Borrar"/>
+            </td>
+          </tr>
+        </table>
+      </article>
+    </div>
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+               <th>F.P.</th>
+               <th>Bus</th>
+               <th>Asiento</th>
+               <th>Importe</th>
+               <th>Ing.</th>
+               <th>Pag.</th>
+               <th>Bono</th>
+               <th>Socio</th>
+               <th>Nombre</th>
+               <th>Nota provisional</th>
+               <th>Nota permanente</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+               <th>F.P.</th>
+               <th>Bus</th>
+               <th>Asiento</th>
+               <th>Importe</th>
+               <th>Ing.</th>
+               <th>Pag.</th>
+               <th>Bono</th>
+               <th>Socio</th>
+               <th>Nombre</th>
+               <th>Nota provisional</th>
+               <th>Nota permanente</th>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>

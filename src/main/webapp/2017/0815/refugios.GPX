@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="CompeGPS" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <link href="http://www.compegps.com">
+      <text>CompeGPS TEAM, SL</text>
+    </link>
+    <time>2017-07-12T17:28:04Z</time>
+    <bounds maxlat="44.982717" maxlon="6.327563" minlat="44.765328" minlon="6.052267"/>
+  </metadata>
+  <wpt lat="44.765328" lon="6.327563">
+    <ele>-9999.0</ele>
+    <name>Pre la Chaumette</name>
+    <desc></desc>
+    <sym>Waypoint</sym>
+    <time>2017-07-12T16:10:21Z</time>
+  </wpt>
+  <wpt lat="44.829269" lon="6.275533">
+    <ele>1499.5</ele>
+    <name>Refuge du Clot</name>
+    <desc></desc>
+    <sym>Waypoint</sym>
+    <time>2017-07-12T16:21:22Z</time>
+  </wpt>
+  <wpt lat="44.826447" lon="6.145155">
+    <ele>1053.9</ele>
+    <name>Gite La Chamierre</name>
+    <desc></desc>
+    <sym>Waypoint</sym>
+    <time>2017-07-12T16:57:12Z</time>
+  </wpt>
+  <wpt lat="44.869740" lon="6.090277">
+    <ele>1111.9</ele>
+    <name>Gîte Les Arias</name>
+    <desc></desc>
+    <sym>Waypoint</sym>
+    <time>2017-07-12T17:00:59Z</time>
+  </wpt>
+  <wpt lat="44.908893" lon="6.052267">
+    <ele>1762.1</ele>
+    <name>Gîte Le Béranger</name>
+    <desc></desc>
+    <sym>Waypoint</sym>
+    <time>2017-07-12T17:09:51Z</time>
+  </wpt>
+  <wpt lat="44.982717" lon="6.120221">
+    <ele>949.8</ele>
+    <name>L&apos;Alleau</name>
+    <desc></desc>
+    <sym>Waypoint</sym>
+    <time>2017-07-12T17:25:26Z</time>
+  </wpt>
+</gpx>

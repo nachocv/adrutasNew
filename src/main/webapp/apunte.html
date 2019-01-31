@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Apunte</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="/stylesheets/main.css" type="text/css">
+  <link rel="stylesheet" href="/js/jquery-ui-1.12.1.custom/jquery-ui.css">
+  <script src="/js/jquery-3.3.1.js"></script> 
+  <script src="/js/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+  <script src="/js/main.js"></script>
+  <script type="text/javascript">
+  $(salidaDetalle);
+  </script>
+</head>
+<body>
+  <div class="center caja_l">
+    <h3>ALTA EN ACTIVIDAD (<object class="apuntados"></object> apuntados)</h3>
+    <article>
+      <table>
+        <tr>
+          <td><label for="actividad">Actividad: </label></td>
+          <td>
+            <select id="salida" class="input_500" onchange="salidaDetalle()"/>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"><br/></td>
+        </tr>
+        <tr>
+          <td><label for="filtro">Filtro: </label></td>
+          <td><input id="filtro" class="input_500"></td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center">
+            <input type="submit" name="lista" value="Grabar" onclick="return mandaLista()">
+            <input type="submit" name="lista" value="Borrar" onclick="return delAlta()">
+            <input type="submit" name="lista" value="Cancelar" onclick="salidaDetalle()">
+          </td>
+        </tr>
+      </table>
+    </article>
+  </div>
+  <div class="caja_xxl center">
+    <h3>LISTA DE APUNTADOS</h3>
+      <article>
+        <table id="apuntados" style="width:100%">
+          <tbody>
+            <tr align="center">
+              <td>Sel</td>
+              <td>F.P.</td>
+              <td>Bus</td>
+              <td>Asiento</td>
+              <td>Importe</td>
+              <td>Ing.</td>
+              <td>Pag.</td>
+              <td>Bono</td>
+              <td>Socio</td>
+              <td>Nombre</td>
+              <td>Nota provisional</td>
+              <td>Nota permanente</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </div>
+  </body>
+</html>

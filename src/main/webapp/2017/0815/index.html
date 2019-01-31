@@ -1,0 +1,64 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="/stylesheets/main.css" type="text/css">
+  <link rel="stylesheet" href="/jquery-ui-1.11.2/jquery-ui.min.css">
+  <script src="/js/jquery-1.11.1.min.js"></script> 
+  <script src="/jquery-ui-1.11.2/jquery-ui.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+  $(function() {
+    var esto = $(this);
+    $(".include" ).each(function() {
+      esto = $(this);
+      esto.load(esto.attr("src"));
+    });
+  });
+  </script>
+</head>
+
+<body>
+WEBAPP
+	<div id="contenedor">
+		<div id="header"></div>
+    <table class="tabla_contenedor art-article">
+			<tr>
+				<td class="td_contenedor">
+          <table>
+            <tr class="top">
+              <td>
+                <object class="include" src="/2017/06/aviso1.html"></object>
+                <object class="include" src="/2016/apunte.html"></object>
+                <object class="include" src="/2017/bienvenida2.html"></object>
+              </td>
+              <td>
+                <object class="include" src="/2017/0815/proxima.html"></object>
+                <object class="include" src="/2016/ventajas_socio.html"></object>
+              </td>
+              <td>
+                <object class="include" src="/2017/aviso1.html"></object>
+                <object class="include" src="/2017/seguros/fmm/federacion.html"></object>
+                <object class="include" src="/2014/aviso.html"></object>
+                <object class="include" src="/2016/noticias2.html"></object>
+              </td>
+            </tr>
+          </table>
+				</td>
+			</tr>
+      <tr>
+        <td class="td_contenedor">
+          <object class="include" src="/2017/0701/excursiones.html"></object>
+          <object class="include" src="/2017/0701/salidas.html"></object>
+        </td>
+      </tr>
+      <tr>
+        <td class="td_contenedor">
+          <object class="include" src="/jsp/fotos.html"></object>
+        </td>
+      </tr>
+    </table>
+    <object class="include" src="/txt/footer.txt"></object>
+	</div>
+<script>
+</script>
+</body>
