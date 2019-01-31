@@ -1,0 +1,28 @@
+<html>
+<%@ page contentType="text/html; charset=utf-8" language="java"%>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="/stylesheets/main.css"
+	type="text/css">
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/fotos.js"></script>
+</head>
+
+<body onload="init()">
+	<div class="caja_s">
+		<h3>FEDERACION 2018</h3>
+		<article>
+		  <br/><img alt="Licencia Federativa" src="/2018/seguros/fmm/tarjetafedme2018.png" width="215">
+      <br/><a href="http://www.fmm.es/federacion-montana/tramites/licencia-paso-a-paso/seguros-montana-fmm-tipos-tarifas-2018" target="_new">Tipos y Tarifas</a>
+      <br/><a href="http://www.fmm.es/federacion-montana/tramites/accidentado/tramita-un-parte" target="_new">Tramitar un parte de accidente</a>
+      <br/><a href="http://www.fmm.es/federacion-montana/tramites/10-razones-para-federarte" target="_new">10 Razones para federarte</a>
+      <br/><a href="http://www.fmm.es/federacion-montana/tramites/recomendaciones-viajes-extranjero" target="_new">Recomendaciones viaje</a>
+      <br/><a href="https://fmmlicencias.com/fmm/accesofederado.aspx" target="_new">Ampliación, duplicado, domiciliación y cambio de datos</a>
+      <br/><a href="http://www.fmmlicencias.com/ventajas/pub2/home.asp" target="_new">Ventajas al federado</a>
+      <br/><a href="http://www.fmm.es/federacion-montana/tramites/accidentado/poliza-de-seguros" target="_new">Condiciones particulares de la póliza de accidentes</a>
+      <br/><a href="/2018/seguros/fmm/centros-medicos_sep16.pdf" target="_new">Centros concertados MAPFRE</a>
+      <br/><a href="http://www.fmm.es/federacion-montana/federacion/legislacion-montana" target="_new">Legislación en montaña</a>
+		</article>
+	</div>
+</body>
+</html>
