@@ -2,6 +2,8 @@ package com.adrutas.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -49,6 +51,7 @@ import adrutas.com.Constante;
 public class SalidaDetalle implements Serializable {
 	private static final long serialVersionUID = -6755376347925749528L;
 	private static final Logger log = Logger.getLogger(SalidaDetalle.class.getName());
+	private static final List<Integer> precioTipoNoSocio = Arrays.asList(new Integer[] {5,6,7,8});
 
 	@EmbeddedId
 	private SalidaDetallePK id;
@@ -382,7 +385,7 @@ public class SalidaDetalle implements Serializable {
 		return null;
 	}
 
-	public static synchronized SalidaDetalle insert(String salida,int idPersona) {
+	public static synchronized String insert(String salida,int idPersona) {
 		EntityManager em = null;
     	SalidaDetalle detalle = new SalidaDetalle();
         try {
@@ -390,14 +393,17 @@ public class SalidaDetalle implements Serializable {
 			em.getTransaction().begin();
         	SalidaDetallePK id = new SalidaDetallePK();
         	Recibo recibo = new Recibo();
-			Salida salidaBean = em.createNamedQuery("Salida.findBySalida",Salida.class)
+			Salida beanSalida = em.createNamedQuery("Salida.findBySalida",Salida.class)
 					.setParameter("salida",salida).getSingleResult();
+			if (beanSalida.getPlazas()<=beanSalida.getSalidaDetalles().size()) {
+				return "Ya no hay plazas";
+			}
 			List<Ficha> list = em.createNamedQuery("Ficha.find", Ficha.class)
 					.setParameter("idPersona", idPersona)
-					.setParameter("anyo", salidaBean.getAnyo())
+					.setParameter("anyo", beanSalida.getAnyo())
 					.setParameter("idFicha", (short) 0).getResultList();
 			Ficha ficha = list.isEmpty()? null: list.get(0);
-			Date fechaInicio = salidaBean.getFechaInicio();
+			Date fechaInicio = beanSalida.getFechaInicio();
 			Date baja;
 			boolean isDirectivo = false;
 			if (ficha!=null) {
@@ -415,9 +421,9 @@ public class SalidaDetalle implements Serializable {
             	Integer anyoAnt = 0;
             	int cont = 0;
             	detalle.setFp("ME");
-                if ("N".equals(salidaBean.getTipo())) {
+                if ("N".equals(beanSalida.getTipo())) {
                     for (SalidaDetalle bean: em.createNamedQuery("SalidaDetalle.findN",SalidaDetalle.class).setParameter(
-                    		"anyo",salidaBean.getAnyo()).setParameter("id_persona",idPersona).getResultList()) {
+                    		"anyo",beanSalida.getAnyo()).setParameter("id_persona",idPersona).getResultList()) {
                     	if (!bean.getSalidaBean().getAnyo().equals(anyoAnt)) {
                             anyoAnt = bean.getSalidaBean().getAnyo();
                             cont = 0;
@@ -439,7 +445,7 @@ public class SalidaDetalle implements Serializable {
                         	if (bono.getId().getUso()<10) {
                         		BonoDetalle bonoDetalle = new BonoDetalle();
                         		bonoDetalle.setIdPersona(idPersona);
-                        		bonoDetalle.setSalidaBean(salidaBean);
+                        		bonoDetalle.setSalidaBean(beanSalida);
                         		BonoDetallePK bonoDetallePK = new BonoDetallePK();
                         		bonoDetalle.setId(bonoDetallePK);
                         		bonoDetallePK.setBono(bono.getId().getBono());
@@ -455,17 +461,25 @@ public class SalidaDetalle implements Serializable {
 
 //			Calculo del precio
 	        Map<Object, BigDecimal> precio = new HashMap<Object, BigDecimal>();
-			for (SalidaPrecio salidaPrecio: salidaBean.getSalidaPrecios()) {
-	            precio.put(salidaPrecio.getPrecioTipoBean().getPrecioTipo(), salidaPrecio.getPrecio());
+	        boolean soloSocios = true;
+	        int precioTipo;
+			for (SalidaPrecio salidaPrecio: beanSalida.getSalidaPrecios()) {
+	            precio.put((precioTipo = salidaPrecio.getPrecioTipoBean().getPrecioTipo()), salidaPrecio.getPrecio());
+            	if (precioTipoNoSocio.contains(precioTipo)) {
+            		soloSocios = false;
+            	}
 	        }
 	        BigDecimal importe;
 	        BigDecimal ingreso;
 	        BigDecimal pago = BigDecimal.ZERO;
-        	BigDecimal impSegDia = new BigDecimal(Static.getPropiedadesanuales(salidaBean.getAnyo(),"S1D"));
+        	BigDecimal impSegDia = new BigDecimal(Static.getPropiedadesanuales(beanSalida.getAnyo(),"S1D"));
 	        boolean seguro_dia = ficha==null || "".equals(ficha.getTipoLicencia());
 	        if (ficha==null || ficha.getImportecuota().signum()==0) {
 
 //	            No socio
+            	if (soloSocios) {
+            		return "Salida solo para socios";
+            	}
 	            if (seguro_dia) {
 
 //	                No socio sin federar
@@ -523,7 +537,7 @@ public class SalidaDetalle implements Serializable {
 			recibo.setImporte(importe);
 			recibo.setFormapago(Static.mFormaPagoAll.get(detalle.getFp()));
 			detalle.setIngreso(ingreso);
-			detalle.setSalidaBean(salidaBean);
+			detalle.setSalidaBean(beanSalida);
 			detalle.setId(id);
         	id.setIdPersona(idPersona);
         	id.setSalida(salida);
@@ -538,12 +552,13 @@ public class SalidaDetalle implements Serializable {
 			em.getTransaction().commit();
         } catch (Exception e) {
         	log.log(Level.SEVERE, "SalidaDetalle.insert", e);
+        	return e.getMessage();
 		} finally {
 			if (em!=null) {
 				em.close();
 			}
 		}
-        return detalle;
+        return null;
 	}
 
 	public static synchronized void update(Map<String,Object> listaApuntados) {

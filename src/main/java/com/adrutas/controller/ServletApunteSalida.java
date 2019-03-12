@@ -16,6 +16,10 @@ public class ServletApunteSalida extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SalidaDetalle.insert(request.getParameter("salida"),Integer.parseInt(request.getParameter("id_persona")));
+		String error = SalidaDetalle.insert(request.getParameter("salida"),Integer.parseInt(request.getParameter("id_persona")));
+		if (error!=null) {
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			response.getWriter().print(error);
+		}
 	}
 }

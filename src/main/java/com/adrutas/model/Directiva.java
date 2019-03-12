@@ -78,7 +78,7 @@ public class Directiva implements Serializable {
 		this.persona = persona;
 	}
 
-    public static boolean isDirectivo(int idPersona) {
+    public static boolean isDirectivo(Integer idPersona) {
 		EntityManager em = null;
         try {
     		em = EntityManagerFactories.getEMF().createEntityManager();

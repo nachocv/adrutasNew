@@ -26,6 +26,7 @@ import javax.persistence.Transient;
 
 import com.adrutas.dao.EntityManagerFactories;
 import com.adrutas.dao.Static;
+import com.google.gson.Gson;
 
 import adrutas.com.Constante;
 
@@ -58,6 +59,8 @@ import adrutas.com.Constante;
 public class Persona implements Serializable {
 	private static final long serialVersionUID = 2031642939280211222L;
 	private static final Logger log = Logger.getLogger(Persona.class.getName());
+//	private static final DateFormat dF1 = new SimpleDateFormat("yyyy-MM-dd", new Locale("es", "ES"));
+//	private static final DateFormat dF2 = new SimpleDateFormat("yyyy-MM-dd", new Locale("en", "US"));
 
 	@Id
 	@Column(name="id_persona")
@@ -677,10 +680,14 @@ public class Persona implements Serializable {
             	map.put("provincia", persona.getProvincia());
             	map.put("correo", persona.getCorreo());
             	map.put("sexo", persona.getSexo());
-            	map.put("nacimiento", persona.getNacimiento()==null? "": Constante.dF12.format(persona.getNacimiento()));
+//            	log.log(Level.WARNING, "persona.nacimiento: " + persona.getNacimiento().toString()
+//            			+ " Time: " + persona.getNacimiento().getTime()
+//            			+ " local.es: " + dF1.format(persona.getNacimiento())
+//            			+ " local.en: " + dF2.format(persona.getNacimiento()));
+            	map.put("nacimiento", persona.getNacimiento()==null? "": persona.getNacimiento().toString());
             	map.put("pzCastilla", persona.getPzCastilla());
             	map.put("pasaporte", persona.getPasaporte());
-            	map.put("cadPasaporte", persona.getCadPasaporte()==null? "": Constante.dF12.format(persona.getCadPasaporte()));
+            	map.put("cadPasaporte", persona.getCadPasaporte()==null? "": persona.getCadPasaporte().toString());
             	map.put("nota", persona.getNota());
             	map.put("vetado", persona.getVetado());
             	map.put("veto", persona.getVeto());
@@ -704,8 +711,11 @@ public class Persona implements Serializable {
             	int anyo = -1;
             	for (Ficha ficha: persona.getFichas()) {
             		if (anyo==-1) {
-                    	map.put("ingreso", Constante.dF12.format(persona.getIngreso()==null?
-                    			ficha.getFecha(): persona.getIngreso()));
+            			if (persona.getIngreso()==null) {
+                        	map.put("ingreso", ficha.getFecha().toString());
+            			} else {
+                        	map.put("ingreso", persona.getIngreso().toString());
+            			}
             		}
             		mapBean2.put(anyo = ficha.getId().getAnyo(),mapBean1 = new HashMap<String, Object>());
             		mapBean1.put("importecuota", ficha.getImportecuota());
@@ -876,7 +886,7 @@ public class Persona implements Serializable {
 
     public static synchronized Map<String, Object> update(Map<String, Object> map) {
 		String nombre = (String) map.get("nombre");
-		if (nombre==null || nombre.isEmpty()) {
+		if (nombre==null || (nombre=nombre.trim()).isEmpty()) {
 			return null;
 		}
 		EntityManager em = null;
@@ -898,6 +908,7 @@ public class Persona implements Serializable {
     			persona = new Persona();
     			persona.setIdPersona(idPersona = em.createNamedQuery("Persona.getIdPersona", Integer.class).setMaxResults(1).getSingleResult() + 1);
     			em.persist(persona);
+            	log.log(Level.SEVERE, "Insertando persona con idPersona: " + persona.getIdPersona() + ", map: " + new Gson().toJson(map));
     		}
     		String usuario = (String) map.get("usuario");
     		if (!"".equals(usuario)) {

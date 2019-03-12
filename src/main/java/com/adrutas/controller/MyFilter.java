@@ -27,7 +27,7 @@ public final class MyFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
     	Persona persona = (Persona) ((HttpServletRequest) request).getSession().getAttribute("yo");
-    	if (persona==null || Directiva.isDirectivo(persona.getIdPerfil())) {
+    	if (persona==null || !Directiva.isDirectivo(persona.getIdPersona())) {
     		((HttpServletResponse) response).sendError(403);
     	} else {
     		chain.doFilter(request, response);

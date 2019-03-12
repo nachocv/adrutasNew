@@ -20,6 +20,7 @@ import javax.persistence.TemporalType;
  */
 @Entity@Table(name = "link")
 @NamedQuery(name="Link.findAll", query="SELECT l FROM Link l")
+@NamedQuery(name="Link.count",query="select count(l) from Link l where link=:link")
 public class Link implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -71,5 +72,4 @@ public class Link implements Serializable {
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
-
 }

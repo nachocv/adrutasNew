@@ -660,16 +660,13 @@ public class Salida implements Serializable {
             map.put("abiertoApunte",abiertoApunte);
             if (persona!=null) {
             	map.put("id_persona", persona.getIdPersona());
-            	map.put("usuario", persona.getUsuario());
+            	map.put("usuario", persona.getUsuario().isEmpty()? persona.getNombre(): persona.getUsuario());
             	if (abiertoApunte && em.createNamedQuery("Persona.findByIdPersona", Persona.class)
             			.setParameter("idPersona",persona.getIdPersona()).getSingleResult()
             			.esSocio(beanSalida.anyo)) {
             		map.put("apuntado",!em.createNamedQuery("SalidaDetalle.findByPersona", SalidaDetalle.class)
             				.setParameter("salida",beanSalida.getSalida())
             				.setParameter("idPersona",persona.getIdPersona()).getResultList().isEmpty());
-//            		map.put("apuntado",em.createNamedQuery("SalidaDetalle.findByPersona", SalidaDetalle.class)
-//            				.setParameter("salida",beanSalida.getSalida())
-//            				.setParameter("idPersona",persona.getIdPersona()).getSingleResult()!=null);
             	}
             }
         } catch (Exception e) {

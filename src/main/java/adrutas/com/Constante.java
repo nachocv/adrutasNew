@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 public final class Constante {
     private static final Logger log = Logger.getLogger(Constante.class.getName());
     public static final TimeZone tZ = TimeZone.getTimeZone("Europe/Madrid");
-    public static final Locale locale = new Locale("es", "ES");
+    public static Locale locale = new Locale("es", "ES");
     public static final NumberFormat nF1 = new DecimalFormat("00");
     public static final NumberFormat nF2 = new DecimalFormat("0000");
     public static final NumberFormat nF3 = new DecimalFormat("00000000");
@@ -32,8 +32,8 @@ public final class Constante {
     public static final DateFormat dF4 = new SimpleDateFormat("dd/MM/yyyy", locale);
     public static final DateFormat dF5 = new SimpleDateFormat("yyMMdd");
     public static final DateFormat dF6 = new SimpleDateFormat("d 'de' ");
-    public static final DateFormat dF7 = new SimpleDateFormat("MMMM", new Locale("es", "ES"));
-    public static final DateFormat dF8 = new SimpleDateFormat("dd-MMM", new Locale("es", "ES"));
+    public static final DateFormat dF7 = new SimpleDateFormat("MMMM", locale);
+    public static final DateFormat dF8 = new SimpleDateFormat("dd-MMM", locale);
     public static final DateFormat dF9 = new SimpleDateFormat("dd/MM/yyyy HH:mm", locale);
     public static final DateFormat dF10 = new SimpleDateFormat("HH:mm", locale);
     public static final DateFormat dF11 = new SimpleDateFormat("/yyyy/MMdd/");

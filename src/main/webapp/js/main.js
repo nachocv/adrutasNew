@@ -69,7 +69,7 @@ function apunte(salida,id_persona,funcion) {
     url: "/apunteSalida?salida=" + salida + "&id_persona=" + id_persona,
     success: funcion,
     error : function(jqXHR, status, error) {
-      alert('Disculpe, existió un problema');
+      alert(jqXHR.responseText);
     }
   });
 }
@@ -182,6 +182,7 @@ var bienvenida = function() {
 }
 
 function comprueba_identificacion(result) {
+  console.log(result);
 	datos = JSON.parse(result);
   $("object#plazas").html(datos.abiertoApunte? "<font color='blue'>¡¡" +
       (datos.hayPlazas? "QUEDAN PLAZAS LIBRES": "YA NO HAY PLAZAS") + "!!</font><br/>": "");
@@ -191,8 +192,10 @@ function comprueba_identificacion(result) {
     console.log("identificado. datos.abiertoApunte: " + datos.abiertoApunte + ". datos.apuntado: " + datos.apuntado);
 	  $("object#usuario").html("Bienvenido <b>" + datos.usuario + "</b><br/><br/><a href=\"javascript:modifica_datos();\">"
 	      + "Modificar datos</a><br/><a href=\"javascript:close_session();\">Cerrar sesión</a><br/><br/>");
-	  $("object#apuntarse").html(datos.abiertoApunte? datos.apuntado? "<font color='red'>Ya estás apuntado</font>":
-	    "<a href='javascript:void(0)' onclick='apuntaWeb();'>Apúntate aquí</a>": "");
+	  $("object#apuntarse").html(datos.apuntado? "<font color='red'>Ya estás apuntado</font>"
+	      : datos.abiertoApunte && datos.hayPlazas? "<a href='javascript:void(0)' onclick='apuntaWeb();'>Apúntate aquí</a>"
+	      : "");
+//    $("object#apuntarse").html("<a href='javascript:void(0)' onclick='apuntaWeb();'>Apúntate aquí</a>");
 	}
 }
 
@@ -696,9 +699,35 @@ function excelContable(salida) {
   form.submit();
 }
 
-function excelSocios() {
-	$("form[action='/excel_socios']").submit();
-}
+//function excelSocios() {
+//  $.ajax({
+//    url: "/excel_socios",
+//    beforeSend: function() {
+//      $('#response').html("<img src='/images/ui-anim_basic_16x16.gif' />");
+//    },
+//    success: function(html) {
+//      $('#response').html(html);
+//    }
+//    success : function(data) {
+//      response($.map(data, function(item) {
+//        persona = item;
+//        console.log("persona: " + persona);
+//        return {
+//          label : item.id_persona + "#" + item.nomb,
+//          value : item.nomb,
+//          persona: item
+//        }
+//      }));
+//    },
+//    error : function(jqXHR, status, error) {
+//      alert('Disculpe, existió un problema');
+//    }
+//  });
+//
+//  $("form#myForm").remove();
+//  var form = $('<form id="myForm" method="post" action="/excel_socios"></form>').appendTo('body');
+//  form.submit();
+//}
 
 function excelEtiquetasSocios(no_email) {
 	var form = $("form[action='/excel_etiquetas_socios']");
@@ -1101,7 +1130,7 @@ function grabaPersona() {
   personaNew.poblacion = $("input#poblacion").val().trim();
   personaNew.provincia = $("input#provincia").val().trim();
   personaNew.correo = $("input#correo").is(":checked");
-  personaNew.sexo = value;
+  personaNew.sexo = $("input#sexoM").is(':checked')? "M": "V";
   personaNew.nacimiento = $("input#nacimiento").val();
   if (persona==undefined) {
     personaNew.ingreso = new Date().formatDate();
