@@ -150,20 +150,42 @@ var getInit = function() {
 	}});
 }
 
+var prueba = function() {
+  var fecha = new URL($(location).attr('href')).searchParams.get("fecha");
+  $.ajax({url: "/prueba?fecha=" + fecha + "&pathname=" + window.location.pathname, success: function(result) {
+    url = result;
+        $(".init").load(url);
+    },
+  error : function(jqXHR, status, error) {
+    alert('Disculpe, existió un problema');
+  }});
+}
+
+var putInclude = function() {
+  $(".include" ).each(function() {
+    esto = $(this);
+    esto.load(esto.attr("src"));
+  });
+}
+
+var changePassword= function() {
+  putInclude();
+  var link = new URL($(location).attr('href')).searchParams.get("link");
+  $("input[name='link']").val(link);
+  console.log("link: " + link);
+}
+
 var getUsuario = function() {
-    $(".include" ).each(function() {
-        esto = $(this);
-        esto.load(esto.attr("src"));
-    });
-    $.ajax({
-      url: "/getUsuario?pathname=" + (url==undefined? window.location.pathname: url),
-      success: function(result) {
-    		comprueba_identificacion(result);
-    	},
-    	error : function(jqXHR, status, error) {
-	    	alert('Disculpe, existió un problema');
-	    }
-	});
+  putInclude();
+  $.ajax({
+    url: "/getUsuario?pathname=" + (url==undefined? window.location.pathname: url),
+    success: function(result) {
+      comprueba_identificacion(result);
+    },
+    error : function(jqXHR, status, error) {
+      alert('Disculpe, existió un problema');
+    }
+  });
 }
 
 var bienvenida = function() {
@@ -270,10 +292,7 @@ function resizeIframe(miIframe) {
 }
 
 var getPersona = function() {
-  $(".include" ).each(function() {
-      esto = $(this);
-      esto.load(esto.attr("src"));
-  });
+  putInclude();
   $.ajax({
     url: "/persona",
     success: function(result) {
@@ -762,7 +781,17 @@ function put_md5(input) {
 }
 
 function renewPassword() {
-	$("form[action='/renewPassword']").submit();
+  console.log("renewPassword. Email: " + $("input#renewEmail").val());
+//	$("form[action='/renewPassword']").submit();
+
+  $.ajax({
+    method: "POST",
+    url: "/renewPassword?email=" + $("input#renewEmail").val(),
+    error : function(jqXHR, status, error) {
+      alert(jqXHR.responseText);
+    }
+  });
+  ocultaFrame();
 }
 
 function selectFicha(input) {
@@ -1183,19 +1212,4 @@ function grabaFicha() {
 			alert('Disculpe, existió un problema');
 		}
 	});
-}
-
-var prueba = function() {
-    var select = $("select#anyos");
-    select.append("<option value=\"2010\">2010</option>");
-    select.append("<option value=\"2011\">2011</option>");
-    select.append("<option value=\"2012\">2012</option>");
-    select.append("<option value=\"2013\">2013</option>");
-    select.append("<option value=\"2014\">2014</option>");
-    select.append("<option value=\"2015\">2015</option>");
-    select.append("<option value=\"2016\">2016</option>");
-    select.append("<option value=\"2017\">2017</option>");
-    select.append("<option value=\"2018\">2018</option>");
-    var anyo = 2012;
-    $('select#anyos option[value=' + anyo + ']').attr('selected','selected');
 }

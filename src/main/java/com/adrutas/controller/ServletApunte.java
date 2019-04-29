@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.adrutas.model.Persona;
-import com.adrutas.model.Salida;
-
 import com.google.gson.Gson;
 
 @WebServlet(name = "ServletApunte", urlPatterns = {"/apunte"})

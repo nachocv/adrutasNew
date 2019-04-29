@@ -197,7 +197,7 @@ public class Ficha implements Serializable {
 		EntityManager em = null;
 		Ficha ficha = null;
         try {
-    		em = EntityManagerFactories.getEMF().createEntityManager();
+    		em = EntityManagerFactories.getEM();
     		ficha = find(em,idPersona,anyo,idFicha);
         } catch (Exception e) {
         	log.log(Level.SEVERE, "No updata", e);
@@ -222,7 +222,7 @@ public class Ficha implements Serializable {
     		int anyo = Integer.parseInt((String) map.get("anyo"));
     		short idFicha = 0;
     		Date fecha = new Date();
-    		em = EntityManagerFactories.getEMF().createEntityManager();
+    		em = EntityManagerFactories.getEM();
 			em.getTransaction().begin();
     		int idRecibo = em.createNamedQuery("Recibo.getLast", Integer.class).setMaxResults(1).getSingleResult() + 1;
     		ficha = find(em,idPersona,anyo,idFicha);

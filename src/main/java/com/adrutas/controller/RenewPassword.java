@@ -2,6 +2,7 @@ package com.adrutas.controller;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.adrutas.dao.EntityManagerFactories;
+import com.adrutas.dao.Static;
+import com.adrutas.model.Link;
 import com.adrutas.model.Persona;
 
 import adrutas.com.Constante;
@@ -74,23 +77,26 @@ public class RenewPassword extends HttpServlet {
         mArgs.put("from", new InternetAddress("adrutas.web@gmail.com", "Administrador Web de ADRutas"));
         mArgs.put("to", new InternetAddress(email,nombre));
         mArgs.put("subject", "Cuenta adrutas");
-        link = server + "changePassword?link=" + link;
+        link = server + "sendLink?link=" + link;
         mArgs.put("htmlBody", "Hola,<br/><br/>Este mensaje se ha generado desde la web \"adrutas.com\" porque alguien" +
         		" ha informado de que no dispones de la contraseña de tu cuenta.<br/><br/>Reactiva tu cuenta pulsando" +
         		" este enlace.<br/><br/><a href=\"" + link + "\">" + link +
         		"</a><br/><br/>Este es un mensaje automático, no contestes a esta dirección.");
-        Mail.sendHtmlMail(mArgs);
+        log.log(Level.SEVERE, "Enviado el link " + link + " al email " + email + " de " + nombre);
+        if (Static.PRODUCTION) {
+        	Mail.sendHtmlMail(mArgs);
+        }
     }
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		EntityManager em = null;
-        String link;
+        String sLink;
         String error = null;
         try {
         	String email = req.getParameter("email");
-    		em = EntityManagerFactories.getEMF().createEntityManager();
-            List<Persona> list = Persona.findExact(email);
+    		em = EntityManagerFactories.getEM();
+            List<Persona> list = Persona.findByEmail(email,em,2);
             if (list.size()==0) {
                 error = "El EMail \"" + email + "\" no lo tiene nadie. " +
                 		"Si quiere que le sea asignado, pongase en contacto con el Club";
@@ -98,21 +104,40 @@ public class RenewPassword extends HttpServlet {
                 error = "El EMail \"" + email + "\" lo tiene más de una persona";
             } else {
                 Persona persona = list.get(0);
-                for (link = getRndStr(Constante.r, 25); em.createNamedQuery("Link.count", Number.class).setParameter(
-                		"link", link).getSingleResult().intValue()>1;link = getRndStr(Constante.r, 25)) {}
+    			em.getTransaction().begin();
+        		for (Link link1: em.createNamedQuery("Link.findOld",Link.class)
+        				.setParameter("fecha",new Date()).getResultList()) {
+            		em.remove(link1);
+        		}
+        		for (Link link1: em.createNamedQuery("Link.findByPersona", Link.class).setParameter(
+        				"idPersona", persona.getIdPersona()).getResultList()) {
+            		em.remove(link1);
+        		}
+                for (sLink = getRndStr(Constante.r, 25); em.createNamedQuery("Link.count", Number.class).setParameter(
+                		"link", sLink).getSingleResult().intValue()>0;sLink = getRndStr(Constante.r, 25)) {}
+                Link link = new Link();
+                link.setFecha(new Date());
+                link.setPersona(persona);
+                link.setLink(sLink);
+//                persona.setLink(link);
+                em.persist(link);
+//                em.persist(persona);
+    			em.getTransaction().commit();
                 StringBuffer url = req.getRequestURL();
                 String server = url.substring(0,url.length()-req.getRequestURI().length()+1);
-                sendPassword(email,persona.getNombre(),server,link);
+                sendPassword(email,persona.getNombre(),server,sLink);
             }
         } catch (Exception e) {
-        	error = "No recupera la cuenta" + e.getMessage();
-            log.log(Level.SEVERE, "No recupera la cuenta", e);
+        	error = "No recupera la cuenta " + e.getMessage();
+            log.log(Level.SEVERE, "No recupera la cuenta ", e);
 		} finally {
 			if (em!=null) {
 				em.close();
 			}
 		}
-		if (error!=null) {
+		if (error==null) {
+	        req.getRequestDispatcher("/").forward(req,resp);
+		} else {
 			resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			resp.getWriter().print(error);
 		}

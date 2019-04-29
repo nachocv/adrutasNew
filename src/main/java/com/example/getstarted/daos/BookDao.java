@@ -1,9 +1,9 @@
 package com.example.getstarted.daos;
 
+import java.sql.SQLException;
+
 import com.example.getstarted.objects.Book;
 import com.example.getstarted.objects.Result;
-
-import java.sql.SQLException;
 
 public interface BookDao {
 	Long createBook(Book book) throws SQLException;

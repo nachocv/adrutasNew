@@ -53,7 +53,7 @@ public class Static extends HttpServlet {
 
 //  Anyo, Salida
     private static SortedSet<Salida> sAlbum;
-
+	public static boolean PRODUCTION = false;
 
     public static void inicio() {
         mSalida = new TreeMap<Date, Salida>(myComparator2);
@@ -66,7 +66,7 @@ public class Static extends HttpServlet {
         sAlbum = new TreeSet<Salida>(myComparator1);
 		EntityManager em = null;
         try {
-    		em = EntityManagerFactories.getEMF().createEntityManager();
+    		em = EntityManagerFactories.getEM();
     		for (Salida salida: em.createNamedQuery("Salida.findAll", Salida.class).getResultList()) {
     			salida.putFechas();
     			if (!salida.getAlbums().isEmpty()) {

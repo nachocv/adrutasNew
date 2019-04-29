@@ -8,7 +8,7 @@ public class SalidaDao {
 	private static final Logger log = Logger.getLogger(SalidaDao.class.getName());
 
 	public static void doLogSalida() {
-		EntityManager em = EntityManagerFactories.getEMF().createEntityManager();
+		EntityManager em = EntityManagerFactories.getEM();
 //		Query q = em.createNamedQuery("Salida.findAll");
 //		for (Salida salida: (List<Salida>) q.getResultList()) {
 //			log.finest("salida: " + salida.getSalida() + " descripcion: " + salida.getDescripcion());

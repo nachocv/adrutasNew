@@ -35,7 +35,7 @@ import adrutas.com.Constante;
 @NamedQuery(name="Salida.findBySalida", query="SELECT s FROM Salida s WHERE s.salida=:salida")
 @NamedQuery(name="Salida.quedanPlazas", query="SELECT s FROM Salida s LEFT JOIN s.salidaDetalles")
 @NamedQuery(name="Salida.findByDate", query="SELECT s FROM Salida s LEFT JOIN s.salidaFechas f WHERE "
-		+ "f.fechaTipoBean.fechaTipo=2 and f.fecha>=:date ORDER BY f.fecha")
+		+ "f.fechaTipoBean.fechaTipo=2 and f.fecha>=:date and s.url is not null ORDER BY f.fecha")
 
 public class Salida implements Serializable {
 	private static final long serialVersionUID = 8476007606083178837L;
@@ -660,7 +660,8 @@ public class Salida implements Serializable {
             map.put("abiertoApunte",abiertoApunte);
             if (persona!=null) {
             	map.put("id_persona", persona.getIdPersona());
-            	map.put("usuario", persona.getUsuario().isEmpty()? persona.getNombre(): persona.getUsuario());
+            	String usuario = persona.getUsuario();
+            	map.put("usuario", usuario==null || usuario.isEmpty()? persona.getNombre(): persona.getUsuario());
             	if (abiertoApunte && em.createNamedQuery("Persona.findByIdPersona", Persona.class)
             			.setParameter("idPersona",persona.getIdPersona()).getSingleResult()
             			.esSocio(beanSalida.anyo)) {
@@ -706,7 +707,7 @@ public class Salida implements Serializable {
 		List<PersonaMensaje> lMensajes;
     	Map<String, Object> map = new HashMap<String, Object>();
         try {
-    		em = EntityManagerFactories.getEMF().createEntityManager();
+    		em = EntityManagerFactories.getEM();
         	List<Map<String, Object>> lBeans = new ArrayList<Map<String, Object>>();
         	Map<String, Object> mBean;
         	map.put("salidas",lBeans);

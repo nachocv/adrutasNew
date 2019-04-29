@@ -163,10 +163,6 @@ public class Persona implements Serializable {
 	@Transient
 	private Map<Integer,Ficha> mFichas = new TreeMap<Integer,Ficha>();
 
-	//bi-directional one-to-one association to Link
-	@OneToOne(mappedBy="persona")
-	private Link link;
-
 	//bi-directional many-to-one association to SalidaDetalle
 	@OneToMany(mappedBy="persona")
 	private List<SalidaDetalle> salidaDetalles;
@@ -547,14 +543,6 @@ public class Persona implements Serializable {
 		return mFichas;
 	}
 
-	public Link getLink() {
-		return this.link;
-	}
-
-	public void setLink(Link link) {
-		this.link = link;
-	}
-
 	public List<SalidaDetalle> getSalidaDetalles() {
 		return this.salidaDetalles;
 	}
@@ -629,7 +617,7 @@ public class Persona implements Serializable {
 	public static List<Persona> findAll() {
 		EntityManager em = null;
         try {
-    		em = EntityManagerFactories.getEMF().createEntityManager();
+    		em = EntityManagerFactories.getEM();
     		return em.createNamedQuery("Persona.findAll", Persona.class).getResultList();
         } catch (Exception e) {
         	log.log(Level.SEVERE, "No lee Salida.findAll", e);
@@ -644,7 +632,7 @@ public class Persona implements Serializable {
 	public static List<Persona> find(String salida) {
 		EntityManager em = null;
         try {
-    		em = EntityManagerFactories.getEMF().createEntityManager();
+    		em = EntityManagerFactories.getEM();
     		return em.createNamedQuery("Persona.find", Persona.class).setParameter("salida", salida).getResultList();
         } catch (Exception e) {
         	log.log(Level.SEVERE, "No lee Persona.find", e);
@@ -664,7 +652,7 @@ public class Persona implements Serializable {
     	Map<Integer,Map<String, Object>> mapBean2;
     	int fichaYear;
         try {
-    		em = EntityManagerFactories.getEMF().createEntityManager();
+    		em = EntityManagerFactories.getEM();
     		Persona persona = em.createNamedQuery("Persona.findByIdPersona", Persona.class)
     				.setParameter("idPersona", idPersona).getSingleResult();
     		if (persona!=null) {
@@ -752,13 +740,21 @@ public class Persona implements Serializable {
         return map;
 	}
 
+	public static List<Persona> findByEmail(String filtro,EntityManager em,int maxResults) {
+    	List<Persona> list = new ArrayList<Persona>();
+        if (Constante.PATTERN_INI_EMAIL.matcher(filtro).matches()) {
+            list = em.createNamedQuery("Persona.findByEmail", Persona.class).setMaxResults(maxResults)
+        			.setParameter("filtro", filtro).getResultList();
+        }
+		return list;
+	}
     public static List<Persona> findExact(String filtro) {
     	List<Persona> list = new ArrayList<Persona>();
     	filtro = filtro.trim().toUpperCase();
 		EntityManager em = null;
 		int maxResults = 2;
         try {
-    		em = EntityManagerFactories.getEMF().createEntityManager();
+    		em = EntityManagerFactories.getEM();
             if (Constante.PATTERN_NOMBRE.matcher(filtro).matches()) {
             	if ((list = em.createNamedQuery("Persona.findByNombre", Persona.class).setMaxResults(maxResults)
             			.setParameter("filtro", filtro).getResultList()).size()>=maxResults) {
@@ -780,13 +776,10 @@ public class Persona implements Serializable {
             		return list;
             	}
             }
-            if (Constante.PATTERN_INI_EMAIL.matcher(filtro).matches()) {
-                list.addAll(em.createNamedQuery("Persona.findByEmail", Persona.class).setMaxResults(maxResults)
-            			.setParameter("filtro", filtro).getResultList());
-            	if (list.size()>=maxResults) {
-            		return list;
-            	}
-            }
+            list.addAll(findByEmail(filtro,em,maxResults));
+        	if (list.size()>=maxResults) {
+        		return list;
+        	}
             if (Constante.PATTERN_ID_PERSONA.matcher(filtro).matches()) {
                 list.addAll(em.createNamedQuery("Persona.findByIdPersona", Persona.class).setMaxResults(maxResults)
             			.setParameter("idPersona", filtro.substring(1).replaceFirst("^0+(?!$)", "")).getResultList());
@@ -810,7 +803,7 @@ public class Persona implements Serializable {
 		EntityManager em = null;
 		int maxResults = 10;
         try {
-    		em = EntityManagerFactories.getEMF().createEntityManager();
+    		em = EntityManagerFactories.getEM();
             if (Constante.PATTERN_NOMBRE.matcher(filtro).matches()) {
             	for (Persona persona: em.createNamedQuery("Persona.filterByNombre", Persona.class).setMaxResults(maxResults)
             			.setParameter("filtro", filtro).getResultList()) {
@@ -894,7 +887,7 @@ public class Persona implements Serializable {
 		int idPersona = 0;
         try {
     		Persona persona = null;
-    		em = EntityManagerFactories.getEMF().createEntityManager();
+    		em = EntityManagerFactories.getEM();
 			em.getTransaction().begin();
         	boolean exists = !"".equals(map.get("id_persona"));
         	if (exists) {

@@ -81,7 +81,7 @@ public class Directiva implements Serializable {
     public static boolean isDirectivo(Integer idPersona) {
 		EntityManager em = null;
         try {
-    		em = EntityManagerFactories.getEMF().createEntityManager();
+    		em = EntityManagerFactories.getEM();
     		return !(em.createNamedQuery("Directiva.findByIdPersona", Directiva.class).setParameter("idPersona"
     				, idPersona).setParameter("now", new Date()).getResultList()).isEmpty();
         } catch (Exception e) {
