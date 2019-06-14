@@ -8,24 +8,28 @@
 	    <welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
-	<!-- <servlet>
-		<servlet-name>ServletDo</servlet-name>
-		<servlet-class>com.adrutas.controller.ServletMain</servlet-class>
-		<load-on-startup>0</load-on-startup>
-	</servlet> -->  
+  <!-- <filter>
+    <filter-name>FilterJunta</filter-name>
+    <filter-class>com.adrutas.controller.FilterJunta</filter-class>
+  </filter>
 
-	<!-- <servlet-mapping>
-		<servlet-name>ServletDo</servlet-name>
-		<url-pattern>*.do</url-pattern>
-	</servlet-mapping> -->
+  <filter-mapping>
+    <filter-name>FilterJunta</filter-name>
+    <url-pattern>/persona.html</url-pattern>
+  </filter-mapping>
 
-	<!-- <filter>
-		<filter-name>MyFilter</filter-name>
-		<filter-class>com.adrutas.controller.MyFilter</filter-class>
-	</filter> -->
+  <filter-mapping>
+    <filter-name>FilterJunta</filter-name>
+    <url-pattern>/apunte.html</url-pattern>
+  </filter-mapping>
 
-	<!-- <filter-mapping>
-		<filter-name>MyFilter</filter-name> mandatory
-		<url-pattern>*.do</url-pattern> either url-pattern or servlet-name is mandatory
-	</filter-mapping> -->
+  <filter>
+    <filter-name>FilterSocio</filter-name>
+    <filter-class>com.adrutas.controller.FilterSocio</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>FilterSocio</filter-name>
+    <url-pattern>/socios/*</url-pattern>
+  </filter-mapping> -->
 </web-app>

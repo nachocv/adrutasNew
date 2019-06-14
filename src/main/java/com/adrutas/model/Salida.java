@@ -4,14 +4,18 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Id;
@@ -36,6 +40,10 @@ import adrutas.com.Constante;
 @NamedQuery(name="Salida.quedanPlazas", query="SELECT s FROM Salida s LEFT JOIN s.salidaDetalles")
 @NamedQuery(name="Salida.findByDate", query="SELECT s FROM Salida s LEFT JOIN s.salidaFechas f WHERE "
 		+ "f.fechaTipoBean.fechaTipo=2 and f.fecha>=:date and s.url is not null ORDER BY f.fecha")
+@NamedQuery(name="Salida.findByFechaDesde", query="SELECT s FROM Salida s LEFT JOIN s.salidaFechas f WHERE "
+		+ "f.fechaTipoBean.fechaTipo=2 and f.fecha>:date ORDER BY f.fecha,s.salida")
+@NamedQuery(name="Salida.findByFechaHasta", query="SELECT s FROM Salida s LEFT JOIN s.salidaFechas f WHERE "
+		+ "f.fechaTipoBean.fechaTipo=1 and f.fecha<:date ORDER BY f.fecha DESC,s.salida DESC")
 
 public class Salida implements Serializable {
 	private static final long serialVersionUID = 8476007606083178837L;
@@ -112,6 +120,9 @@ public class Salida implements Serializable {
 	@Lob
 	private String urlPortada;
 
+	@Column(name="salida_desde")
+	private String salidaDesde;
+
 	//bi-directional many-to-one association to Album
 	@OneToMany(mappedBy="salidaBean")
 	private List<Album> albums;
@@ -145,7 +156,73 @@ public class Salida implements Serializable {
 	private Date fechaCierre;
 
 	@Transient
+	private Date fechaPreapunteIni;
+
+	@Transient
+	private Date fechaPreapunteFin;
+
+	@Transient
 	private List<Salida> fotosPortada = null;
+
+	@Transient
+	private static Comparator<Map<String, Object>> myComparator = new Comparator<Map<String, Object>>() {
+		@Override
+		public int compare(Map<String, Object> o1, Map<String, Object> o2) {
+			int comparacion;
+			Short short1 = (Short) o1.get("bus");
+			Short short2 = (Short) o2.get("bus");
+			if (short1==null) {
+				if (short2!=null) {
+					return -1;
+				}
+			} else {
+				if (short2==null) {
+					return 1;
+				} else {
+					if ((comparacion = short1.compareTo(short2))!=0) {
+						return comparacion;
+					} else {
+						short1 = (Short) o1.get("asiento");
+						short2 = (Short) o2.get("asiento");
+						if (short1==null) {
+							if (short2!=null) {
+								return -1;
+							}
+						} else {
+							if (short2==null) {
+								return 1;
+							} else {
+								if ((comparacion = short1.compareTo(short2))!=0) {
+									return comparacion;
+								}
+							}
+						}
+					}
+				}
+			}
+			Long long1 = (Long) o1.get("puntos");
+			Long long2 = (Long) o2.get("puntos");
+			if (long1==null) {
+				if (long2!=null) {
+					return -1;
+				}
+			} else {
+				if (long2==null) {
+					return 1;
+				} else {
+					if ((comparacion = long2.compareTo(long1))!=0) {
+						return comparacion;
+					}
+					// Continuamos con la antiguedad
+					return (int) o1.get("idPers")-(int) o2.get("idPers");
+				}
+			}
+			if ((comparacion = ((Integer) o1.get("idRecibo")).compareTo((Integer) o2.get("idRecibo")))!=0) {
+				return comparacion;
+			}
+			return 0;
+		}
+	};
 
 	public Salida() {
 	}
@@ -428,6 +505,14 @@ public class Salida implements Serializable {
 		this.urlPortada = urlPortada;
 	}
 
+	public String getSalidaDesde() {
+		return salidaDesde;
+	}
+
+	public void setSalidaDesde(String salidaDesde) {
+		this.salidaDesde = salidaDesde;
+	}
+
 	public List<Album> getAlbums() {
 		return this.albums;
 	}
@@ -539,25 +624,34 @@ public class Salida implements Serializable {
 	}
 
 	public void putFechas() {
-		SalidaFechaPK fechaPK;
     	Calendar calendar;
 		for (SalidaFecha fecha: salidaFechas) {
-			if ((fechaPK = fecha.getId()).getFechaTipo()==1) {
+			switch (fecha.getId().getFechaTipo()) {
+			case 1:
                 fechaInicio = fecha.getFecha();
                 if (anyo==null) {
                 	calendar = new GregorianCalendar();
                 	calendar.setTime(fechaInicio);
                 	anyo = calendar.get(Calendar.YEAR);
                 }
-			}
-			if (fechaPK.getFechaTipo()==2) {
+				break;
+			case 2:
 				fechaFin = fecha.getFecha();
-			}
-			if (fechaPK.getFechaTipo()==7) {
+				break;
+			case 7:
 				fechaApunte = fecha.getFecha();
-			}
-			if (fechaPK.getFechaTipo()==8) {
+				break;
+			case 8:
 				fechaCierre = fecha.getFecha();
+				break;
+			case 9:
+				fechaPreapunteIni = fecha.getFecha();
+				break;
+			case 10:
+				fechaPreapunteFin = fecha.getFecha();
+				break;
+			default:
+				break;
 			}
 		}
 	}
@@ -574,9 +668,7 @@ public class Salida implements Serializable {
 	}
 
 	public Date getFechaFin() {
-		if (fechaFin==null) {
-			putFechas();
-		}
+		getFechaInicio();
 		return fechaFin;
 	}
 
@@ -585,9 +677,7 @@ public class Salida implements Serializable {
 	}
 
 	public Date getFechaApunte() {
-		if (fechaApunte==null) {
-			putFechas();
-		}
+		getFechaInicio();
 		return fechaApunte;
 	}
 
@@ -596,6 +686,7 @@ public class Salida implements Serializable {
 	}
 
 	public Date getFechaCierre() {
+		getFechaInicio();
 		return fechaCierre;
 	}
 
@@ -603,8 +694,26 @@ public class Salida implements Serializable {
 		this.fechaCierre = fechaCierre;
 	}
 
+	public Date getFechaPreapunteIni() {
+		getFechaInicio();
+		return fechaPreapunteIni;
+	}
+
+	public void setFechaPreapunteIni(Date fechaPreapunteIni) {
+		this.fechaPreapunteIni = fechaPreapunteIni;
+	}
+
+	public Date getFechaPreapunteFin() {
+		getFechaInicio();
+		return fechaPreapunteFin;
+	}
+
+	public void setFechaPreapunteFin(Date fechaPreapunteFin) {
+		this.fechaPreapunteFin = fechaPreapunteFin;
+	}
+
 	public String getsFechaInicio() {
-        return Constante.dF8.format(fechaInicio);
+        return Constante.dF8.format(getFechaInicio());
 	}
 
 	public String getsDiaDe() {
@@ -704,6 +813,9 @@ public class Salida implements Serializable {
 		int idPersona;
 		String mensaje;
 		String observacion;
+		int anyo;
+		Date antiguedad;
+		Salida salidaBean = null;
 		List<PersonaMensaje> lMensajes;
     	Map<String, Object> map = new HashMap<String, Object>();
         try {
@@ -711,27 +823,56 @@ public class Salida implements Serializable {
         	List<Map<String, Object>> lBeans = new ArrayList<Map<String, Object>>();
         	Map<String, Object> mBean;
         	map.put("salidas",lBeans);
-    		for (Salida bean: em.createNamedQuery("Salida.findAll", Salida.class).getResultList()) {
+        	List<Salida> lSalidas = em.createNamedQuery("Salida.findAll", Salida.class).getResultList();
+    		for (Salida bean: lSalidas) {
         		lBeans.add(mBean = new HashMap<String, Object>());
         		mBean.put("fechaInicio",Constante.dF12.format(bean.getFechaInicio()));
         		mBean.put("salida",bean.getSalida());
         		mBean.put("descripcion",bean.getDescripcion());
         		mBean.put("plazas",bean.getPlazas());
         		mBean.put("tipo",bean.getTipo());
+        		if (bean.getSalida().equals(salida)) {
+            		salidaBean = bean;
+        		}
         	}
-        	if (salida==null || "null".equals(salida)) {
-        		salida = (String) lBeans.get(0).get("salida");
+        	if (salidaBean==null) {
+        		salidaBean = lSalidas.get(0);
+        		salida = salidaBean.getSalida();
+        	}
+        	String salidaDesde = null;
+        	String salidaHasta = null;
+        	if ("E".equals(salidaBean.getTipo())) {
+        		Calendar cal = Calendar.getInstance();
+        		cal.setTime(salidaBean.getFechaFin());
+        		cal.add(Calendar.YEAR, -1);
+        		salidaDesde = em.createNamedQuery("Salida.findByFechaDesde",Salida.class).
+        				setParameter("date", cal.getTime()).setMaxResults(1).getSingleResult().getSalida();
+        		Date dateFin = salidaBean.getFechaPreapunteIni();
+        		dateFin = dateFin==null? salidaBean.getFechaApunte(): dateFin;
+        		salidaHasta = em.createNamedQuery("Salida.findByFechaHasta",Salida.class).
+        				setParameter("date", dateFin==null? salidaBean.getFechaInicio(): dateFin).
+        				setMaxResults(1).getSingleResult().getSalida();
+            	log.log(Level.INFO, "Salida " + salidaBean.getSalida() + " empieza con "
+        				+ salidaDesde + " y termina con " + salidaHasta);
         	}
         	map.put("salida", salida);
-        	List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        	Set<Map<String, Object>> list = new TreeSet<Map<String, Object>>(myComparator);
         	map.put("detalles", list);
         	map.put("fp",Static.getLfp());
         	for (SalidaDetalle bean: em.createNamedQuery("SalidaDetalle.find", SalidaDetalle.class).
         			setParameter("salida", salida).getResultList()) {
-        		list.add(mBean = new HashMap<String, Object>());
+        		mBean = new HashMap<String, Object>();
         		mBean.put("fp", bean.getRecibo().getFormapago().getCodigo());
-        		mBean.put("bus", bean.getBus()==null? "": bean.getBus());
-        		mBean.put("asiento", bean.getAsiento()==null? "": bean.getAsiento());
+        		mBean.put("bus", bean.getBus());
+        		mBean.put("asiento", bean.getAsiento());
+        		mBean.put("idPers", idPersona = bean.getId().getIdPersona());
+        		mBean.put("idPersona", Constante.nF2.format(idPersona));
+        		if (salidaDesde!=null) {
+            		mBean.put("puntos", em.createNamedQuery("SalidaDetalle.countByPersonaAndSalidas",
+            				Long.class).setParameter("idPersona",idPersona).setParameter("salidaIni",
+            				salidaDesde).setParameter("salidaFin",salidaHasta).getSingleResult());
+        		}
+        		mBean.put("idRecibo",bean.getRecibo().getIdRecibo());
         		mBean.put("importe", (bean.getSeguroDia()==0? "": "SD ") + Constante.nF4.format(bean.getImporte()));
         		if (bean.getRecibo().getImporte()==null) {
         			ingreso = Constante.nF4.format(BigDecimal.ZERO);
@@ -745,7 +886,6 @@ public class Salida implements Serializable {
         		} else {
             		mBean.put("bono", bono.getId().getBono() + "-" + bono.getId().getUso());
         		}
-        		mBean.put("idPersona", Constante.nF2.format(idPersona = bean.getId().getIdPersona()));
         		persona = bean.getPersona();
         		mBean.put("observacion", (observacion = bean.getObservacion())==null? "": observacion);
         		mBean.put("nombre", ((persona.getNombre()==null? "": persona.getNombre().trim())
@@ -754,6 +894,29 @@ public class Salida implements Serializable {
         		lMensajes = em.createNamedQuery("PersonaMensaje.find",PersonaMensaje.class).setParameter("salida", salida)
         				.setParameter("idPersona", idPersona).setMaxResults(1).getResultList();
         		mBean.put("mensaje",lMensajes.isEmpty()? "": (mensaje = lMensajes.get(0).getMensaje())==null? "": mensaje);
+        		anyo = bean.getSalidaBean().getAnyo();
+        		antiguedad = null;
+        		for (Ficha ficha: em.createNamedQuery("Ficha.findByPersona",Ficha.class).setParameter("idPersona",idPersona).getResultList()) {
+        			if (ficha.getId().getAnyo()<2009 || ficha.getImportecuota().signum()==1) {
+        				if (ficha.getId().getAnyo()>anyo) {
+        					continue;
+        				} else if (ficha.getId().getAnyo()==anyo) {
+        					antiguedad = ficha.getFecha();
+        				} else if (anyo-1==ficha.getId().getAnyo()) {
+        					anyo = ficha.getId().getAnyo();
+        					antiguedad = ficha.getFecha();
+        				} else {
+        					break;
+        				}
+        			} else {
+        				break;
+        			}
+        		}
+        		if (antiguedad!=null) {
+            		mBean.put("antiguedad",Constante.dF12.format(antiguedad));
+            		mBean.put("fecha",antiguedad);
+        		}
+        		list.add(mBean);
         	}
         } catch (Exception e) {
         	log.log(Level.SEVERE, "No lee Salida.findApunte", e);

@@ -2,6 +2,7 @@ package com.adrutas.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -43,6 +44,10 @@ import adrutas.com.Constante;
 		+ "ORDER BY s.bus,s.asiento,s.recibo.idRecibo")
 @NamedQuery(name="SalidaDetalle.findByPersona", query="SELECT s FROM SalidaDetalle s "
 		+ "WHERE s.id.salida=:salida and s.id.idPersona=:idPersona")
+@NamedQuery(name="SalidaDetalle.findByPersonaAndSalidas", query="SELECT s FROM SalidaDetalle s "
+		+ "WHERE s.id.idPersona=:idPersona and s.id.salida >= :salidaIni and s.id.salida < :salidaFin")
+@NamedQuery(name="SalidaDetalle.countByPersonaAndSalidas", query="SELECT count(s.id.salida) FROM SalidaDetalle s "
+		+ "WHERE s.id.idPersona=:idPersona and s.id.salida >= :salidaIni and s.id.salida < :salidaFin")
 @NamedQuery(name="SalidaDetalle.getLast", query="SELECT s.contador FROM SalidaDetalle s order by s.contador desc")
 @NamedQuery(name="SalidaDetalle.findN",query="SELECT s FROM SalidaDetalle s WHERE salidaBean.tipo='N' and "
 		+ "(salidaBean.anyo=:anyo OR salidaBean.anyo=:anyo-1) AND id_persona=:id_persona ORDER BY s.salidaBean.salida")
@@ -125,6 +130,9 @@ public class SalidaDetalle implements Serializable {
 
 	@Transient
 	private short uso;
+
+	@Transient
+	private short puntos;
 
 	public SalidaDetalle() {
 	}
@@ -368,6 +376,14 @@ public class SalidaDetalle implements Serializable {
 		this.bonoDetalle = bonoDetalle;
 	}
 
+	public short getPuntos() {
+		return puntos;
+	}
+
+	public void setPuntos(short puntos) {
+		this.puntos = puntos;
+	}
+
 	public static SalidaDetalle findByPersona(String salida,int id_persona) {
 		EntityManager em = null;
         try {
@@ -382,6 +398,41 @@ public class SalidaDetalle implements Serializable {
 			}
 		}
 		return null;
+	}
+
+	public static Map<String, Object> find(Map<String,Object> map) {
+		EntityManager em = null;
+		Map<String,Object> mResult = new HashMap<String,Object>();
+		Map<String,Map<String,String>> mSalidas = new HashMap<String,Map<String,String>>();
+		Map<String,List<String>> mEspeciales = new HashMap<String,List<String>>();
+		List<String> lEspeciales;
+		Map<String,String> mBean;
+		mResult.put("salidas",mSalidas);
+		mResult.put("especiales",mEspeciales);
+        try {
+    		em = EntityManagerFactories.getEM();
+    		int idPersona = ((Double) map.get("id_persona")).intValue();
+    		for (String salida: (List<String>) map.get("array")) {
+        		Salida beanSalida = em.createNamedQuery("Salida.findBySalida", Salida.class)
+        				.setParameter("salida",salida).getSingleResult();
+        		mEspeciales.put(salida, lEspeciales=new ArrayList<String>());
+        		for (SalidaDetalle salidaDetalle: em.createNamedQuery("SalidaDetalle.findByPersonaAndSalidas",
+        				SalidaDetalle.class).setParameter("idPersona",idPersona).setParameter("salidaIni",
+        				beanSalida.getSalidaDesde()).setParameter("salidaFin",salida).getResultList()) {
+        			mSalidas.put(salidaDetalle.getId().getSalida(), mBean = new HashMap<String,String>());
+        			mBean.put("descripcion",salidaDetalle.getSalidaBean().getDescripcion());
+        			mBean.put("inicio",Constante.dF12.format(salidaDetalle.getSalidaBean().getFechaInicio()));
+        			lEspeciales.add(salidaDetalle.getId().getSalida());
+        		}
+    		}
+        } catch (Exception e) {
+        	log.log(Level.SEVERE, "No lee Salida.findBySalida", e);
+		} finally {
+			if (em!=null) {
+				em.close();
+			}
+		}
+        return mResult;
 	}
 
 	public static synchronized String insert(String salida,int idPersona) {

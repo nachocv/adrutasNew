@@ -33,6 +33,7 @@ import com.adrutas.dao.Static;
 @NamedQuery(name="Ficha.findAll", query="SELECT f FROM Ficha f")
 @NamedQuery(name="Ficha.find",
 query="SELECT f FROM Ficha f WHERE f.id.idPersona=:idPersona and f.id.anyo=:anyo and f.id.idFicha=:idFicha")
+@NamedQuery(name="Ficha.findByPersona",query="SELECT f FROM Ficha f WHERE f.id.idPersona=:idPersona ORDER BY f.id.anyo desc")
 public class Ficha implements Serializable {
 	private static final long serialVersionUID = 6097850077775371167L;
 

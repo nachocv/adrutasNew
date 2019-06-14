@@ -19,7 +19,6 @@ function filtrar(funcion) {
         success : function(data) {
           response($.map(data, function(item) {
             persona = item;
-            console.log("persona: " + persona);
             return {
               label : item.id_persona + "#" + item.nomb,
               value : item.nomb,
@@ -64,7 +63,6 @@ var persona = function() {
 }
 
 function apunte(salida,id_persona,funcion) {
-  console.log("url: /apunteSalida?salida=" + salida + "&id_persona=" + id_persona);
   $.ajax({
     url: "/apunteSalida?salida=" + salida + "&id_persona=" + id_persona,
     success: funcion,
@@ -96,6 +94,10 @@ var salidaDetalle = function() {
 }
 
 function cargaSalidaDetalle(salidaDetalles) {
+  var bus;
+  var asiento;
+  var puntos;
+  var antiguedad;
   var salidas = salidaDetalles.salidas;
   var detalles = salidaDetalles.detalles;
   var select = $("select#salida");
@@ -107,20 +109,34 @@ function cargaSalidaDetalle(salidaDetalles) {
   select.val(salidaDetalles.salida);
   var table = $("table#apuntados");
   $("table#apuntados tr").remove();
-  table.append("<tr align='center'><td>Sel</td><td>F.P.</td><td>Bus</td><td>Asiento</td><td>Importe</td>"
-    + "<td>Ing.</td><td>Pag.</td><td>Bono</td><td>Socio</td><td>Nombre</td><td>Nota provisional</td>"
-    + "<td>Nota permanente</td></tr>");
+  table.append("<tr align='center'><td>Sel</td><td>F.P.</td><td>Bus</td><td>Asiento</td><td>Puntos</td><td>Antigüedad" +
+  		"</td><td>Importe</td><td>Ing.</td><td>Pag.</td><td>Bono</td><td>Socio</td><td>Nombre</td><td>Nota provisional" +
+  		"</td><td>Nota permanente</td></tr>");
   $.each(detalles, function(index, value) {
     select = "<select name='estado'><option value=''></option>";
     $.each(salidaDetalles.fp, function(index2, value2) {
       select += ("<option value='" + value2 + "'" + (value2==value.fp? " selected='selected'": "") + ">" + value2 + "</option>");
     });
     select += "</select>";
+    if ((bus = value.bus)==undefined) {
+      bus = "";
+    }
+    if ((asiento = value.asiento)==undefined) {
+      asiento = "";
+    }
+    if ((puntos = value.puntos)==undefined) {
+      puntos = "";
+    }
+    if ((antiguedad = value.antiguedad)==undefined) {
+      antiguedad = "";
+    }
     table.append("<tr name='apuntado'>"
         + "<td class='todo'><input type='radio' name='id_persona' value='" + value.idPersona + "'></td>"
         + "<td class='todo'>" + select + "</td>"
-        + "<td class='todo'><input type='text' name='bus' value='" + value.bus + "' size='1'></td>"
-        + "<td class='todo'><input type='text' name='asiento' value='" + value.asiento + "' size='1'></td>"
+        + "<td class='todo'><input type='text' name='bus' value='" + bus + "' size='1'></td>"
+        + "<td class='todo'><input type='text' name='asiento' value='" + asiento + "' size='1'></td>"
+        + "<td class='todo'><input type='text' name='asiento' value='" + puntos + "' size='1'></td>"
+        + "<td class='todo'><input type='text' name='asiento' value='" + antiguedad + "' size='6'></td>"
         + "<td class='todo' align='right'>" + value.importe + "</td>"
         + "<td class='todo'><input type='text' name='ingreso' value='" + value.ingreso + "' size='1'></td>"
         + "<td class='todo'><input type='text' name='pago' value='" + value.pago + "' size='1'></td>"
@@ -130,11 +146,11 @@ function cargaSalidaDetalle(salidaDetalles) {
         + "<td class='todo'><input type='text' name='observacion' value='" + value.observacion + "' size='40'></td>"
         + "<td class='todo'><input type='text' name='mensaje' value='" + value.mensaje + "' size='40'></td></tr>");
   });
-  table.append("<tr><td colspan='12' align='center'>"
+  table.append("<tr><td colspan='14' align='center'>"
     + "<input type='submit' name='lista' value='Grabar' onclick='return mandaLista()'> "
     + "<input type='submit' name='lista' value='Borrar' onclick='return delAlta()'> "
     + "<input type='submit' name='lista' value='Cancelar' onclick='salidaDetalle()'></td></tr><tr>"
-    + "<td colspan='12' align='center'><a href='javascript:void(0)' onclick='listaTelefonos();'>Lista Teléfonos</a>"
+    + "<td colspan='14' align='center'><a href='javascript:void(0)' onclick='listaTelefonos();'>Lista Teléfonos</a>"
     + "<br/><a href='javascript:void(0)' onclick='listaAsientos();'>Lista Asientos</a>"
     + "<br/><a href='javascript:void(0)' onclick='excelContable();'>Excel contable</a></td></tr>");
 }
@@ -143,7 +159,7 @@ var getInit = function() {
 	var fecha = new URL($(location).attr('href')).searchParams.get("fecha");
 	$.ajax({url: "/getInit?fecha=" + fecha + "&pathname=" + window.location.pathname, success: function(result) {
 		url = result;
-        $(".init").load(url);
+		$(".init").load(url);
     },
 	error : function(jqXHR, status, error) {
 		alert('Disculpe, existió un problema');
@@ -172,7 +188,50 @@ var changePassword= function() {
   putInclude();
   var link = new URL($(location).attr('href')).searchParams.get("link");
   $("input[name='link']").val(link);
-  console.log("link: " + link);
+}
+
+var getSalidas = function() {
+  if (datos!=undefined && datos.id_persona!=undefined) {
+    var salidas = new Object();
+    salidas.id_persona = datos.id_persona;
+    salidas.array = new Array();
+    var objects = $("object.puntos");
+    objects.each(function() {
+      console.log($(this).parent().children("div.puntos").attr("id").substring(3));
+      salidas.array.push($(this).attr("src"));
+    });
+    $.ajax({
+      url: "/getSalidas?salidas=" + JSON.stringify(salidas),
+      success: function(result) {
+        var resultado;
+        var oSalida;
+        console.log("getSalidas result: " + result);
+        var resultados = JSON.parse(result);
+        $.each(resultados.especiales, function(key,value) {
+          console.log("getSalidas especial.key: " + key);
+          var object = $("object.puntos[src='" + key + "']");
+          var div = $("div#ex_" + key);
+          resultado = "<br/><a href='#ex_" + key + "' rel='modal:open'>Tienes " + value.length + " puntos</a>";
+          console.log("getSalidas salida: " + key + "\nresultado: " + resultado);
+          object.html(resultado);
+          resultado = "<p>Tienes " + value.length + " puntos por participar en las siguientes salidas:</p>";
+          value.forEach(function(salida) {
+            oSalida = resultados.salidas[salida];
+            console.log("<p>Salida " + salida + " del " + oSalida.inicio + " a " + oSalida.descripcion + "</p>");
+            resultado += "<p>Salida " + salida + " del " + oSalida.inicio + " a " + oSalida.descripcion + "</p>";
+          });
+          console.log("getSalidas div.html: " + resultado);
+          div.html(resultado);
+        });
+      },
+      error : function(jqXHR, status, error) {
+        alert('Disculpe, existió un problema');
+      }
+    });
+    $("#myBtn").click(function(){
+      $("#myModal").modal({keyboard: true});
+    });
+  }
 }
 
 var getUsuario = function() {
@@ -204,15 +263,13 @@ var bienvenida = function() {
 }
 
 function comprueba_identificacion(result) {
-  console.log(result);
 	datos = JSON.parse(result);
   $("object#plazas").html(datos.abiertoApunte? "<font color='blue'>¡¡" +
       (datos.hayPlazas? "QUEDAN PLAZAS LIBRES": "YA NO HAY PLAZAS") + "!!</font><br/>": "");
 	if (datos.id_persona==undefined) {
 	  no_identificado();
 	} else {
-    console.log("identificado. datos.abiertoApunte: " + datos.abiertoApunte + ". datos.apuntado: " + datos.apuntado);
-	  $("object#usuario").html("Bienvenido <b>" + datos.usuario + "</b><br/><br/><a href=\"javascript:modifica_datos();\">"
+    $("object#usuario").html("Bienvenido <b>" + datos.usuario + "</b><br/><br/><a href=\"javascript:modifica_datos();\">"
 	      + "Modificar datos</a><br/><a href=\"javascript:close_session();\">Cerrar sesión</a><br/><br/>");
 	  $("object#apuntarse").html(datos.apuntado? "<font color='red'>Ya estás apuntado</font>"
 	      : datos.abiertoApunte && datos.hayPlazas? "<a href='javascript:void(0)' onclick='apuntaWeb();'>Apúntate aquí</a>"
@@ -523,7 +580,6 @@ function mandaLista() {
 
 function delAlta() {
   var persona = $("input:radio[name='id_persona']:checked");
-  console.log("id_persona: " + persona.val())
   $.ajax({url: "/delAlta?salida=" + $("select#salida").val() + "&id_persona=" + persona.val(),
     success : salidaDetalle,
     error : function(jqXHR, status, error) {
@@ -718,36 +774,6 @@ function excelContable(salida) {
   form.submit();
 }
 
-//function excelSocios() {
-//  $.ajax({
-//    url: "/excel_socios",
-//    beforeSend: function() {
-//      $('#response').html("<img src='/images/ui-anim_basic_16x16.gif' />");
-//    },
-//    success: function(html) {
-//      $('#response').html(html);
-//    }
-//    success : function(data) {
-//      response($.map(data, function(item) {
-//        persona = item;
-//        console.log("persona: " + persona);
-//        return {
-//          label : item.id_persona + "#" + item.nomb,
-//          value : item.nomb,
-//          persona: item
-//        }
-//      }));
-//    },
-//    error : function(jqXHR, status, error) {
-//      alert('Disculpe, existió un problema');
-//    }
-//  });
-//
-//  $("form#myForm").remove();
-//  var form = $('<form id="myForm" method="post" action="/excel_socios"></form>').appendTo('body');
-//  form.submit();
-//}
-
 function excelEtiquetasSocios(no_email) {
 	var form = $("form[action='/excel_etiquetas_socios']");
 	form.find("input[name='no_email']").val(no_email);
@@ -763,16 +789,6 @@ function excelGMail() {
 }
 
 String.prototype.hashCode = function() {
-	/*
-    var hash = 0;
-    if (this.length === 0) return hash;
-    for (var i = 0; i < this.length; i++) {
-        var character  = this.charCodeAt(i);
-        hash  = ((hash<<5)-hash)+character;
-        hash = hash & hash; // Convert to 32bit integer
-    }
-    return hash;
-    */
     return hex_md5(this);
 }
 
@@ -781,9 +797,6 @@ function put_md5(input) {
 }
 
 function renewPassword() {
-  console.log("renewPassword. Email: " + $("input#renewEmail").val());
-//	$("form[action='/renewPassword']").submit();
-
   $.ajax({
     method: "POST",
     url: "/renewPassword?email=" + $("input#renewEmail").val(),
@@ -1006,7 +1019,6 @@ function contabilidadSocios() {
 }
 
 function cargaPersona(data) {
-  console.log("cargaPersona. data: " + data);
   persona = JSON.parse(data);
   $("input#filtro").val("");
   $("input#id_persona").val(persona.id_persona);
