@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.adrutas.model.Persona;
 import com.google.gson.Gson;
 
-@WebServlet(name = "GrabaPersona", urlPatterns = {"/grabaPersona"})
+@WebServlet(name = "GrabaPersona", urlPatterns = {"/jd/grabaPersona"})
 public class ServletGrabaPersona extends HttpServlet {
 	private static final long serialVersionUID = 7007175350357635662L;
 	private static final Logger log = Logger.getLogger(ServletGrabaPersona.class.getName());

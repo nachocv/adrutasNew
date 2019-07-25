@@ -18,7 +18,7 @@ import com.adrutas.model.Directiva;
 import com.adrutas.model.Persona;
 
 //No funciona en app engine la anotación @WebFilter, lo pongo en web.xml
-//@WebFilter(filterName = "FilterJunta", urlPatterns = {"/persona.html","/apunte.html"})
+//@WebFilter(filterName = "FilterJunta", urlPatterns = {"/jd/*"})
 public final class FilterJunta implements Filter {
 	private ServletContext context;
 	private static final Logger log = Logger.getLogger(FilterJunta.class.getName());
@@ -28,13 +28,18 @@ public final class FilterJunta implements Filter {
 		context.log("Inicializado FilterJunta");
 	}
 
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		log.log(Level.SEVERE, "Entra en FilterJunta.doFilter");
-    	Persona persona = (Persona) ((HttpServletRequest) request).getSession().getAttribute("yo");
+	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
+		String uri = ((HttpServletRequest) req).getRequestURI();
+		StringBuffer url = ((HttpServletRequest) req).getRequestURL();
+		log.log(Level.SEVERE, "uri: " + uri + ". url: " + url);
+    	Persona persona = (Persona) ((HttpServletRequest) req).getSession().getAttribute("yo");
+    	log.log(Level.SEVERE, "persona==null: " + (persona==null));
     	if (persona==null || !Directiva.isDirectivo(persona.getIdPersona())) {
-    		((HttpServletResponse) response).sendError(403);
+    		log.log(Level.SEVERE, "Se envía error 403");
+    		((HttpServletResponse) resp).sendError(403);
     	} else {
-    		chain.doFilter(request, response);
+    		log.log(Level.SEVERE, "Se continua el filtro");
+    		chain.doFilter(req, resp);
     	}
 	}
 

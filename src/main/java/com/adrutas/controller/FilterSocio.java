@@ -13,11 +13,11 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.adrutas.dao.EntityManagerFactories;
+import com.adrutas.model.Directiva;
 import com.adrutas.model.Ficha;
 import com.adrutas.model.Persona;
 
@@ -33,8 +33,11 @@ public final class FilterSocio implements Filter {
 	}
 
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
-		log.log(Level.SEVERE, "Entra en FilterSocio.doFilter");
+		String uri = ((HttpServletRequest) req).getRequestURI();
+		StringBuffer url = ((HttpServletRequest) req).getRequestURL();
+		log.log(Level.SEVERE, "uri: " + uri + ". url: " + url);
     	Persona persona = (Persona) ((HttpServletRequest) req).getSession().getAttribute("yo");
+    	log.log(Level.SEVERE, "persona==null: " + (persona==null));
     	if (persona!=null) {
 			log.log(Level.SEVERE, "Recupera el atributo yo");
     		EntityManager em = null;
@@ -53,6 +56,7 @@ public final class FilterSocio implements Filter {
     					"idPersona", persona.getIdPersona()).getResultList());
     	    	if (persona.esSocio(anyo) || (calendar1.compareTo(calendar2)<0 && persona.esSocio(anyo-1))) {
     	    		chain.doFilter(req, resp);
+    	    		log.log(Level.SEVERE, "Se continua el filtro");
     	    		return;
     	    	}
     		} finally {
@@ -61,6 +65,7 @@ public final class FilterSocio implements Filter {
     			}
     		}
     	}
+		log.log(Level.SEVERE, "Se envía zonaSocio.html");
 		((HttpServletResponse) resp).sendRedirect("/zonaSocio.html");
 	}
 }

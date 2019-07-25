@@ -25,7 +25,7 @@ import com.adrutas.model.SalidaDetalle;
 
 import adrutas.com.Constante;
 
-@WebServlet(name = "ExcelContable", urlPatterns = {"/excelContable"})
+@WebServlet(name = "ExcelContable", urlPatterns = {"/jd/excelContable"})
 public class ExcelContable extends HttpServlet {
 	private static final long serialVersionUID = 2607208416807650199L;
 	private static final Logger log = Logger.getLogger(ExcelContable.class.getName());

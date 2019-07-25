@@ -1,0 +1,577 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="CompeGPS" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <link href="http://www.compegps.com">
+      <text>CompeGPS TEAM, SL</text>
+    </link>
+    <time>2019-06-23T20:22:22Z</time>
+    <bounds maxlat="42.702125" maxlon="0.496403" minlat="42.692347" minlon="0.482083"/>
+  </metadata>
+  <trk>
+    <name>190702_sellam</name>
+    <trkseg>
+      <trkpt lat="42.702125" lon="0.482083">
+        <ele>2868.7</ele>
+        <time>2019-06-19T17:43:12Z</time>
+      </trkpt>
+      <trkpt lat="42.702026" lon="0.482125">
+        <ele>2869.8</ele>
+        <time>2019-06-19T17:43:25Z</time>
+      </trkpt>
+      <trkpt lat="42.701962" lon="0.482123">
+        <ele>2874.1</ele>
+        <time>2019-06-19T17:43:34Z</time>
+      </trkpt>
+      <trkpt lat="42.701912" lon="0.482160">
+        <ele>2876.5</ele>
+        <time>2019-06-19T17:43:41Z</time>
+      </trkpt>
+      <trkpt lat="42.701779" lon="0.482183">
+        <ele>2875.4</ele>
+        <time>2019-06-19T17:43:59Z</time>
+      </trkpt>
+      <trkpt lat="42.701644" lon="0.482083">
+        <ele>2882.2</ele>
+        <time>2019-06-19T17:44:20Z</time>
+      </trkpt>
+      <trkpt lat="42.701553" lon="0.482141">
+        <ele>2883.6</ele>
+        <time>2019-06-19T17:44:33Z</time>
+      </trkpt>
+      <trkpt lat="42.701456" lon="0.482155">
+        <ele>2884.1</ele>
+        <time>2019-06-19T17:44:46Z</time>
+      </trkpt>
+      <trkpt lat="42.701439" lon="0.482212">
+        <ele>2885.6</ele>
+        <time>2019-06-19T17:44:52Z</time>
+      </trkpt>
+      <trkpt lat="42.701377" lon="0.482229">
+        <ele>2887.5</ele>
+        <time>2019-06-19T17:45:01Z</time>
+      </trkpt>
+      <trkpt lat="42.701268" lon="0.482286">
+        <ele>2892.3</ele>
+        <time>2019-06-19T17:45:16Z</time>
+      </trkpt>
+      <trkpt lat="42.701176" lon="0.482276">
+        <ele>2894.7</ele>
+        <time>2019-06-19T17:45:29Z</time>
+      </trkpt>
+      <trkpt lat="42.701130" lon="0.482252">
+        <ele>2894.7</ele>
+        <time>2019-06-19T17:45:35Z</time>
+      </trkpt>
+      <trkpt lat="42.701051" lon="0.482307">
+        <ele>2894.7</ele>
+        <time>2019-06-19T17:45:47Z</time>
+      </trkpt>
+      <trkpt lat="42.701014" lon="0.482304">
+        <ele>2895.7</ele>
+        <time>2019-06-19T17:45:52Z</time>
+      </trkpt>
+      <trkpt lat="42.700805" lon="0.482381">
+        <ele>2894.7</ele>
+        <time>2019-06-19T17:46:21Z</time>
+      </trkpt>
+      <trkpt lat="42.700598" lon="0.482351">
+        <ele>2894.3</ele>
+        <time>2019-06-19T17:46:49Z</time>
+      </trkpt>
+      <trkpt lat="42.700470" lon="0.482398">
+        <ele>2890.9</ele>
+        <time>2019-06-19T17:47:06Z</time>
+      </trkpt>
+      <trkpt lat="42.700381" lon="0.482474">
+        <ele>2890.8</ele>
+        <time>2019-06-19T17:47:20Z</time>
+      </trkpt>
+      <trkpt lat="42.700292" lon="0.482511">
+        <ele>2889.5</ele>
+        <time>2019-06-19T17:47:33Z</time>
+      </trkpt>
+      <trkpt lat="42.700241" lon="0.482566">
+        <ele>2887.9</ele>
+        <time>2019-06-19T17:47:41Z</time>
+      </trkpt>
+      <trkpt lat="42.699989" lon="0.482723">
+        <ele>2884.2</ele>
+        <time>2019-06-19T17:48:18Z</time>
+      </trkpt>
+      <trkpt lat="42.699866" lon="0.482871">
+        <ele>2876.0</ele>
+        <time>2019-06-19T17:48:40Z</time>
+      </trkpt>
+      <trkpt lat="42.699786" lon="0.482897">
+        <ele>2879.4</ele>
+        <time>2019-06-19T17:48:51Z</time>
+      </trkpt>
+      <trkpt lat="42.699766" lon="0.482890">
+        <ele>2882.7</ele>
+        <time>2019-06-19T17:48:54Z</time>
+      </trkpt>
+      <trkpt lat="42.699691" lon="0.482920">
+        <ele>2886.5</ele>
+        <time>2019-06-19T17:49:05Z</time>
+      </trkpt>
+      <trkpt lat="42.699624" lon="0.482906">
+        <ele>2884.2</ele>
+        <time>2019-06-19T17:49:14Z</time>
+      </trkpt>
+      <trkpt lat="42.699612" lon="0.482911">
+        <ele>2886.1</ele>
+        <time>2019-06-19T17:49:15Z</time>
+      </trkpt>
+      <trkpt lat="42.699481" lon="0.482933">
+        <ele>2890.9</ele>
+        <time>2019-06-19T17:49:33Z</time>
+      </trkpt>
+      <trkpt lat="42.699384" lon="0.482932">
+        <ele>2891.3</ele>
+        <time>2019-06-19T17:49:46Z</time>
+      </trkpt>
+      <trkpt lat="42.699356" lon="0.482954">
+        <ele>2892.7</ele>
+        <time>2019-06-19T17:49:50Z</time>
+      </trkpt>
+      <trkpt lat="42.699288" lon="0.482947">
+        <ele>2894.7</ele>
+        <time>2019-06-19T17:49:59Z</time>
+      </trkpt>
+      <trkpt lat="42.699280" lon="0.482973">
+        <ele>2895.3</ele>
+        <time>2019-06-19T17:50:02Z</time>
+      </trkpt>
+      <trkpt lat="42.699211" lon="0.482999">
+        <ele>2896.6</ele>
+        <time>2019-06-19T17:50:12Z</time>
+      </trkpt>
+      <trkpt lat="42.699136" lon="0.483064">
+        <ele>2898.6</ele>
+        <time>2019-06-19T17:50:23Z</time>
+      </trkpt>
+      <trkpt lat="42.699059" lon="0.482994">
+        <ele>2900.5</ele>
+        <time>2019-06-19T17:50:36Z</time>
+      </trkpt>
+      <trkpt lat="42.698998" lon="0.483056">
+        <ele>2900.0</ele>
+        <time>2019-06-19T17:50:46Z</time>
+      </trkpt>
+      <trkpt lat="42.698965" lon="0.483036">
+        <ele>2903.9</ele>
+        <time>2019-06-19T17:50:51Z</time>
+      </trkpt>
+      <trkpt lat="42.698918" lon="0.483061">
+        <ele>2902.8</ele>
+        <time>2019-06-19T17:50:57Z</time>
+      </trkpt>
+      <trkpt lat="42.698811" lon="0.483098">
+        <ele>2902.9</ele>
+        <time>2019-06-19T17:51:12Z</time>
+      </trkpt>
+      <trkpt lat="42.698732" lon="0.483270">
+        <ele>2878.0</ele>
+        <time>2019-06-19T17:51:32Z</time>
+      </trkpt>
+      <trkpt lat="42.698722" lon="0.483452">
+        <ele>2878.1</ele>
+        <time>2019-06-19T17:51:50Z</time>
+      </trkpt>
+      <trkpt lat="42.698651" lon="0.483533">
+        <ele>2880.0</ele>
+        <time>2019-06-19T17:52:02Z</time>
+      </trkpt>
+      <trkpt lat="42.698600" lon="0.483643">
+        <ele>2880.0</ele>
+        <time>2019-06-19T17:52:15Z</time>
+      </trkpt>
+      <trkpt lat="42.698487" lon="0.484090">
+        <ele>2882.1</ele>
+        <time>2019-06-19T17:53:01Z</time>
+        <cmt>Puerto de O</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.698470" lon="0.484251">
+        <ele>2879.0</ele>
+        <time>2019-06-19T17:53:17Z</time>
+      </trkpt>
+      <trkpt lat="42.698365" lon="0.484420">
+        <ele>2882.1</ele>
+        <time>2019-06-19T17:53:39Z</time>
+      </trkpt>
+      <trkpt lat="42.698259" lon="0.484871">
+        <ele>2887.0</ele>
+        <time>2019-06-19T17:54:26Z</time>
+      </trkpt>
+      <trkpt lat="42.698174" lon="0.484935">
+        <ele>2884.1</ele>
+        <time>2019-06-19T17:54:39Z</time>
+      </trkpt>
+      <trkpt lat="42.698069" lon="0.485445">
+        <ele>2895.0</ele>
+        <time>2019-06-19T17:55:30Z</time>
+      </trkpt>
+      <trkpt lat="42.697993" lon="0.485694">
+        <ele>2895.1</ele>
+        <time>2019-06-19T17:55:57Z</time>
+      </trkpt>
+      <trkpt lat="42.697935" lon="0.486027">
+        <ele>2905.1</ele>
+        <time>2019-06-19T17:56:30Z</time>
+      </trkpt>
+      <trkpt lat="42.697849" lon="0.486204">
+        <ele>2908.1</ele>
+        <time>2019-06-19T17:56:51Z</time>
+      </trkpt>
+      <trkpt lat="42.697784" lon="0.486271">
+        <ele>2913.0</ele>
+        <time>2019-06-19T17:57:02Z</time>
+      </trkpt>
+      <trkpt lat="42.697795" lon="0.486330">
+        <ele>2913.0</ele>
+        <time>2019-06-19T17:57:08Z</time>
+      </trkpt>
+      <trkpt lat="42.697780" lon="0.486408">
+        <ele>2913.0</ele>
+        <time>2019-06-19T17:57:16Z</time>
+      </trkpt>
+      <trkpt lat="42.697709" lon="0.486445">
+        <ele>2913.0</ele>
+        <time>2019-06-19T17:57:26Z</time>
+      </trkpt>
+      <trkpt lat="42.697602" lon="0.486625">
+        <ele>2921.1</ele>
+        <time>2019-06-19T17:57:49Z</time>
+      </trkpt>
+      <trkpt lat="42.697545" lon="0.486671">
+        <ele>2921.0</ele>
+        <time>2019-06-19T17:57:58Z</time>
+      </trkpt>
+      <trkpt lat="42.697515" lon="0.486778">
+        <ele>2921.0</ele>
+        <time>2019-06-19T17:58:09Z</time>
+      </trkpt>
+      <trkpt lat="42.697372" lon="0.487033">
+        <ele>2927.1</ele>
+        <time>2019-06-19T17:58:40Z</time>
+      </trkpt>
+      <trkpt lat="42.697261" lon="0.487162">
+        <ele>2937.0</ele>
+        <time>2019-06-19T17:59:00Z</time>
+      </trkpt>
+      <trkpt lat="42.697121" lon="0.487288">
+        <ele>2937.0</ele>
+        <time>2019-06-19T17:59:22Z</time>
+      </trkpt>
+      <trkpt lat="42.697064" lon="0.487521">
+        <ele>2945.1</ele>
+        <time>2019-06-19T17:59:46Z</time>
+      </trkpt>
+      <trkpt lat="42.697009" lon="0.487556">
+        <ele>2945.1</ele>
+        <time>2019-06-19T17:59:54Z</time>
+      </trkpt>
+      <trkpt lat="42.696975" lon="0.487620">
+        <ele>2945.1</ele>
+        <time>2019-06-19T18:00:02Z</time>
+      </trkpt>
+      <trkpt lat="42.696895" lon="0.487958">
+        <ele>2960.0</ele>
+        <time>2019-06-19T18:00:37Z</time>
+      </trkpt>
+      <trkpt lat="42.696841" lon="0.488015">
+        <ele>2960.1</ele>
+        <time>2019-06-19T18:00:46Z</time>
+      </trkpt>
+      <trkpt lat="42.696849" lon="0.488092">
+        <ele>2960.0</ele>
+        <time>2019-06-19T18:00:54Z</time>
+      </trkpt>
+      <trkpt lat="42.696806" lon="0.488114">
+        <ele>2960.0</ele>
+        <time>2019-06-19T18:01:00Z</time>
+      </trkpt>
+      <trkpt lat="42.696672" lon="0.488479">
+        <ele>2977.0</ele>
+        <time>2019-06-19T18:01:40Z</time>
+      </trkpt>
+      <trkpt lat="42.696664" lon="0.488645">
+        <ele>2977.1</ele>
+        <time>2019-06-19T18:01:56Z</time>
+      </trkpt>
+      <trkpt lat="42.696585" lon="0.488798">
+        <ele>2985.0</ele>
+        <time>2019-06-19T18:02:15Z</time>
+      </trkpt>
+      <trkpt lat="42.696360" lon="0.489039">
+        <ele>2996.1</ele>
+        <time>2019-06-19T18:02:53Z</time>
+      </trkpt>
+      <trkpt lat="42.696352" lon="0.489093">
+        <ele>2996.1</ele>
+        <time>2019-06-19T18:02:58Z</time>
+      </trkpt>
+      <trkpt lat="42.696301" lon="0.489144">
+        <ele>2996.0</ele>
+        <time>2019-06-19T18:03:07Z</time>
+        <cmt>Pico Audoubert 3044m</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.696311" lon="0.489137">
+        <ele>3037.4</ele>
+        <time>2019-06-19T18:03:08Z</time>
+      </trkpt>
+      <trkpt lat="42.696294" lon="0.489172">
+        <ele>3039.8</ele>
+        <time>2019-06-19T18:03:12Z</time>
+      </trkpt>
+      <trkpt lat="42.696115" lon="0.489358">
+        <ele>3043.8</ele>
+        <time>2019-06-19T18:03:42Z</time>
+      </trkpt>
+      <trkpt lat="42.695983" lon="0.489527">
+        <ele>3043.7</ele>
+        <time>2019-06-19T18:04:06Z</time>
+      </trkpt>
+      <trkpt lat="42.695962" lon="0.489569">
+        <ele>3044.2</ele>
+        <time>2019-06-19T18:04:11Z</time>
+      </trkpt>
+      <trkpt lat="42.695876" lon="0.489696">
+        <ele>3041.3</ele>
+        <time>2019-06-19T18:04:28Z</time>
+      </trkpt>
+      <trkpt lat="42.695796" lon="0.489900">
+        <ele>3039.5</ele>
+        <time>2019-06-19T18:04:51Z</time>
+      </trkpt>
+      <trkpt lat="42.695756" lon="0.489954">
+        <ele>3040.3</ele>
+        <time>2019-06-19T18:04:59Z</time>
+      </trkpt>
+      <trkpt lat="42.695574" lon="0.490314">
+        <ele>3044.2</ele>
+        <time>2019-06-19T18:05:41Z</time>
+      </trkpt>
+      <trkpt lat="42.695556" lon="0.490352">
+        <ele>3045.6</ele>
+        <time>2019-06-19T18:05:46Z</time>
+      </trkpt>
+      <trkpt lat="42.695514" lon="0.490581">
+        <ele>3047.0</ele>
+        <time>2019-06-19T18:06:09Z</time>
+      </trkpt>
+      <trkpt lat="42.695500" lon="0.490637">
+        <ele>3050.5</ele>
+        <time>2019-06-19T18:06:15Z</time>
+      </trkpt>
+      <trkpt lat="42.695495" lon="0.490640">
+        <ele>3052.3</ele>
+        <time>2019-06-19T18:06:16Z</time>
+      </trkpt>
+      <trkpt lat="42.695445" lon="0.490939">
+        <ele>3059.1</ele>
+        <time>2019-06-19T18:06:46Z</time>
+      </trkpt>
+      <trkpt lat="42.695403" lon="0.490981">
+        <ele>3063.0</ele>
+        <time>2019-06-19T18:06:53Z</time>
+      </trkpt>
+      <trkpt lat="42.695336" lon="0.491146">
+        <ele>3066.3</ele>
+        <time>2019-06-19T18:07:11Z</time>
+      </trkpt>
+      <trkpt lat="42.695339" lon="0.491179">
+        <ele>3067.8</ele>
+        <time>2019-06-19T18:07:14Z</time>
+      </trkpt>
+      <trkpt lat="42.695310" lon="0.491299">
+        <ele>3077.4</ele>
+        <time>2019-06-19T18:07:27Z</time>
+      </trkpt>
+      <trkpt lat="42.695308" lon="0.491395">
+        <ele>3082.1</ele>
+        <time>2019-06-19T18:07:36Z</time>
+      </trkpt>
+      <trkpt lat="42.695283" lon="0.491439">
+        <ele>3088.0</ele>
+        <time>2019-06-19T18:07:42Z</time>
+      </trkpt>
+      <trkpt lat="42.695271" lon="0.491520">
+        <ele>3089.9</ele>
+        <time>2019-06-19T18:07:50Z</time>
+        <cmt>Cap de la Baca 3097m</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.695237" lon="0.491573">
+        <ele>3092.8</ele>
+        <time>2019-06-19T18:07:57Z</time>
+      </trkpt>
+      <trkpt lat="42.695222" lon="0.491567">
+        <ele>3092.3</ele>
+        <time>2019-06-19T18:07:59Z</time>
+      </trkpt>
+      <trkpt lat="42.695165" lon="0.491660">
+        <ele>3091.3</ele>
+        <time>2019-06-19T18:08:11Z</time>
+      </trkpt>
+      <trkpt lat="42.695161" lon="0.491697">
+        <ele>3089.3</ele>
+        <time>2019-06-19T18:08:14Z</time>
+      </trkpt>
+      <trkpt lat="42.695007" lon="0.491896">
+        <ele>3083.6</ele>
+        <time>2019-06-19T18:08:43Z</time>
+      </trkpt>
+      <trkpt lat="42.694729" lon="0.492122">
+        <ele>3082.1</ele>
+        <time>2019-06-19T18:09:26Z</time>
+      </trkpt>
+      <trkpt lat="42.694491" lon="0.492185">
+        <ele>3085.6</ele>
+        <time>2019-06-19T18:09:58Z</time>
+      </trkpt>
+      <trkpt lat="42.694377" lon="0.492261">
+        <ele>3093.8</ele>
+        <time>2019-06-19T18:10:15Z</time>
+      </trkpt>
+      <trkpt lat="42.694230" lon="0.492410">
+        <ele>3092.7</ele>
+        <time>2019-06-19T18:10:39Z</time>
+      </trkpt>
+      <trkpt lat="42.694087" lon="0.492629">
+        <ele>3086.5</ele>
+        <time>2019-06-19T18:11:08Z</time>
+      </trkpt>
+      <trkpt lat="42.694051" lon="0.492648">
+        <ele>3084.2</ele>
+        <time>2019-06-19T18:11:13Z</time>
+      </trkpt>
+      <trkpt lat="42.693793" lon="0.492717">
+        <ele>3078.8</ele>
+        <time>2019-06-19T18:11:48Z</time>
+      </trkpt>
+      <trkpt lat="42.693773" lon="0.492715">
+        <ele>3080.2</ele>
+        <time>2019-06-19T18:11:51Z</time>
+      </trkpt>
+      <trkpt lat="42.693511" lon="0.492719">
+        <ele>3084.2</ele>
+        <time>2019-06-19T18:12:26Z</time>
+      </trkpt>
+      <trkpt lat="42.693441" lon="0.492734">
+        <ele>3089.3</ele>
+        <time>2019-06-19T18:12:36Z</time>
+      </trkpt>
+      <trkpt lat="42.693235" lon="0.492742">
+        <ele>3094.7</ele>
+        <time>2019-06-19T18:13:03Z</time>
+        <cmt>Tuca del Sellán 3104m</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.693132" lon="0.492799">
+        <ele>3095.6</ele>
+        <time>2019-06-19T18:13:18Z</time>
+      </trkpt>
+      <trkpt lat="42.693100" lon="0.492803">
+        <ele>3097.6</ele>
+        <time>2019-06-19T18:13:22Z</time>
+      </trkpt>
+      <trkpt lat="42.693071" lon="0.492845">
+        <ele>3098.5</ele>
+        <time>2019-06-19T18:13:28Z</time>
+      </trkpt>
+      <trkpt lat="42.693007" lon="0.493043">
+        <ele>3099.5</ele>
+        <time>2019-06-19T18:13:49Z</time>
+      </trkpt>
+      <trkpt lat="42.692955" lon="0.493151">
+        <ele>3098.0</ele>
+        <time>2019-06-19T18:14:02Z</time>
+      </trkpt>
+      <trkpt lat="42.692959" lon="0.493228">
+        <ele>3092.8</ele>
+        <time>2019-06-19T18:14:09Z</time>
+      </trkpt>
+      <trkpt lat="42.692933" lon="0.493284">
+        <ele>3091.3</ele>
+        <time>2019-06-19T18:14:16Z</time>
+      </trkpt>
+      <trkpt lat="42.692899" lon="0.493510">
+        <ele>3082.2</ele>
+        <time>2019-06-19T18:14:38Z</time>
+      </trkpt>
+      <trkpt lat="42.692796" lon="0.493682">
+        <ele>3076.0</ele>
+        <time>2019-06-19T18:15:00Z</time>
+      </trkpt>
+      <trkpt lat="42.692675" lon="0.493944">
+        <ele>3069.6</ele>
+        <time>2019-06-19T18:15:30Z</time>
+      </trkpt>
+      <trkpt lat="42.692670" lon="0.494032">
+        <ele>3064.8</ele>
+        <time>2019-06-19T18:15:39Z</time>
+      </trkpt>
+      <trkpt lat="42.692619" lon="0.494191">
+        <ele>3064.4</ele>
+        <time>2019-06-19T18:15:56Z</time>
+      </trkpt>
+      <trkpt lat="42.692486" lon="0.494664">
+        <ele>3062.4</ele>
+        <time>2019-06-19T18:16:46Z</time>
+      </trkpt>
+      <trkpt lat="42.692450" lon="0.494848">
+        <ele>3070.2</ele>
+        <time>2019-06-19T18:17:05Z</time>
+      </trkpt>
+      <trkpt lat="42.692458" lon="0.494973">
+        <ele>3074.9</ele>
+        <time>2019-06-19T18:17:17Z</time>
+      </trkpt>
+      <trkpt lat="42.692455" lon="0.494988">
+        <ele>3075.4</ele>
+        <time>2019-06-19T18:17:18Z</time>
+      </trkpt>
+      <trkpt lat="42.692477" lon="0.495221">
+        <ele>3080.2</ele>
+        <time>2019-06-19T18:17:41Z</time>
+      </trkpt>
+      <trkpt lat="42.692523" lon="0.495346">
+        <ele>3083.2</ele>
+        <time>2019-06-19T18:17:55Z</time>
+      </trkpt>
+      <trkpt lat="42.692511" lon="0.495520">
+        <ele>3088.5</ele>
+        <time>2019-06-19T18:18:12Z</time>
+      </trkpt>
+      <trkpt lat="42.692485" lon="0.495771">
+        <ele>3098.0</ele>
+        <time>2019-06-19T18:18:37Z</time>
+      </trkpt>
+      <trkpt lat="42.692499" lon="0.495873">
+        <ele>3100.5</ele>
+        <time>2019-06-19T18:18:47Z</time>
+      </trkpt>
+      <trkpt lat="42.692488" lon="0.495970">
+        <ele>3101.4</ele>
+        <time>2019-06-19T18:18:57Z</time>
+      </trkpt>
+      <trkpt lat="42.692390" lon="0.496222">
+        <ele>3099.9</ele>
+        <time>2019-06-19T18:19:25Z</time>
+      </trkpt>
+      <trkpt lat="42.692362" lon="0.496267">
+        <ele>3094.7</ele>
+        <time>2019-06-19T18:19:31Z</time>
+        <cmt>Sellán de la Baca 3108m</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.692347" lon="0.496403">
+        <ele>3093.8</ele>
+        <time>2019-06-19T18:19:44Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>

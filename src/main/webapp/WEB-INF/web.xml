@@ -8,6 +8,46 @@
 	    <welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
+  <filter>
+    <filter-name>Filter</filter-name>
+    <filter-class>com.adrutas.controller.Filter</filter-class>
+  </filter>
+
+	<filter-mapping>
+	    <filter-name>Filter</filter-name>
+	    <url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+  <filter>
+    <filter-name>FilterJunta</filter-name>
+    <filter-class>com.adrutas.controller.FilterJunta</filter-class>
+  </filter>
+
+	<filter-mapping>
+	    <filter-name>FilterJunta</filter-name>
+	    <url-pattern>/jd/*</url-pattern>
+	</filter-mapping>
+
+  <filter>
+    <filter-name>FilterSocio</filter-name>
+    <filter-class>com.adrutas.controller.FilterSocio</filter-class>
+  </filter>
+
+  <filter-mapping>
+      <filter-name>FilterSocio</filter-name>
+      <url-pattern>/socios/*</url-pattern>
+  </filter-mapping>
+
+  <!-- <filter>
+    <filter-name>Filter</filter-name>
+    <filter-class>com.adrutas.controller.Filter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>Filter</filter-name>
+    <url-pattern>*</url-pattern>
+  </filter-mapping> -->
+
   <!-- <filter>
     <filter-name>FilterJunta</filter-name>
     <filter-class>com.adrutas.controller.FilterJunta</filter-class>

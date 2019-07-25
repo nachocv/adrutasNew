@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.adrutas.model.SalidaDetalle;
 import com.google.gson.Gson;
 
-@WebServlet(name = "ServletMandaLista", urlPatterns = {"/mandaLista"})
+@WebServlet(name = "ServletMandaLista", urlPatterns = {"/jd/mandaLista"})
 public class ServletMandaLista extends HttpServlet {
 	private static final long serialVersionUID = 906159967871146790L;
 

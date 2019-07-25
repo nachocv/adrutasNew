@@ -24,7 +24,7 @@ import fr.opensagres.xdocreport.document.registry.XDocReportRegistry;
 import fr.opensagres.xdocreport.template.IContext;
 import fr.opensagres.xdocreport.template.TemplateEngineKind;
 
-@WebServlet(name = "ListaFicha", urlPatterns = {"/lista_ficha"})
+@WebServlet(name = "ListaFicha", urlPatterns = {"/jd/lista_ficha"})
 public class ListaFicha extends HttpServlet {
 	private static final long serialVersionUID = 614337683527218214L;
 	private static final Logger log = Logger.getLogger(ListaFicha.class.getName());

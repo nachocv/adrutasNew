@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.adrutas.model.SalidaDetalle;
 
-@WebServlet(name = "ServletDelAlta", urlPatterns = {"/delAlta"})
+@WebServlet(name = "ServletDelAlta", urlPatterns = {"/jd/delAlta"})
 public class ServletDelAlta extends HttpServlet {
 	private static final long serialVersionUID = -4539599305533439093L;
 	private static final Logger log = Logger.getLogger(ServletDelAlta.class.getName());

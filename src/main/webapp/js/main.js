@@ -13,7 +13,7 @@ function filtrar(funcion) {
   $("input#filtro").autocomplete({
     source : function(request, response) {
       $.ajax({
-        url : "/filtroPersona",
+        url : "/jd/filtroPersona",
         dataType : "json",
         data : {filtro:$("input#filtro").val()},
         success : function(data) {
@@ -48,7 +48,7 @@ function buscaPersona(event, ui) {
 var persona = function() {
   filtrar(buscaPersona);
   $.ajax({
-    url: "/persona",
+    url: "/jd/persona",
     success: function(result) {
         comprueba_identificacion(result);
       },
@@ -64,7 +64,7 @@ var persona = function() {
 
 function apunte(salida,id_persona,funcion) {
   $.ajax({
-    url: "/apunteSalida?salida=" + salida + "&id_persona=" + id_persona,
+    url: "/jd/apunteSalida?salida=" + salida + "&id_persona=" + id_persona,
     success: funcion,
     error : function(jqXHR, status, error) {
       alert(jqXHR.responseText);
@@ -83,7 +83,7 @@ function apunteSalida(event, ui) {
 var salidaDetalle = function() {
   filtrar(apunteSalida);
   var salidaDetalles;
-  $.ajax({url: "/salidaDetalle?salida=" + $("select#salida").val(), 
+  $.ajax({url: "/jd/salidaDetalle?salida=" + $("select#salida").val(), 
     success: function(result) {
       salidaDetalles = JSON.parse(result);
       cargaSalidaDetalle(salidaDetalles);
@@ -351,7 +351,7 @@ function resizeIframe(miIframe) {
 var getPersona = function() {
   putInclude();
   $.ajax({
-    url: "/persona",
+    url: "/jd/persona",
     success: function(result) {
         comprueba_identificacion(result);
       },
@@ -560,7 +560,7 @@ function mandaLista() {
 	});
 	$.ajax({
     type: "POST",
-    url: "/mandaLista",
+    url: "/jd/mandaLista",
     processData: false,
     contentType: 'application/json',
     data: JSON.stringify(listaApuntados),
@@ -580,7 +580,7 @@ function mandaLista() {
 
 function delAlta() {
   var persona = $("input:radio[name='id_persona']:checked");
-  $.ajax({url: "/delAlta?salida=" + $("select#salida").val() + "&id_persona=" + persona.val(),
+  $.ajax({url: "/jd/delAlta?salida=" + $("select#salida").val() + "&id_persona=" + persona.val(),
     success : salidaDetalle,
     error : function(jqXHR, status, error) {
       alert('Disculpe, existió un problema');
@@ -687,7 +687,7 @@ function add_email() {
 }
 
 function add_email1() {
-	var element = $("form[action='/persona'] input#email");
+	var element = $("form[action='/jd/persona'] input#email");
 	$("#emails").append("<li><div onclick=\"llama(this)\">" + element.val() + "</div></li>");
 	element.val("");
 }
@@ -727,7 +727,7 @@ function baja_email() {
 
 function listaFicha() {
   $("form#myForm").remove();
-  var form = $('<form id="myForm" method="post" action="/lista_ficha"></form>').appendTo('body');
+  var form = $('<form id="myForm" method="post" action="/jd/lista_ficha"></form>').appendTo('body');
   var field = $("<input></input>");
   field.attr("type", "hidden");
   field.attr("name", "id_persona");
@@ -743,7 +743,7 @@ function listaFicha() {
 
 function listaTelefonos() {
   $("form#myForm").remove();
-  var form = $('<form id="myForm" method="post" action="/listaAlfa"></form>').appendTo('body');
+  var form = $('<form id="myForm" method="post" action="/jd/listaAlfa"></form>').appendTo('body');
   var field = $("<input></input>");
   field.attr("type", "hidden");
   field.attr("name", "salida");
@@ -754,7 +754,7 @@ function listaTelefonos() {
 
 function listaAsientos(salida) {
   $("form#myForm").remove();
-  var form = $('<form id="myForm" method="post" action="/listaAsientos"></form>').appendTo('body');
+  var form = $('<form id="myForm" method="post" action="/jd/listaAsientos"></form>').appendTo('body');
   var field = $("<input></input>");
   field.attr("type", "hidden");
   field.attr("name", "salida");
@@ -765,7 +765,7 @@ function listaAsientos(salida) {
 
 function excelContable(salida) {
   $("form#myForm").remove();
-  var form = $('<form id="myForm" method="post" action="/excelContable"></form>').appendTo('body');
+  var form = $('<form id="myForm" method="post" action="/jd/excelContable"></form>').appendTo('body');
   var field = $("<input></input>");
   field.attr("type", "hidden");
   field.attr("name", "salida");
@@ -1193,7 +1193,7 @@ function grabaPersona() {
     personaNew.emails.push(option.value);
   });
   $.ajax({
-    url: "/grabaPersona?persona=" + JSON.stringify(personaNew),
+    url: "/jd/grabaPersona?persona=" + JSON.stringify(personaNew),
     success : cargaPersona,
     error : function(jqXHR, status, error) {
       alert('Disculpe, existió un problema');
@@ -1218,7 +1218,7 @@ function grabaFicha() {
 		ficha.opciones.push(value.id.substring(7));
 	});
 	$.ajax({
-		url : "/grabaFicha?ficha=" + JSON.stringify(ficha),
+		url : "/jd/grabaFicha?ficha=" + JSON.stringify(ficha),
 		success : cargaPersona,
 		error : function(jqXHR, status, error) {
 			alert('Disculpe, existió un problema');

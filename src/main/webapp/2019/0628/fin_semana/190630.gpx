@@ -1,0 +1,2065 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="CompeGPS" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <link href="http://www.compegps.com">
+      <text>CompeGPS TEAM, SL</text>
+    </link>
+    <time>2019-06-19T21:00:28Z</time>
+    <bounds maxlat="42.418225" maxlon="0.143909" minlat="42.394293" minlon="0.094768"/>
+  </metadata>
+  <trk>
+    <name>190630</name>
+    <trkseg>
+      <trkpt lat="42.412389" lon="0.140029">
+        <ele>544.3</ele>
+        <time>2017-11-26T07:58:33Z</time>
+        <cmt>01 Aínsa</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.412263" lon="0.140277">
+        <ele>540.5</ele>
+        <time>2017-11-26T08:01:45Z</time>
+      </trkpt>
+      <trkpt lat="42.412353" lon="0.140517">
+        <ele>541.8</ele>
+        <time>2017-11-26T08:02:03Z</time>
+      </trkpt>
+      <trkpt lat="42.412264" lon="0.140690">
+        <ele>544.3</ele>
+        <time>2017-11-26T08:02:29Z</time>
+      </trkpt>
+      <trkpt lat="42.412016" lon="0.140706">
+        <ele>549.1</ele>
+        <time>2017-11-26T08:02:53Z</time>
+      </trkpt>
+      <trkpt lat="42.411784" lon="0.140593">
+        <ele>552.5</ele>
+        <time>2017-11-26T08:03:15Z</time>
+      </trkpt>
+      <trkpt lat="42.411427" lon="0.140567">
+        <ele>557.8</ele>
+        <time>2017-11-26T08:03:52Z</time>
+      </trkpt>
+      <trkpt lat="42.411183" lon="0.140630">
+        <ele>560.5</ele>
+        <time>2017-11-26T08:04:15Z</time>
+      </trkpt>
+      <trkpt lat="42.410997" lon="0.140573">
+        <ele>563.4</ele>
+        <time>2017-11-26T08:04:35Z</time>
+      </trkpt>
+      <trkpt lat="42.410617" lon="0.140633">
+        <ele>570.7</ele>
+        <time>2017-11-26T08:05:15Z</time>
+      </trkpt>
+      <trkpt lat="42.410350" lon="0.140750">
+        <ele>575.5</ele>
+        <time>2017-11-26T08:05:40Z</time>
+      </trkpt>
+      <trkpt lat="42.410128" lon="0.140710">
+        <ele>577.5</ele>
+        <time>2017-11-26T08:06:06Z</time>
+      </trkpt>
+      <trkpt lat="42.409868" lon="0.140549">
+        <ele>581.2</ele>
+        <time>2017-11-26T08:06:34Z</time>
+      </trkpt>
+      <trkpt lat="42.409496" lon="0.140437">
+        <ele>587.9</ele>
+        <time>2017-11-26T08:07:12Z</time>
+      </trkpt>
+      <trkpt lat="42.409002" lon="0.140267">
+        <ele>588.9</ele>
+        <time>2017-11-26T08:07:56Z</time>
+      </trkpt>
+      <trkpt lat="42.408782" lon="0.140156">
+        <ele>589.4</ele>
+        <time>2017-11-26T08:08:15Z</time>
+      </trkpt>
+      <trkpt lat="42.408538" lon="0.140133">
+        <ele>591.4</ele>
+        <time>2017-11-26T08:08:39Z</time>
+      </trkpt>
+      <trkpt lat="42.408399" lon="0.140327">
+        <ele>592.3</ele>
+        <time>2017-11-26T08:08:56Z</time>
+      </trkpt>
+      <trkpt lat="42.407914" lon="0.140650">
+        <ele>594.8</ele>
+        <time>2017-11-26T08:09:43Z</time>
+      </trkpt>
+      <trkpt lat="42.407258" lon="0.140857">
+        <ele>600.5</ele>
+        <time>2017-11-26T08:10:41Z</time>
+      </trkpt>
+      <trkpt lat="42.406904" lon="0.141108">
+        <ele>603.3</ele>
+        <time>2017-11-26T08:11:16Z</time>
+      </trkpt>
+      <trkpt lat="42.406665" lon="0.141299">
+        <ele>607.6</ele>
+        <time>2017-11-26T08:11:50Z</time>
+      </trkpt>
+      <trkpt lat="42.406381" lon="0.141653">
+        <ele>612.1</ele>
+        <time>2017-11-26T08:12:27Z</time>
+      </trkpt>
+      <trkpt lat="42.406048" lon="0.141959">
+        <ele>616.4</ele>
+        <time>2017-11-26T08:13:02Z</time>
+      </trkpt>
+      <trkpt lat="42.405686" lon="0.142320">
+        <ele>616.8</ele>
+        <time>2017-11-26T08:13:59Z</time>
+      </trkpt>
+      <trkpt lat="42.405113" lon="0.142748">
+        <ele>622.1</ele>
+        <time>2017-11-26T08:14:50Z</time>
+      </trkpt>
+      <trkpt lat="42.404591" lon="0.143369">
+        <ele>627.4</ele>
+        <time>2017-11-26T08:15:45Z</time>
+      </trkpt>
+      <trkpt lat="42.403950" lon="0.143789">
+        <ele>624.6</ele>
+        <time>2017-11-26T08:16:43Z</time>
+      </trkpt>
+      <trkpt lat="42.403770" lon="0.143808">
+        <ele>627.5</ele>
+        <time>2017-11-26T08:17:30Z</time>
+        <cmt>02 Ermita Virgen de los Palacios</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.403896" lon="0.143754">
+        <ele>623.5</ele>
+        <time>2017-11-26T08:18:59Z</time>
+      </trkpt>
+      <trkpt lat="42.403774" lon="0.143829">
+        <ele>622.1</ele>
+        <time>2017-11-26T08:19:13Z</time>
+      </trkpt>
+      <trkpt lat="42.403837" lon="0.143909">
+        <ele>621.2</ele>
+        <time>2017-11-26T08:19:59Z</time>
+      </trkpt>
+      <trkpt lat="42.404272" lon="0.143613">
+        <ele>625.5</ele>
+        <time>2017-11-26T08:21:46Z</time>
+      </trkpt>
+      <trkpt lat="42.404555" lon="0.143409">
+        <ele>625.4</ele>
+        <time>2017-11-26T08:22:13Z</time>
+      </trkpt>
+      <trkpt lat="42.405221" lon="0.142672">
+        <ele>617.8</ele>
+        <time>2017-11-26T08:23:25Z</time>
+      </trkpt>
+      <trkpt lat="42.405698" lon="0.142332">
+        <ele>614.0</ele>
+        <time>2017-11-26T08:24:09Z</time>
+      </trkpt>
+      <trkpt lat="42.406290" lon="0.141747">
+        <ele>609.2</ele>
+        <time>2017-11-26T08:25:09Z</time>
+      </trkpt>
+      <trkpt lat="42.406507" lon="0.141543">
+        <ele>606.8</ele>
+        <time>2017-11-26T08:25:30Z</time>
+      </trkpt>
+      <trkpt lat="42.406811" lon="0.141170">
+        <ele>600.4</ele>
+        <time>2017-11-26T08:26:07Z</time>
+      </trkpt>
+      <trkpt lat="42.406601" lon="0.141173">
+        <ele>600.1</ele>
+        <time>2017-11-26T08:26:34Z</time>
+      </trkpt>
+      <trkpt lat="42.406310" lon="0.141142">
+        <ele>601.4</ele>
+        <time>2017-11-26T08:27:23Z</time>
+      </trkpt>
+      <trkpt lat="42.405753" lon="0.141005">
+        <ele>604.8</ele>
+        <time>2017-11-26T08:28:13Z</time>
+      </trkpt>
+      <trkpt lat="42.404940" lon="0.141018">
+        <ele>608.6</ele>
+        <time>2017-11-26T08:29:17Z</time>
+      </trkpt>
+      <trkpt lat="42.404758" lon="0.141042">
+        <ele>608.6</ele>
+        <time>2017-11-26T08:29:32Z</time>
+      </trkpt>
+      <trkpt lat="42.404092" lon="0.141275">
+        <ele>610.5</ele>
+        <time>2017-11-26T08:30:25Z</time>
+      </trkpt>
+      <trkpt lat="42.403728" lon="0.141454">
+        <ele>611.1</ele>
+        <time>2017-11-26T08:30:57Z</time>
+      </trkpt>
+      <trkpt lat="42.403680" lon="0.141401">
+        <ele>623.5</ele>
+        <time>2017-11-26T08:31:24Z</time>
+        <cmt>03 Mirador - comedero de rapaces</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.403719" lon="0.141390">
+        <ele>611.0</ele>
+        <time>2017-11-26T08:31:57Z</time>
+      </trkpt>
+      <trkpt lat="42.403477" lon="0.141635">
+        <ele>608.7</ele>
+        <time>2017-11-26T08:32:39Z</time>
+      </trkpt>
+      <trkpt lat="42.403283" lon="0.141718">
+        <ele>608.7</ele>
+        <time>2017-11-26T08:32:58Z</time>
+      </trkpt>
+      <trkpt lat="42.403053" lon="0.141709">
+        <ele>612.1</ele>
+        <time>2017-11-26T08:33:21Z</time>
+      </trkpt>
+      <trkpt lat="42.402572" lon="0.141832">
+        <ele>614.4</ele>
+        <time>2017-11-26T08:34:11Z</time>
+      </trkpt>
+      <trkpt lat="42.402544" lon="0.141746">
+        <ele>619.8</ele>
+        <time>2017-11-26T08:34:33Z</time>
+        <cmt>04 Pista a derecha</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.402515" lon="0.141288">
+        <ele>621.6</ele>
+        <time>2017-11-26T08:35:06Z</time>
+      </trkpt>
+      <trkpt lat="42.402487" lon="0.141150">
+        <ele>622.6</ele>
+        <time>2017-11-26T08:35:20Z</time>
+      </trkpt>
+      <trkpt lat="42.402206" lon="0.140597">
+        <ele>624.0</ele>
+        <time>2017-11-26T08:36:18Z</time>
+      </trkpt>
+      <trkpt lat="42.402056" lon="0.140574">
+        <ele>621.6</ele>
+        <time>2017-11-26T08:36:34Z</time>
+      </trkpt>
+      <trkpt lat="42.401635" lon="0.140192">
+        <ele>624.6</ele>
+        <time>2017-11-26T08:37:13Z</time>
+      </trkpt>
+      <trkpt lat="42.401402" lon="0.140114">
+        <ele>626.4</ele>
+        <time>2017-11-26T08:38:11Z</time>
+      </trkpt>
+      <trkpt lat="42.401278" lon="0.140054">
+        <ele>628.8</ele>
+        <time>2017-11-26T08:38:24Z</time>
+      </trkpt>
+      <trkpt lat="42.401352" lon="0.140068">
+        <ele>625.9</ele>
+        <time>2017-11-26T08:38:40Z</time>
+        <cmt>05 Roble monumental</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.401147" lon="0.139972">
+        <ele>629.4</ele>
+        <time>2017-11-26T08:38:58Z</time>
+      </trkpt>
+      <trkpt lat="42.401005" lon="0.139817">
+        <ele>631.8</ele>
+        <time>2017-11-26T08:39:13Z</time>
+      </trkpt>
+      <trkpt lat="42.400845" lon="0.139769">
+        <ele>635.0</ele>
+        <time>2017-11-26T08:39:29Z</time>
+      </trkpt>
+      <trkpt lat="42.400763" lon="0.139448">
+        <ele>640.3</ele>
+        <time>2017-11-26T08:40:46Z</time>
+        <cmt>06 Senda derecha</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.400669" lon="0.139235">
+        <ele>643.7</ele>
+        <time>2017-11-26T08:41:06Z</time>
+      </trkpt>
+      <trkpt lat="42.400621" lon="0.138974">
+        <ele>646.2</ele>
+        <time>2017-11-26T08:41:28Z</time>
+      </trkpt>
+      <trkpt lat="42.400724" lon="0.138795">
+        <ele>647.2</ele>
+        <time>2017-11-26T08:41:45Z</time>
+      </trkpt>
+      <trkpt lat="42.400796" lon="0.138356">
+        <ele>651.9</ele>
+        <time>2017-11-26T08:42:16Z</time>
+      </trkpt>
+      <trkpt lat="42.400718" lon="0.138027">
+        <ele>656.3</ele>
+        <time>2017-11-26T08:42:43Z</time>
+      </trkpt>
+      <trkpt lat="42.400535" lon="0.137851">
+        <ele>659.7</ele>
+        <time>2017-11-26T08:43:05Z</time>
+      </trkpt>
+      <trkpt lat="42.400310" lon="0.137393">
+        <ele>667.2</ele>
+        <time>2017-11-26T08:43:49Z</time>
+      </trkpt>
+      <trkpt lat="42.400212" lon="0.136831">
+        <ele>674.5</ele>
+        <time>2017-11-26T08:44:53Z</time>
+      </trkpt>
+      <trkpt lat="42.400085" lon="0.136619">
+        <ele>680.2</ele>
+        <time>2017-11-26T08:45:18Z</time>
+      </trkpt>
+      <trkpt lat="42.400050" lon="0.136485">
+        <ele>681.7</ele>
+        <time>2017-11-26T08:45:29Z</time>
+      </trkpt>
+      <trkpt lat="42.399915" lon="0.136264">
+        <ele>686.5</ele>
+        <time>2017-11-26T08:45:52Z</time>
+      </trkpt>
+      <trkpt lat="42.399850" lon="0.136048">
+        <ele>689.0</ele>
+        <time>2017-11-26T08:46:11Z</time>
+      </trkpt>
+      <trkpt lat="42.399604" lon="0.135894">
+        <ele>690.8</ele>
+        <time>2017-11-26T08:46:38Z</time>
+      </trkpt>
+      <trkpt lat="42.399385" lon="0.135475">
+        <ele>695.6</ele>
+        <time>2017-11-26T08:47:15Z</time>
+      </trkpt>
+      <trkpt lat="42.399301" lon="0.134948">
+        <ele>702.0</ele>
+        <time>2017-11-26T08:47:54Z</time>
+      </trkpt>
+      <trkpt lat="42.399277" lon="0.134901">
+        <ele>702.8</ele>
+        <time>2017-11-26T08:47:58Z</time>
+      </trkpt>
+      <trkpt lat="42.399020" lon="0.134615">
+        <ele>708.2</ele>
+        <time>2017-11-26T08:48:28Z</time>
+      </trkpt>
+      <trkpt lat="42.399007" lon="0.134344">
+        <ele>709.5</ele>
+        <time>2017-11-26T08:48:48Z</time>
+      </trkpt>
+      <trkpt lat="42.398907" lon="0.133550">
+        <ele>711.5</ele>
+        <time>2017-11-26T08:49:53Z</time>
+      </trkpt>
+      <trkpt lat="42.398606" lon="0.133057">
+        <ele>712.9</ele>
+        <time>2017-11-26T08:50:38Z</time>
+      </trkpt>
+      <trkpt lat="42.398320" lon="0.132832">
+        <ele>708.7</ele>
+        <time>2017-11-26T08:51:05Z</time>
+      </trkpt>
+      <trkpt lat="42.398238" lon="0.132697">
+        <ele>709.2</ele>
+        <time>2017-11-26T08:51:14Z</time>
+      </trkpt>
+      <trkpt lat="42.398140" lon="0.132341">
+        <ele>710.5</ele>
+        <time>2017-11-26T08:51:37Z</time>
+      </trkpt>
+      <trkpt lat="42.398007" lon="0.132108">
+        <ele>710.1</ele>
+        <time>2017-11-26T08:51:57Z</time>
+      </trkpt>
+      <trkpt lat="42.397796" lon="0.131605">
+        <ele>708.2</ele>
+        <time>2017-11-26T08:52:31Z</time>
+      </trkpt>
+      <trkpt lat="42.397553" lon="0.131313">
+        <ele>706.7</ele>
+        <time>2017-11-26T08:52:58Z</time>
+      </trkpt>
+      <trkpt lat="42.397560" lon="0.131175">
+        <ele>707.1</ele>
+        <time>2017-11-26T08:53:10Z</time>
+      </trkpt>
+      <trkpt lat="42.397431" lon="0.130830">
+        <ele>709.1</ele>
+        <time>2017-11-26T08:53:33Z</time>
+      </trkpt>
+      <trkpt lat="42.397121" lon="0.130392">
+        <ele>702.4</ele>
+        <time>2017-11-26T08:54:16Z</time>
+      </trkpt>
+      <trkpt lat="42.397094" lon="0.130219">
+        <ele>702.0</ele>
+        <time>2017-11-26T08:54:28Z</time>
+      </trkpt>
+      <trkpt lat="42.397215" lon="0.130049">
+        <ele>704.8</ele>
+        <time>2017-11-26T08:54:46Z</time>
+      </trkpt>
+      <trkpt lat="42.397268" lon="0.129827">
+        <ele>707.1</ele>
+        <time>2017-11-26T08:55:01Z</time>
+      </trkpt>
+      <trkpt lat="42.397213" lon="0.129657">
+        <ele>706.2</ele>
+        <time>2017-11-26T08:55:14Z</time>
+      </trkpt>
+      <trkpt lat="42.397028" lon="0.129681">
+        <ele>708.7</ele>
+        <time>2017-11-26T08:55:31Z</time>
+      </trkpt>
+      <trkpt lat="42.396604" lon="0.129504">
+        <ele>714.5</ele>
+        <time>2017-11-26T08:56:16Z</time>
+      </trkpt>
+      <trkpt lat="42.396283" lon="0.129633">
+        <ele>717.3</ele>
+        <time>2017-11-26T08:57:38Z</time>
+      </trkpt>
+      <trkpt lat="42.396028" lon="0.129636">
+        <ele>718.8</ele>
+        <time>2017-11-26T08:58:04Z</time>
+      </trkpt>
+      <trkpt lat="42.395564" lon="0.129409">
+        <ele>720.1</ele>
+        <time>2017-11-26T08:58:48Z</time>
+      </trkpt>
+      <trkpt lat="42.395100" lon="0.128965">
+        <ele>724.0</ele>
+        <time>2017-11-26T08:59:38Z</time>
+      </trkpt>
+      <trkpt lat="42.395048" lon="0.128959">
+        <ele>725.5</ele>
+        <time>2017-11-26T08:59:49Z</time>
+      </trkpt>
+      <trkpt lat="42.394882" lon="0.128881">
+        <ele>727.3</ele>
+        <time>2017-11-26T09:00:07Z</time>
+      </trkpt>
+      <trkpt lat="42.394651" lon="0.128445">
+        <ele>731.2</ele>
+        <time>2017-11-26T09:00:45Z</time>
+      </trkpt>
+      <trkpt lat="42.394644" lon="0.128258">
+        <ele>733.7</ele>
+        <time>2017-11-26T09:00:59Z</time>
+      </trkpt>
+      <trkpt lat="42.394589" lon="0.127751">
+        <ele>740.4</ele>
+        <time>2017-11-26T09:02:02Z</time>
+      </trkpt>
+      <trkpt lat="42.394433" lon="0.127507">
+        <ele>747.6</ele>
+        <time>2017-11-26T09:03:09Z</time>
+      </trkpt>
+      <trkpt lat="42.394385" lon="0.127253">
+        <ele>752.9</ele>
+        <time>2017-11-26T09:03:46Z</time>
+      </trkpt>
+      <trkpt lat="42.394293" lon="0.127277">
+        <ele>757.6</ele>
+        <time>2017-11-26T09:04:18Z</time>
+      </trkpt>
+      <trkpt lat="42.394371" lon="0.126915">
+        <ele>765.3</ele>
+        <time>2017-11-26T09:05:01Z</time>
+      </trkpt>
+      <trkpt lat="42.394538" lon="0.126622">
+        <ele>771.1</ele>
+        <time>2017-11-26T09:05:45Z</time>
+      </trkpt>
+      <trkpt lat="42.394533" lon="0.126465">
+        <ele>752.8</ele>
+        <time>2017-11-26T09:06:16Z</time>
+        <cmt>07 Cruceta Bruello</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.394561" lon="0.126491">
+        <ele>771.2</ele>
+        <time>2017-11-26T09:08:11Z</time>
+      </trkpt>
+      <trkpt lat="42.394563" lon="0.126486">
+        <ele>771.7</ele>
+        <time>2017-11-26T09:09:59Z</time>
+      </trkpt>
+      <trkpt lat="42.394563" lon="0.126482">
+        <ele>770.6</ele>
+        <time>2017-11-26T09:12:07Z</time>
+      </trkpt>
+      <trkpt lat="42.394557" lon="0.126466">
+        <ele>777.3</ele>
+        <time>2017-11-26T09:15:16Z</time>
+      </trkpt>
+      <trkpt lat="42.394756" lon="0.126278">
+        <ele>774.1</ele>
+        <time>2017-11-26T09:16:08Z</time>
+      </trkpt>
+      <trkpt lat="42.395020" lon="0.126191">
+        <ele>776.9</ele>
+        <time>2017-11-26T09:16:28Z</time>
+      </trkpt>
+      <trkpt lat="42.395192" lon="0.126251">
+        <ele>780.7</ele>
+        <time>2017-11-26T09:16:50Z</time>
+      </trkpt>
+      <trkpt lat="42.395548" lon="0.126086">
+        <ele>783.7</ele>
+        <time>2017-11-26T09:17:30Z</time>
+      </trkpt>
+      <trkpt lat="42.395672" lon="0.126018">
+        <ele>785.0</ele>
+        <time>2017-11-26T09:17:43Z</time>
+      </trkpt>
+      <trkpt lat="42.395846" lon="0.125993">
+        <ele>787.4</ele>
+        <time>2017-11-26T09:18:02Z</time>
+      </trkpt>
+      <trkpt lat="42.395974" lon="0.126131">
+        <ele>791.3</ele>
+        <time>2017-11-26T09:18:26Z</time>
+      </trkpt>
+      <trkpt lat="42.396193" lon="0.126112">
+        <ele>795.1</ele>
+        <time>2017-11-26T09:18:51Z</time>
+      </trkpt>
+      <trkpt lat="42.396658" lon="0.125980">
+        <ele>800.4</ele>
+        <time>2017-11-26T09:19:43Z</time>
+      </trkpt>
+      <trkpt lat="42.396926" lon="0.125899">
+        <ele>803.9</ele>
+        <time>2017-11-26T09:20:12Z</time>
+      </trkpt>
+      <trkpt lat="42.397242" lon="0.125747">
+        <ele>807.2</ele>
+        <time>2017-11-26T09:20:54Z</time>
+      </trkpt>
+      <trkpt lat="42.397581" lon="0.125690">
+        <ele>811.9</ele>
+        <time>2017-11-26T09:21:33Z</time>
+      </trkpt>
+      <trkpt lat="42.397824" lon="0.125582">
+        <ele>813.9</ele>
+        <time>2017-11-26T09:21:58Z</time>
+      </trkpt>
+      <trkpt lat="42.398266" lon="0.125437">
+        <ele>817.8</ele>
+        <time>2017-11-26T09:22:48Z</time>
+      </trkpt>
+      <trkpt lat="42.398438" lon="0.125415">
+        <ele>820.1</ele>
+        <time>2017-11-26T09:23:04Z</time>
+      </trkpt>
+      <trkpt lat="42.398591" lon="0.125306">
+        <ele>822.1</ele>
+        <time>2017-11-26T09:23:20Z</time>
+      </trkpt>
+      <trkpt lat="42.398954" lon="0.125268">
+        <ele>829.2</ele>
+        <time>2017-11-26T09:24:15Z</time>
+      </trkpt>
+      <trkpt lat="42.399277" lon="0.125117">
+        <ele>830.2</ele>
+        <time>2017-11-26T09:25:15Z</time>
+      </trkpt>
+      <trkpt lat="42.399749" lon="0.124622">
+        <ele>824.9</ele>
+        <time>2017-11-26T09:26:13Z</time>
+      </trkpt>
+      <trkpt lat="42.400038" lon="0.124320">
+        <ele>822.1</ele>
+        <time>2017-11-26T09:26:53Z</time>
+      </trkpt>
+      <trkpt lat="42.400101" lon="0.124214">
+        <ele>822.1</ele>
+        <time>2017-11-26T09:27:02Z</time>
+      </trkpt>
+      <trkpt lat="42.400394" lon="0.123940">
+        <ele>821.5</ele>
+        <time>2017-11-26T09:27:27Z</time>
+      </trkpt>
+      <trkpt lat="42.400517" lon="0.123900">
+        <ele>823.9</ele>
+        <time>2017-11-26T09:28:24Z</time>
+        <cmt>08 Sendero Aínsa</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.400588" lon="0.123866">
+        <ele>822.1</ele>
+        <time>2017-11-26T09:28:43Z</time>
+      </trkpt>
+      <trkpt lat="42.401058" lon="0.123539">
+        <ele>826.4</ele>
+        <time>2017-11-26T09:29:29Z</time>
+      </trkpt>
+      <trkpt lat="42.401173" lon="0.123519">
+        <ele>829.3</ele>
+        <time>2017-11-26T09:29:41Z</time>
+      </trkpt>
+      <trkpt lat="42.401343" lon="0.123564">
+        <ele>833.1</ele>
+        <time>2017-11-26T09:30:01Z</time>
+      </trkpt>
+      <trkpt lat="42.401535" lon="0.123591">
+        <ele>837.4</ele>
+        <time>2017-11-26T09:30:24Z</time>
+      </trkpt>
+      <trkpt lat="42.401747" lon="0.123543">
+        <ele>840.8</ele>
+        <time>2017-11-26T09:30:57Z</time>
+      </trkpt>
+      <trkpt lat="42.402016" lon="0.123430">
+        <ele>845.6</ele>
+        <time>2017-11-26T09:31:32Z</time>
+      </trkpt>
+      <trkpt lat="42.402403" lon="0.123355">
+        <ele>849.9</ele>
+        <time>2017-11-26T09:32:09Z</time>
+      </trkpt>
+      <trkpt lat="42.402626" lon="0.123357">
+        <ele>849.5</ele>
+        <time>2017-11-26T09:32:43Z</time>
+        <cmt>09 Partarra 860 m.</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.402623" lon="0.123316">
+        <ele>852.8</ele>
+        <time>2017-11-26T09:34:37Z</time>
+      </trkpt>
+      <trkpt lat="42.402646" lon="0.123277">
+        <ele>851.8</ele>
+        <time>2017-11-26T09:39:53Z</time>
+      </trkpt>
+      <trkpt lat="42.402641" lon="0.123277">
+        <ele>852.3</ele>
+        <time>2017-11-26T09:46:11Z</time>
+      </trkpt>
+      <trkpt lat="42.402656" lon="0.123296">
+        <ele>853.7</ele>
+        <time>2017-11-26T09:47:56Z</time>
+      </trkpt>
+      <trkpt lat="42.402654" lon="0.123290">
+        <ele>854.2</ele>
+        <time>2017-11-26T09:49:35Z</time>
+      </trkpt>
+      <trkpt lat="42.402745" lon="0.123209">
+        <ele>854.8</ele>
+        <time>2017-11-26T09:50:42Z</time>
+      </trkpt>
+      <trkpt lat="42.403204" lon="0.122790">
+        <ele>854.7</ele>
+        <time>2017-11-26T09:51:32Z</time>
+      </trkpt>
+      <trkpt lat="42.403350" lon="0.122718">
+        <ele>855.7</ele>
+        <time>2017-11-26T09:51:48Z</time>
+      </trkpt>
+      <trkpt lat="42.403711" lon="0.122374">
+        <ele>851.3</ele>
+        <time>2017-11-26T09:52:36Z</time>
+      </trkpt>
+      <trkpt lat="42.403734" lon="0.122346">
+        <ele>850.4</ele>
+        <time>2017-11-26T09:54:45Z</time>
+      </trkpt>
+      <trkpt lat="42.404074" lon="0.121991">
+        <ele>847.6</ele>
+        <time>2017-11-26T09:55:26Z</time>
+      </trkpt>
+      <trkpt lat="42.404395" lon="0.121733">
+        <ele>846.2</ele>
+        <time>2017-11-26T09:55:59Z</time>
+      </trkpt>
+      <trkpt lat="42.404473" lon="0.121604">
+        <ele>844.6</ele>
+        <time>2017-11-26T09:56:10Z</time>
+      </trkpt>
+      <trkpt lat="42.405007" lon="0.121171">
+        <ele>845.6</ele>
+        <time>2017-11-26T09:57:11Z</time>
+      </trkpt>
+      <trkpt lat="42.405092" lon="0.121029">
+        <ele>844.2</ele>
+        <time>2017-11-26T09:57:23Z</time>
+      </trkpt>
+      <trkpt lat="42.405249" lon="0.120903">
+        <ele>845.6</ele>
+        <time>2017-11-26T09:57:40Z</time>
+      </trkpt>
+      <trkpt lat="42.405508" lon="0.120562">
+        <ele>842.3</ele>
+        <time>2017-11-26T09:58:13Z</time>
+      </trkpt>
+      <trkpt lat="42.405671" lon="0.120460">
+        <ele>843.7</ele>
+        <time>2017-11-26T09:58:30Z</time>
+      </trkpt>
+      <trkpt lat="42.405834" lon="0.120249">
+        <ele>841.3</ele>
+        <time>2017-11-26T09:58:51Z</time>
+      </trkpt>
+      <trkpt lat="42.406163" lon="0.120089">
+        <ele>842.7</ele>
+        <time>2017-11-26T09:59:27Z</time>
+      </trkpt>
+      <trkpt lat="42.406613" lon="0.119551">
+        <ele>837.4</ele>
+        <time>2017-11-26T10:00:22Z</time>
+      </trkpt>
+      <trkpt lat="42.406791" lon="0.119136">
+        <ele>831.2</ele>
+        <time>2017-11-26T10:01:00Z</time>
+      </trkpt>
+      <trkpt lat="42.406882" lon="0.119037">
+        <ele>808.2</ele>
+        <time>2017-11-26T10:01:14Z</time>
+        <cmt>10 La Selva Norte</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.407001" lon="0.119041">
+        <ele>826.3</ele>
+        <time>2017-11-26T10:02:11Z</time>
+      </trkpt>
+      <trkpt lat="42.407162" lon="0.118663">
+        <ele>817.8</ele>
+        <time>2017-11-26T10:03:46Z</time>
+      </trkpt>
+      <trkpt lat="42.407379" lon="0.118342">
+        <ele>812.4</ele>
+        <time>2017-11-26T10:04:39Z</time>
+      </trkpt>
+      <trkpt lat="42.407451" lon="0.118246">
+        <ele>811.0</ele>
+        <time>2017-11-26T10:05:19Z</time>
+      </trkpt>
+      <trkpt lat="42.407532" lon="0.118010">
+        <ele>807.7</ele>
+        <time>2017-11-26T10:06:10Z</time>
+      </trkpt>
+      <trkpt lat="42.407678" lon="0.117844">
+        <ele>805.7</ele>
+        <time>2017-11-26T10:06:23Z</time>
+      </trkpt>
+      <trkpt lat="42.407809" lon="0.117555">
+        <ele>802.3</ele>
+        <time>2017-11-26T10:06:45Z</time>
+      </trkpt>
+      <trkpt lat="42.407795" lon="0.117294">
+        <ele>798.0</ele>
+        <time>2017-11-26T10:07:08Z</time>
+      </trkpt>
+      <trkpt lat="42.407979" lon="0.116924">
+        <ele>789.9</ele>
+        <time>2017-11-26T10:07:48Z</time>
+      </trkpt>
+      <trkpt lat="42.408152" lon="0.116461">
+        <ele>780.8</ele>
+        <time>2017-11-26T10:08:43Z</time>
+      </trkpt>
+      <trkpt lat="42.408251" lon="0.116631">
+        <ele>777.8</ele>
+        <time>2017-11-26T10:09:13Z</time>
+      </trkpt>
+      <trkpt lat="42.408236" lon="0.116832">
+        <ele>774.5</ele>
+        <time>2017-11-26T10:09:33Z</time>
+      </trkpt>
+      <trkpt lat="42.408308" lon="0.117691">
+        <ele>768.8</ele>
+        <time>2017-11-26T10:10:27Z</time>
+      </trkpt>
+      <trkpt lat="42.408472" lon="0.117808">
+        <ele>761.5</ele>
+        <time>2017-11-26T10:10:51Z</time>
+      </trkpt>
+      <trkpt lat="42.408582" lon="0.117649">
+        <ele>756.3</ele>
+        <time>2017-11-26T10:11:08Z</time>
+      </trkpt>
+      <trkpt lat="42.408772" lon="0.117712">
+        <ele>742.2</ele>
+        <time>2017-11-26T10:12:01Z</time>
+      </trkpt>
+      <trkpt lat="42.408848" lon="0.117935">
+        <ele>736.1</ele>
+        <time>2017-11-26T10:12:27Z</time>
+      </trkpt>
+      <trkpt lat="42.409050" lon="0.117952">
+        <ele>734.1</ele>
+        <time>2017-11-26T10:13:25Z</time>
+        <cmt>11 Cruce a izquierda</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.409030" lon="0.117604">
+        <ele>724.9</ele>
+        <time>2017-11-26T10:14:00Z</time>
+      </trkpt>
+      <trkpt lat="42.409048" lon="0.117490">
+        <ele>722.0</ele>
+        <time>2017-11-26T10:14:09Z</time>
+      </trkpt>
+      <trkpt lat="42.408976" lon="0.116955">
+        <ele>713.4</ele>
+        <time>2017-11-26T10:14:45Z</time>
+      </trkpt>
+      <trkpt lat="42.408985" lon="0.116902">
+        <ele>712.9</ele>
+        <time>2017-11-26T10:14:48Z</time>
+      </trkpt>
+      <trkpt lat="42.409391" lon="0.116170">
+        <ele>703.8</ele>
+        <time>2017-11-26T10:15:38Z</time>
+      </trkpt>
+      <trkpt lat="42.409326" lon="0.115880">
+        <ele>697.6</ele>
+        <time>2017-11-26T10:16:01Z</time>
+      </trkpt>
+      <trkpt lat="42.409400" lon="0.115632">
+        <ele>692.8</ele>
+        <time>2017-11-26T10:16:29Z</time>
+      </trkpt>
+      <trkpt lat="42.409541" lon="0.115460">
+        <ele>687.5</ele>
+        <time>2017-11-26T10:16:56Z</time>
+      </trkpt>
+      <trkpt lat="42.409696" lon="0.115553">
+        <ele>684.7</ele>
+        <time>2017-11-26T10:17:25Z</time>
+      </trkpt>
+      <trkpt lat="42.409735" lon="0.116019">
+        <ele>678.4</ele>
+        <time>2017-11-26T10:18:25Z</time>
+      </trkpt>
+      <trkpt lat="42.409803" lon="0.116284">
+        <ele>676.0</ele>
+        <time>2017-11-26T10:18:45Z</time>
+      </trkpt>
+      <trkpt lat="42.409872" lon="0.116202">
+        <ele>671.2</ele>
+        <time>2017-11-26T10:19:07Z</time>
+      </trkpt>
+      <trkpt lat="42.409881" lon="0.115922">
+        <ele>666.3</ele>
+        <time>2017-11-26T10:19:31Z</time>
+      </trkpt>
+      <trkpt lat="42.410075" lon="0.115925">
+        <ele>659.6</ele>
+        <time>2017-11-26T10:19:55Z</time>
+      </trkpt>
+      <trkpt lat="42.410121" lon="0.116164">
+        <ele>653.4</ele>
+        <time>2017-11-26T10:20:16Z</time>
+      </trkpt>
+      <trkpt lat="42.410207" lon="0.116344">
+        <ele>651.4</ele>
+        <time>2017-11-26T10:20:28Z</time>
+      </trkpt>
+      <trkpt lat="42.410398" lon="0.116347">
+        <ele>645.7</ele>
+        <time>2017-11-26T10:21:11Z</time>
+      </trkpt>
+      <trkpt lat="42.410514" lon="0.116111">
+        <ele>639.5</ele>
+        <time>2017-11-26T10:22:42Z</time>
+      </trkpt>
+      <trkpt lat="42.410753" lon="0.115709">
+        <ele>628.3</ele>
+        <time>2017-11-26T10:23:29Z</time>
+      </trkpt>
+      <trkpt lat="42.410785" lon="0.115571">
+        <ele>627.5</ele>
+        <time>2017-11-26T10:23:39Z</time>
+      </trkpt>
+      <trkpt lat="42.410759" lon="0.115279">
+        <ele>627.0</ele>
+        <time>2017-11-26T10:24:12Z</time>
+      </trkpt>
+      <trkpt lat="42.410887" lon="0.114834">
+        <ele>617.4</ele>
+        <time>2017-11-26T10:25:08Z</time>
+      </trkpt>
+      <trkpt lat="42.411040" lon="0.114681">
+        <ele>612.6</ele>
+        <time>2017-11-26T10:25:22Z</time>
+      </trkpt>
+      <trkpt lat="42.411070" lon="0.114416">
+        <ele>605.7</ele>
+        <time>2017-11-26T10:25:44Z</time>
+      </trkpt>
+      <trkpt lat="42.411330" lon="0.114011">
+        <ele>598.5</ele>
+        <time>2017-11-26T10:26:15Z</time>
+      </trkpt>
+      <trkpt lat="42.411397" lon="0.113729">
+        <ele>593.3</ele>
+        <time>2017-11-26T10:26:46Z</time>
+      </trkpt>
+      <trkpt lat="42.411480" lon="0.113576">
+        <ele>590.4</ele>
+        <time>2017-11-26T10:27:00Z</time>
+      </trkpt>
+      <trkpt lat="42.411604" lon="0.113411">
+        <ele>586.5</ele>
+        <time>2017-11-26T10:28:35Z</time>
+      </trkpt>
+      <trkpt lat="42.411881" lon="0.113023">
+        <ele>579.4</ele>
+        <time>2017-11-26T10:29:10Z</time>
+      </trkpt>
+      <trkpt lat="42.411951" lon="0.112874">
+        <ele>577.9</ele>
+        <time>2017-11-26T10:29:22Z</time>
+      </trkpt>
+      <trkpt lat="42.412139" lon="0.112736">
+        <ele>574.5</ele>
+        <time>2017-11-26T10:29:58Z</time>
+      </trkpt>
+      <trkpt lat="42.412198" lon="0.112547">
+        <ele>571.6</ele>
+        <time>2017-11-26T10:30:16Z</time>
+      </trkpt>
+      <trkpt lat="42.412547" lon="0.112195">
+        <ele>564.0</ele>
+        <time>2017-11-26T10:31:07Z</time>
+      </trkpt>
+      <trkpt lat="42.412702" lon="0.112134">
+        <ele>559.6</ele>
+        <time>2017-11-26T10:31:31Z</time>
+      </trkpt>
+      <trkpt lat="42.412845" lon="0.112238">
+        <ele>551.0</ele>
+        <time>2017-11-26T10:32:08Z</time>
+      </trkpt>
+      <trkpt lat="42.412946" lon="0.112262">
+        <ele>548.0</ele>
+        <time>2017-11-26T10:32:22Z</time>
+      </trkpt>
+      <trkpt lat="42.413207" lon="0.112001">
+        <ele>548.0</ele>
+        <time>2017-11-26T10:32:50Z</time>
+      </trkpt>
+      <trkpt lat="42.413570" lon="0.111642">
+        <ele>548.6</ele>
+        <time>2017-11-26T10:34:11Z</time>
+      </trkpt>
+      <trkpt lat="42.413776" lon="0.111315">
+        <ele>550.5</ele>
+        <time>2017-11-26T10:34:54Z</time>
+      </trkpt>
+      <trkpt lat="42.413783" lon="0.110984">
+        <ele>537.6</ele>
+        <time>2017-11-26T10:35:27Z</time>
+        <cmt>12 Río Ena</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.413843" lon="0.110664">
+        <ele>551.4</ele>
+        <time>2017-11-26T10:35:54Z</time>
+      </trkpt>
+      <trkpt lat="42.413764" lon="0.110548">
+        <ele>551.0</ele>
+        <time>2017-11-26T10:36:03Z</time>
+      </trkpt>
+      <trkpt lat="42.413482" lon="0.110272">
+        <ele>557.3</ele>
+        <time>2017-11-26T10:36:30Z</time>
+      </trkpt>
+      <trkpt lat="42.413427" lon="0.110222">
+        <ele>550.5</ele>
+        <time>2017-11-26T10:36:35Z</time>
+      </trkpt>
+      <trkpt lat="42.413320" lon="0.109954">
+        <ele>551.4</ele>
+        <time>2017-11-26T10:36:55Z</time>
+      </trkpt>
+      <trkpt lat="42.413212" lon="0.109882">
+        <ele>554.8</ele>
+        <time>2017-11-26T10:37:09Z</time>
+      </trkpt>
+      <trkpt lat="42.412888" lon="0.109428">
+        <ele>557.3</ele>
+        <time>2017-11-26T10:38:01Z</time>
+      </trkpt>
+      <trkpt lat="42.412687" lon="0.109202">
+        <ele>558.7</ele>
+        <time>2017-11-26T10:38:28Z</time>
+      </trkpt>
+      <trkpt lat="42.412356" lon="0.109104">
+        <ele>560.2</ele>
+        <time>2017-11-26T10:39:00Z</time>
+      </trkpt>
+      <trkpt lat="42.412249" lon="0.109053">
+        <ele>560.5</ele>
+        <time>2017-11-26T10:39:11Z</time>
+      </trkpt>
+      <trkpt lat="42.411856" lon="0.108804">
+        <ele>561.6</ele>
+        <time>2017-11-26T10:39:48Z</time>
+      </trkpt>
+      <trkpt lat="42.411794" lon="0.108739">
+        <ele>581.3</ele>
+        <time>2017-11-26T10:40:03Z</time>
+        <cmt>13 Horno de cal</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.411691" lon="0.108671">
+        <ele>558.6</ele>
+        <time>2017-11-26T10:40:32Z</time>
+      </trkpt>
+      <trkpt lat="42.411446" lon="0.108843">
+        <ele>555.8</ele>
+        <time>2017-11-26T10:41:00Z</time>
+      </trkpt>
+      <trkpt lat="42.411080" lon="0.108880">
+        <ele>556.3</ele>
+        <time>2017-11-26T10:41:30Z</time>
+      </trkpt>
+      <trkpt lat="42.410976" lon="0.108973">
+        <ele>556.2</ele>
+        <time>2017-11-26T10:41:39Z</time>
+      </trkpt>
+      <trkpt lat="42.410541" lon="0.109001">
+        <ele>557.2</ele>
+        <time>2017-11-26T10:42:17Z</time>
+      </trkpt>
+      <trkpt lat="42.410423" lon="0.108956">
+        <ele>565.8</ele>
+        <time>2017-11-26T10:42:27Z</time>
+        <cmt>14 Senda O Grau</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.410236" lon="0.108524">
+        <ele>561.5</ele>
+        <time>2017-11-26T10:43:20Z</time>
+      </trkpt>
+      <trkpt lat="42.410073" lon="0.108359">
+        <ele>563.9</ele>
+        <time>2017-11-26T10:43:40Z</time>
+      </trkpt>
+      <trkpt lat="42.409892" lon="0.107709">
+        <ele>573.5</ele>
+        <time>2017-11-26T10:44:43Z</time>
+      </trkpt>
+      <trkpt lat="42.409972" lon="0.107580">
+        <ele>579.8</ele>
+        <time>2017-11-26T10:45:25Z</time>
+      </trkpt>
+      <trkpt lat="42.410202" lon="0.107526">
+        <ele>590.0</ele>
+        <time>2017-11-26T10:46:27Z</time>
+      </trkpt>
+      <trkpt lat="42.410639" lon="0.107581">
+        <ele>600.5</ele>
+        <time>2017-11-26T10:47:37Z</time>
+      </trkpt>
+      <trkpt lat="42.411144" lon="0.107446">
+        <ele>610.5</ele>
+        <time>2017-11-26T10:48:53Z</time>
+      </trkpt>
+      <trkpt lat="42.411438" lon="0.106929">
+        <ele>617.4</ele>
+        <time>2017-11-26T10:49:58Z</time>
+      </trkpt>
+      <trkpt lat="42.411575" lon="0.106837">
+        <ele>619.7</ele>
+        <time>2017-11-26T10:50:25Z</time>
+      </trkpt>
+      <trkpt lat="42.411867" lon="0.107029">
+        <ele>623.0</ele>
+        <time>2017-11-26T10:51:03Z</time>
+      </trkpt>
+      <trkpt lat="42.412120" lon="0.107232">
+        <ele>627.9</ele>
+        <time>2017-11-26T10:51:36Z</time>
+      </trkpt>
+      <trkpt lat="42.412343" lon="0.107235">
+        <ele>631.2</ele>
+        <time>2017-11-26T10:52:01Z</time>
+      </trkpt>
+      <trkpt lat="42.412638" lon="0.107251">
+        <ele>621.2</ele>
+        <time>2017-11-26T10:52:39Z</time>
+      </trkpt>
+      <trkpt lat="42.412817" lon="0.107192">
+        <ele>637.1</ele>
+        <time>2017-11-26T10:53:49Z</time>
+      </trkpt>
+      <trkpt lat="42.412531" lon="0.107014">
+        <ele>641.8</ele>
+        <time>2017-11-26T10:54:38Z</time>
+      </trkpt>
+      <trkpt lat="42.412115" lon="0.106876">
+        <ele>647.1</ele>
+        <time>2017-11-26T10:55:28Z</time>
+      </trkpt>
+      <trkpt lat="42.411985" lon="0.106565">
+        <ele>648.1</ele>
+        <time>2017-11-26T10:55:55Z</time>
+      </trkpt>
+      <trkpt lat="42.412015" lon="0.106194">
+        <ele>648.5</ele>
+        <time>2017-11-26T10:56:25Z</time>
+      </trkpt>
+      <trkpt lat="42.412012" lon="0.105998">
+        <ele>649.6</ele>
+        <time>2017-11-26T10:56:37Z</time>
+      </trkpt>
+      <trkpt lat="42.411834" lon="0.105799">
+        <ele>651.5</ele>
+        <time>2017-11-26T10:56:58Z</time>
+      </trkpt>
+      <trkpt lat="42.411636" lon="0.105802">
+        <ele>660.6</ele>
+        <time>2017-11-26T10:57:52Z</time>
+        <cmt>15 O Grau / El Grado</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.411788" lon="0.105646">
+        <ele>655.3</ele>
+        <time>2017-11-26T10:58:35Z</time>
+      </trkpt>
+      <trkpt lat="42.411936" lon="0.105534">
+        <ele>656.3</ele>
+        <time>2017-11-26T10:59:17Z</time>
+      </trkpt>
+      <trkpt lat="42.412068" lon="0.105175">
+        <ele>658.1</ele>
+        <time>2017-11-26T11:00:29Z</time>
+      </trkpt>
+      <trkpt lat="42.412030" lon="0.105482">
+        <ele>658.1</ele>
+        <time>2017-11-26T11:02:00Z</time>
+      </trkpt>
+      <trkpt lat="42.412338" lon="0.105467">
+        <ele>662.0</ele>
+        <time>2017-11-26T11:02:45Z</time>
+      </trkpt>
+      <trkpt lat="42.412496" lon="0.105308">
+        <ele>665.3</ele>
+        <time>2017-11-26T11:03:09Z</time>
+      </trkpt>
+      <trkpt lat="42.412586" lon="0.105110">
+        <ele>667.7</ele>
+        <time>2017-11-26T11:03:28Z</time>
+      </trkpt>
+      <trkpt lat="42.412778" lon="0.104942">
+        <ele>664.4</ele>
+        <time>2017-11-26T11:04:06Z</time>
+      </trkpt>
+      <trkpt lat="42.412981" lon="0.104833">
+        <ele>674.1</ele>
+        <time>2017-11-26T11:04:26Z</time>
+      </trkpt>
+      <trkpt lat="42.413221" lon="0.104624">
+        <ele>677.9</ele>
+        <time>2017-11-26T11:04:59Z</time>
+      </trkpt>
+      <trkpt lat="42.413519" lon="0.104253">
+        <ele>682.2</ele>
+        <time>2017-11-26T11:05:37Z</time>
+      </trkpt>
+      <trkpt lat="42.413667" lon="0.104120">
+        <ele>685.1</ele>
+        <time>2017-11-26T11:06:07Z</time>
+      </trkpt>
+      <trkpt lat="42.414031" lon="0.103898">
+        <ele>687.5</ele>
+        <time>2017-11-26T11:06:43Z</time>
+      </trkpt>
+      <trkpt lat="42.414152" lon="0.103666">
+        <ele>688.0</ele>
+        <time>2017-11-26T11:07:00Z</time>
+      </trkpt>
+      <trkpt lat="42.414376" lon="0.103531">
+        <ele>690.3</ele>
+        <time>2017-11-26T11:07:25Z</time>
+      </trkpt>
+      <trkpt lat="42.414599" lon="0.103358">
+        <ele>693.2</ele>
+        <time>2017-11-26T11:07:50Z</time>
+      </trkpt>
+      <trkpt lat="42.414890" lon="0.103040">
+        <ele>698.5</ele>
+        <time>2017-11-26T11:08:31Z</time>
+      </trkpt>
+      <trkpt lat="42.415047" lon="0.102796">
+        <ele>701.4</ele>
+        <time>2017-11-26T11:09:32Z</time>
+      </trkpt>
+      <trkpt lat="42.415082" lon="0.102611">
+        <ele>703.8</ele>
+        <time>2017-11-26T11:09:49Z</time>
+      </trkpt>
+      <trkpt lat="42.415363" lon="0.102406">
+        <ele>706.3</ele>
+        <time>2017-11-26T11:10:19Z</time>
+      </trkpt>
+      <trkpt lat="42.415580" lon="0.102219">
+        <ele>710.6</ele>
+        <time>2017-11-26T11:10:46Z</time>
+      </trkpt>
+      <trkpt lat="42.415765" lon="0.102018">
+        <ele>715.3</ele>
+        <time>2017-11-26T11:11:21Z</time>
+      </trkpt>
+      <trkpt lat="42.415693" lon="0.102011">
+        <ele>709.5</ele>
+        <time>2017-11-26T11:11:47Z</time>
+        <cmt>16 Senda a izquierda</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.415594" lon="0.102023">
+        <ele>716.4</ele>
+        <time>2017-11-26T11:12:33Z</time>
+      </trkpt>
+      <trkpt lat="42.415307" lon="0.102035">
+        <ele>720.2</ele>
+        <time>2017-11-26T11:13:27Z</time>
+      </trkpt>
+      <trkpt lat="42.415080" lon="0.101935">
+        <ele>721.6</ele>
+        <time>2017-11-26T11:13:50Z</time>
+      </trkpt>
+      <trkpt lat="42.414933" lon="0.101783">
+        <ele>723.0</ele>
+        <time>2017-11-26T11:14:09Z</time>
+      </trkpt>
+      <trkpt lat="42.415123" lon="0.101211">
+        <ele>731.8</ele>
+        <time>2017-11-26T11:15:07Z</time>
+      </trkpt>
+      <trkpt lat="42.415186" lon="0.101148">
+        <ele>733.2</ele>
+        <time>2017-11-26T11:15:16Z</time>
+      </trkpt>
+      <trkpt lat="42.415311" lon="0.100741">
+        <ele>742.7</ele>
+        <time>2017-11-26T11:15:53Z</time>
+      </trkpt>
+      <trkpt lat="42.415500" lon="0.100546">
+        <ele>741.8</ele>
+        <time>2017-11-26T11:16:19Z</time>
+      </trkpt>
+      <trkpt lat="42.415489" lon="0.100186">
+        <ele>745.2</ele>
+        <time>2017-11-26T11:16:50Z</time>
+      </trkpt>
+      <trkpt lat="42.415675" lon="0.100557">
+        <ele>745.6</ele>
+        <time>2017-11-26T11:17:30Z</time>
+      </trkpt>
+      <trkpt lat="42.415814" lon="0.100788">
+        <ele>746.6</ele>
+        <time>2017-11-26T11:18:18Z</time>
+      </trkpt>
+      <trkpt lat="42.415791" lon="0.101014">
+        <ele>747.6</ele>
+        <time>2017-11-26T11:19:19Z</time>
+      </trkpt>
+      <trkpt lat="42.415901" lon="0.100927">
+        <ele>747.5</ele>
+        <time>2017-11-26T11:19:49Z</time>
+      </trkpt>
+      <trkpt lat="42.415824" lon="0.100960">
+        <ele>747.1</ele>
+        <time>2017-11-26T11:20:35Z</time>
+        <cmt>17 Ermita San Quiílez (ruinas)</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.415949" lon="0.100892">
+        <ele>748.1</ele>
+        <time>2017-11-26T11:22:18Z</time>
+      </trkpt>
+      <trkpt lat="42.415963" lon="0.100880">
+        <ele>748.1</ele>
+        <time>2017-11-26T11:24:57Z</time>
+      </trkpt>
+      <trkpt lat="42.415887" lon="0.100801">
+        <ele>748.1</ele>
+        <time>2017-11-26T11:25:55Z</time>
+      </trkpt>
+      <trkpt lat="42.415595" lon="0.100427">
+        <ele>745.7</ele>
+        <time>2017-11-26T11:26:33Z</time>
+      </trkpt>
+      <trkpt lat="42.415541" lon="0.100259">
+        <ele>745.2</ele>
+        <time>2017-11-26T11:26:45Z</time>
+      </trkpt>
+      <trkpt lat="42.415727" lon="0.100118">
+        <ele>753.3</ele>
+        <time>2017-11-26T11:27:37Z</time>
+      </trkpt>
+      <trkpt lat="42.416110" lon="0.099696">
+        <ele>765.9</ele>
+        <time>2017-11-26T11:29:06Z</time>
+      </trkpt>
+      <trkpt lat="42.416341" lon="0.099178">
+        <ele>774.4</ele>
+        <time>2017-11-26T11:29:59Z</time>
+      </trkpt>
+      <trkpt lat="42.416494" lon="0.099256">
+        <ele>780.2</ele>
+        <time>2017-11-26T11:30:31Z</time>
+      </trkpt>
+      <trkpt lat="42.416501" lon="0.099519">
+        <ele>781.3</ele>
+        <time>2017-11-26T11:30:50Z</time>
+      </trkpt>
+      <trkpt lat="42.416625" lon="0.099667">
+        <ele>782.2</ele>
+        <time>2017-11-26T11:31:17Z</time>
+      </trkpt>
+      <trkpt lat="42.416780" lon="0.099492">
+        <ele>781.6</ele>
+        <time>2017-11-26T11:31:39Z</time>
+      </trkpt>
+      <trkpt lat="42.416896" lon="0.099157">
+        <ele>780.7</ele>
+        <time>2017-11-26T11:32:06Z</time>
+      </trkpt>
+      <trkpt lat="42.416792" lon="0.098882">
+        <ele>772.0</ele>
+        <time>2017-11-26T11:33:21Z</time>
+        <cmt>18 Guaso, Iglesia y Escunjuradero</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.416775" lon="0.098814">
+        <ele>782.6</ele>
+        <time>2017-11-26T11:34:17Z</time>
+      </trkpt>
+      <trkpt lat="42.416558" lon="0.098615">
+        <ele>776.8</ele>
+        <time>2017-11-26T11:51:46Z</time>
+      </trkpt>
+      <trkpt lat="42.416659" lon="0.098377">
+        <ele>775.9</ele>
+        <time>2017-11-26T11:54:25Z</time>
+      </trkpt>
+      <trkpt lat="42.416658" lon="0.098469">
+        <ele>777.8</ele>
+        <time>2017-11-26T11:58:48Z</time>
+      </trkpt>
+      <trkpt lat="42.416635" lon="0.098670">
+        <ele>779.2</ele>
+        <time>2017-11-26T11:59:10Z</time>
+      </trkpt>
+      <trkpt lat="42.416726" lon="0.098951">
+        <ele>784.0</ele>
+        <time>2017-11-26T12:00:30Z</time>
+      </trkpt>
+      <trkpt lat="42.416735" lon="0.098962">
+        <ele>782.6</ele>
+        <time>2017-11-26T12:04:41Z</time>
+      </trkpt>
+      <trkpt lat="42.416638" lon="0.098728">
+        <ele>780.8</ele>
+        <time>2017-11-26T12:05:47Z</time>
+      </trkpt>
+      <trkpt lat="42.416461" lon="0.098638">
+        <ele>774.4</ele>
+        <time>2017-11-26T12:06:19Z</time>
+      </trkpt>
+      <trkpt lat="42.416289" lon="0.098443">
+        <ele>766.7</ele>
+        <time>2017-11-26T12:06:52Z</time>
+      </trkpt>
+      <trkpt lat="42.416208" lon="0.098381">
+        <ele>764.4</ele>
+        <time>2017-11-26T12:07:32Z</time>
+      </trkpt>
+      <trkpt lat="42.416118" lon="0.098648">
+        <ele>762.5</ele>
+        <time>2017-11-26T12:07:55Z</time>
+      </trkpt>
+      <trkpt lat="42.415975" lon="0.098666">
+        <ele>758.6</ele>
+        <time>2017-11-26T12:08:13Z</time>
+      </trkpt>
+      <trkpt lat="42.416035" lon="0.098163">
+        <ele>755.8</ele>
+        <time>2017-11-26T12:08:46Z</time>
+      </trkpt>
+      <trkpt lat="42.416141" lon="0.097641">
+        <ele>753.3</ele>
+        <time>2017-11-26T12:09:25Z</time>
+      </trkpt>
+      <trkpt lat="42.416095" lon="0.097509">
+        <ele>748.6</ele>
+        <time>2017-11-26T12:09:52Z</time>
+      </trkpt>
+      <trkpt lat="42.415943" lon="0.097283">
+        <ele>741.7</ele>
+        <time>2017-11-26T12:10:17Z</time>
+      </trkpt>
+      <trkpt lat="42.415695" lon="0.097112">
+        <ele>736.9</ele>
+        <time>2017-11-26T12:10:46Z</time>
+      </trkpt>
+      <trkpt lat="42.415217" lon="0.096547">
+        <ele>727.8</ele>
+        <time>2017-11-26T12:11:51Z</time>
+      </trkpt>
+      <trkpt lat="42.415010" lon="0.096467">
+        <ele>722.5</ele>
+        <time>2017-11-26T12:12:25Z</time>
+        <cmt>19 Ermita</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.414891" lon="0.096489">
+        <ele>724.0</ele>
+        <time>2017-11-26T12:14:16Z</time>
+      </trkpt>
+      <trkpt lat="42.414824" lon="0.096702">
+        <ele>721.6</ele>
+        <time>2017-11-26T12:14:34Z</time>
+      </trkpt>
+      <trkpt lat="42.414497" lon="0.096882">
+        <ele>714.5</ele>
+        <time>2017-11-26T12:15:03Z</time>
+      </trkpt>
+      <trkpt lat="42.414169" lon="0.096973">
+        <ele>710.1</ele>
+        <time>2017-11-26T12:15:40Z</time>
+      </trkpt>
+      <trkpt lat="42.413917" lon="0.096719">
+        <ele>710.6</ele>
+        <time>2017-11-26T12:16:33Z</time>
+      </trkpt>
+      <trkpt lat="42.413753" lon="0.096420">
+        <ele>713.9</ele>
+        <time>2017-11-26T12:17:01Z</time>
+      </trkpt>
+      <trkpt lat="42.413639" lon="0.096328">
+        <ele>715.8</ele>
+        <time>2017-11-26T12:17:31Z</time>
+      </trkpt>
+      <trkpt lat="42.413501" lon="0.096220">
+        <ele>717.2</ele>
+        <time>2017-11-26T12:18:03Z</time>
+      </trkpt>
+      <trkpt lat="42.413406" lon="0.096449">
+        <ele>720.1</ele>
+        <time>2017-11-26T12:18:42Z</time>
+      </trkpt>
+      <trkpt lat="42.413230" lon="0.096581">
+        <ele>717.2</ele>
+        <time>2017-11-26T12:20:02Z</time>
+      </trkpt>
+      <trkpt lat="42.413060" lon="0.096554">
+        <ele>706.8</ele>
+        <time>2017-11-26T12:20:23Z</time>
+        <cmt>20 Ermita Santa Quitería</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.413082" lon="0.096523">
+        <ele>715.9</ele>
+        <time>2017-11-26T12:21:07Z</time>
+      </trkpt>
+      <trkpt lat="42.413062" lon="0.096488">
+        <ele>714.8</ele>
+        <time>2017-11-26T12:22:59Z</time>
+      </trkpt>
+      <trkpt lat="42.413090" lon="0.096566">
+        <ele>715.9</ele>
+        <time>2017-11-26T12:23:39Z</time>
+      </trkpt>
+      <trkpt lat="42.413040" lon="0.096545">
+        <ele>715.4</ele>
+        <time>2017-11-26T12:25:47Z</time>
+      </trkpt>
+      <trkpt lat="42.413157" lon="0.096577">
+        <ele>715.8</ele>
+        <time>2017-11-26T12:26:11Z</time>
+      </trkpt>
+      <trkpt lat="42.413357" lon="0.096478">
+        <ele>719.3</ele>
+        <time>2017-11-26T12:26:35Z</time>
+      </trkpt>
+      <trkpt lat="42.413499" lon="0.096194">
+        <ele>716.4</ele>
+        <time>2017-11-26T12:27:03Z</time>
+      </trkpt>
+      <trkpt lat="42.413692" lon="0.096082">
+        <ele>713.5</ele>
+        <time>2017-11-26T12:27:44Z</time>
+      </trkpt>
+      <trkpt lat="42.413899" lon="0.095953">
+        <ele>712.5</ele>
+        <time>2017-11-26T12:28:02Z</time>
+      </trkpt>
+      <trkpt lat="42.414155" lon="0.095557">
+        <ele>713.4</ele>
+        <time>2017-11-26T12:28:36Z</time>
+      </trkpt>
+      <trkpt lat="42.414382" lon="0.095478">
+        <ele>716.4</ele>
+        <time>2017-11-26T12:29:01Z</time>
+      </trkpt>
+      <trkpt lat="42.414655" lon="0.095613">
+        <ele>720.1</ele>
+        <time>2017-11-26T12:29:32Z</time>
+      </trkpt>
+      <trkpt lat="42.414985" lon="0.095477">
+        <ele>720.1</ele>
+        <time>2017-11-26T12:30:03Z</time>
+      </trkpt>
+      <trkpt lat="42.415235" lon="0.095468">
+        <ele>719.3</ele>
+        <time>2017-11-26T12:31:18Z</time>
+      </trkpt>
+      <trkpt lat="42.415395" lon="0.095666">
+        <ele>719.2</ele>
+        <time>2017-11-26T12:31:55Z</time>
+      </trkpt>
+      <trkpt lat="42.415592" lon="0.095690">
+        <ele>717.8</ele>
+        <time>2017-11-26T12:32:20Z</time>
+      </trkpt>
+      <trkpt lat="42.415688" lon="0.095605">
+        <ele>717.3</ele>
+        <time>2017-11-26T12:32:32Z</time>
+      </trkpt>
+      <trkpt lat="42.415858" lon="0.095242">
+        <ele>716.3</ele>
+        <time>2017-11-26T12:33:00Z</time>
+      </trkpt>
+      <trkpt lat="42.415911" lon="0.095170">
+        <ele>716.9</ele>
+        <time>2017-11-26T12:34:04Z</time>
+      </trkpt>
+      <trkpt lat="42.416088" lon="0.094806">
+        <ele>700.5</ele>
+        <time>2017-11-26T12:34:36Z</time>
+        <cmt>21 Sendero</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.416209" lon="0.094768">
+        <ele>716.9</ele>
+        <time>2017-11-26T12:35:23Z</time>
+      </trkpt>
+      <trkpt lat="42.416651" lon="0.094897">
+        <ele>716.9</ele>
+        <time>2017-11-26T12:36:06Z</time>
+      </trkpt>
+      <trkpt lat="42.416939" lon="0.095239">
+        <ele>718.7</ele>
+        <time>2017-11-26T12:36:45Z</time>
+      </trkpt>
+      <trkpt lat="42.417036" lon="0.095398">
+        <ele>718.2</ele>
+        <time>2017-11-26T12:37:37Z</time>
+        <cmt>22 Fuendebucho</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.417164" lon="0.095744">
+        <ele>722.0</ele>
+        <time>2017-11-26T12:38:08Z</time>
+      </trkpt>
+      <trkpt lat="42.417243" lon="0.095879">
+        <ele>724.0</ele>
+        <time>2017-11-26T12:38:22Z</time>
+      </trkpt>
+      <trkpt lat="42.417505" lon="0.096194">
+        <ele>724.4</ele>
+        <time>2017-11-26T12:39:02Z</time>
+      </trkpt>
+      <trkpt lat="42.417739" lon="0.096260">
+        <ele>725.5</ele>
+        <time>2017-11-26T12:39:18Z</time>
+      </trkpt>
+      <trkpt lat="42.417956" lon="0.096167">
+        <ele>727.4</ele>
+        <time>2017-11-26T12:39:38Z</time>
+      </trkpt>
+      <trkpt lat="42.418021" lon="0.096385">
+        <ele>735.5</ele>
+        <time>2017-11-26T12:40:08Z</time>
+        <cmt>23 Cruce</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.418084" lon="0.096700">
+        <ele>730.2</ele>
+        <time>2017-11-26T12:40:56Z</time>
+      </trkpt>
+      <trkpt lat="42.418112" lon="0.097325">
+        <ele>725.0</ele>
+        <time>2017-11-26T12:41:41Z</time>
+      </trkpt>
+      <trkpt lat="42.418071" lon="0.097928">
+        <ele>719.7</ele>
+        <time>2017-11-26T12:42:13Z</time>
+      </trkpt>
+      <trkpt lat="42.418132" lon="0.098379">
+        <ele>714.9</ele>
+        <time>2017-11-26T12:42:42Z</time>
+      </trkpt>
+      <trkpt lat="42.418171" lon="0.098826">
+        <ele>711.0</ele>
+        <time>2017-11-26T12:43:11Z</time>
+      </trkpt>
+      <trkpt lat="42.418225" lon="0.099048">
+        <ele>709.2</ele>
+        <time>2017-11-26T12:43:27Z</time>
+      </trkpt>
+      <trkpt lat="42.418219" lon="0.099398">
+        <ele>707.6</ele>
+        <time>2017-11-26T12:43:54Z</time>
+      </trkpt>
+      <trkpt lat="42.418172" lon="0.099601">
+        <ele>707.6</ele>
+        <time>2017-11-26T12:44:09Z</time>
+      </trkpt>
+      <trkpt lat="42.418025" lon="0.100012">
+        <ele>702.4</ele>
+        <time>2017-11-26T12:44:34Z</time>
+      </trkpt>
+      <trkpt lat="42.418014" lon="0.100367">
+        <ele>700.0</ele>
+        <time>2017-11-26T12:44:53Z</time>
+      </trkpt>
+      <trkpt lat="42.417945" lon="0.100542">
+        <ele>698.0</ele>
+        <time>2017-11-26T12:45:06Z</time>
+      </trkpt>
+      <trkpt lat="42.417926" lon="0.100992">
+        <ele>696.2</ele>
+        <time>2017-11-26T12:45:34Z</time>
+      </trkpt>
+      <trkpt lat="42.417769" lon="0.101277">
+        <ele>695.1</ele>
+        <time>2017-11-26T12:45:54Z</time>
+      </trkpt>
+      <trkpt lat="42.417561" lon="0.101747">
+        <ele>693.7</ele>
+        <time>2017-11-26T12:46:28Z</time>
+      </trkpt>
+      <trkpt lat="42.417399" lon="0.101951">
+        <ele>690.8</ele>
+        <time>2017-11-26T12:46:48Z</time>
+      </trkpt>
+      <trkpt lat="42.417161" lon="0.102088">
+        <ele>685.1</ele>
+        <time>2017-11-26T12:47:18Z</time>
+      </trkpt>
+      <trkpt lat="42.417073" lon="0.102200">
+        <ele>682.1</ele>
+        <time>2017-11-26T12:47:39Z</time>
+      </trkpt>
+      <trkpt lat="42.417068" lon="0.102797">
+        <ele>675.9</ele>
+        <time>2017-11-26T12:48:21Z</time>
+      </trkpt>
+      <trkpt lat="42.417073" lon="0.103270">
+        <ele>669.7</ele>
+        <time>2017-11-26T12:48:57Z</time>
+      </trkpt>
+      <trkpt lat="42.416979" lon="0.103778">
+        <ele>664.8</ele>
+        <time>2017-11-26T12:49:33Z</time>
+      </trkpt>
+      <trkpt lat="42.416987" lon="0.103864">
+        <ele>662.9</ele>
+        <time>2017-11-26T12:49:44Z</time>
+      </trkpt>
+      <trkpt lat="42.416843" lon="0.104395">
+        <ele>655.7</ele>
+        <time>2017-11-26T12:50:25Z</time>
+      </trkpt>
+      <trkpt lat="42.416727" lon="0.104688">
+        <ele>651.5</ele>
+        <time>2017-11-26T12:50:46Z</time>
+      </trkpt>
+      <trkpt lat="42.416718" lon="0.104891">
+        <ele>648.5</ele>
+        <time>2017-11-26T12:50:59Z</time>
+      </trkpt>
+      <trkpt lat="42.416596" lon="0.105182">
+        <ele>644.8</ele>
+        <time>2017-11-26T12:51:19Z</time>
+      </trkpt>
+      <trkpt lat="42.416506" lon="0.105626">
+        <ele>640.3</ele>
+        <time>2017-11-26T12:51:47Z</time>
+      </trkpt>
+      <trkpt lat="42.416416" lon="0.105953">
+        <ele>637.4</ele>
+        <time>2017-11-26T12:52:08Z</time>
+      </trkpt>
+      <trkpt lat="42.416310" lon="0.106403">
+        <ele>639.0</ele>
+        <time>2017-11-26T12:52:38Z</time>
+      </trkpt>
+      <trkpt lat="42.416216" lon="0.106540">
+        <ele>622.1</ele>
+        <time>2017-11-26T12:52:50Z</time>
+      </trkpt>
+      <trkpt lat="42.416147" lon="0.106878">
+        <ele>626.4</ele>
+        <time>2017-11-26T12:53:13Z</time>
+      </trkpt>
+      <trkpt lat="42.415959" lon="0.107329">
+        <ele>622.2</ele>
+        <time>2017-11-26T12:53:42Z</time>
+      </trkpt>
+      <trkpt lat="42.415637" lon="0.107923">
+        <ele>617.4</ele>
+        <time>2017-11-26T12:54:32Z</time>
+      </trkpt>
+      <trkpt lat="42.415425" lon="0.108081">
+        <ele>617.4</ele>
+        <time>2017-11-26T12:55:07Z</time>
+      </trkpt>
+      <trkpt lat="42.415140" lon="0.108427">
+        <ele>614.4</ele>
+        <time>2017-11-26T12:55:43Z</time>
+      </trkpt>
+      <trkpt lat="42.414969" lon="0.108472">
+        <ele>616.3</ele>
+        <time>2017-11-26T12:56:04Z</time>
+      </trkpt>
+      <trkpt lat="42.414893" lon="0.108607">
+        <ele>623.1</ele>
+        <time>2017-11-26T12:56:42Z</time>
+      </trkpt>
+      <trkpt lat="42.414735" lon="0.108786">
+        <ele>618.2</ele>
+        <time>2017-11-26T12:57:04Z</time>
+      </trkpt>
+      <trkpt lat="42.414848" lon="0.108635">
+        <ele>613.4</ele>
+        <time>2017-11-26T12:57:29Z</time>
+      </trkpt>
+      <trkpt lat="42.414905" lon="0.108480">
+        <ele>590.8</ele>
+        <time>2017-11-26T12:57:48Z</time>
+        <cmt>24 Carretera, senda</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.414796" lon="0.108721">
+        <ele>613.0</ele>
+        <time>2017-11-26T12:58:11Z</time>
+      </trkpt>
+      <trkpt lat="42.414597" lon="0.108952">
+        <ele>609.1</ele>
+        <time>2017-11-26T12:58:30Z</time>
+      </trkpt>
+      <trkpt lat="42.414547" lon="0.109145">
+        <ele>606.2</ele>
+        <time>2017-11-26T12:58:41Z</time>
+      </trkpt>
+      <trkpt lat="42.414668" lon="0.109738">
+        <ele>600.1</ele>
+        <time>2017-11-26T12:59:17Z</time>
+      </trkpt>
+      <trkpt lat="42.414908" lon="0.110234">
+        <ele>592.3</ele>
+        <time>2017-11-26T12:59:50Z</time>
+      </trkpt>
+      <trkpt lat="42.414860" lon="0.110428">
+        <ele>589.9</ele>
+        <time>2017-11-26T13:00:00Z</time>
+      </trkpt>
+      <trkpt lat="42.414538" lon="0.110909">
+        <ele>597.1</ele>
+        <time>2017-11-26T13:00:43Z</time>
+      </trkpt>
+      <trkpt lat="42.414477" lon="0.110959">
+        <ele>576.9</ele>
+        <time>2017-11-26T13:00:50Z</time>
+      </trkpt>
+      <trkpt lat="42.414330" lon="0.111256">
+        <ele>570.6</ele>
+        <time>2017-11-26T13:01:12Z</time>
+      </trkpt>
+      <trkpt lat="42.414308" lon="0.111351">
+        <ele>570.2</ele>
+        <time>2017-11-26T13:01:18Z</time>
+      </trkpt>
+      <trkpt lat="42.414160" lon="0.111603">
+        <ele>566.3</ele>
+        <time>2017-11-26T13:01:37Z</time>
+      </trkpt>
+      <trkpt lat="42.414142" lon="0.111876">
+        <ele>564.9</ele>
+        <time>2017-11-26T13:02:09Z</time>
+      </trkpt>
+      <trkpt lat="42.414383" lon="0.111969">
+        <ele>565.3</ele>
+        <time>2017-11-26T13:04:04Z</time>
+      </trkpt>
+      <trkpt lat="42.414826" lon="0.112491">
+        <ele>566.8</ele>
+        <time>2017-11-26T13:04:49Z</time>
+      </trkpt>
+      <trkpt lat="42.415167" lon="0.112751">
+        <ele>567.9</ele>
+        <time>2017-11-26T13:05:18Z</time>
+      </trkpt>
+      <trkpt lat="42.415301" lon="0.112792">
+        <ele>568.3</ele>
+        <time>2017-11-26T13:05:28Z</time>
+      </trkpt>
+      <trkpt lat="42.415664" lon="0.113089">
+        <ele>564.0</ele>
+        <time>2017-11-26T13:05:59Z</time>
+      </trkpt>
+      <trkpt lat="42.415931" lon="0.113237">
+        <ele>563.4</ele>
+        <time>2017-11-26T13:06:19Z</time>
+      </trkpt>
+      <trkpt lat="42.415944" lon="0.113235">
+        <ele>545.3</ele>
+        <time>2017-11-26T13:06:21Z</time>
+      </trkpt>
+      <trkpt lat="42.416251" lon="0.113384">
+        <ele>564.9</ele>
+        <time>2017-11-26T13:06:50Z</time>
+      </trkpt>
+      <trkpt lat="42.416421" lon="0.113492">
+        <ele>564.5</ele>
+        <time>2017-11-26T13:07:04Z</time>
+      </trkpt>
+      <trkpt lat="42.416690" lon="0.113623">
+        <ele>564.4</ele>
+        <time>2017-11-26T13:07:24Z</time>
+      </trkpt>
+      <trkpt lat="42.416914" lon="0.113891">
+        <ele>565.8</ele>
+        <time>2017-11-26T13:07:48Z</time>
+      </trkpt>
+      <trkpt lat="42.417175" lon="0.114064">
+        <ele>566.9</ele>
+        <time>2017-11-26T13:08:13Z</time>
+      </trkpt>
+      <trkpt lat="42.417299" lon="0.114092">
+        <ele>565.0</ele>
+        <time>2017-11-26T13:08:26Z</time>
+      </trkpt>
+      <trkpt lat="42.417466" lon="0.114273">
+        <ele>564.0</ele>
+        <time>2017-11-26T13:08:40Z</time>
+      </trkpt>
+      <trkpt lat="42.417684" lon="0.114331">
+        <ele>562.9</ele>
+        <time>2017-11-26T13:08:57Z</time>
+      </trkpt>
+      <trkpt lat="42.417835" lon="0.114640">
+        <ele>580.3</ele>
+        <time>2017-11-26T13:09:26Z</time>
+        <cmt>25 Carretera</cmt>
+        <sym>C:\Herramientas\CompeGPS Land 7.0.1_Portable\App\CompeGPS\symbols\GARMIN.ZIP\WAYPOINT.bmp</sym>
+      </trkpt>
+      <trkpt lat="42.417762" lon="0.115060">
+        <ele>557.2</ele>
+        <time>2017-11-26T13:09:56Z</time>
+      </trkpt>
+      <trkpt lat="42.417782" lon="0.115184">
+        <ele>556.7</ele>
+        <time>2017-11-26T13:10:03Z</time>
+      </trkpt>
+      <trkpt lat="42.417732" lon="0.115937">
+        <ele>555.7</ele>
+        <time>2017-11-26T13:10:46Z</time>
+      </trkpt>
+      <trkpt lat="42.417623" lon="0.116653">
+        <ele>554.3</ele>
+        <time>2017-11-26T13:11:28Z</time>
+      </trkpt>
+      <trkpt lat="42.417476" lon="0.117048">
+        <ele>554.9</ele>
+        <time>2017-11-26T13:11:50Z</time>
+      </trkpt>
+      <trkpt lat="42.417207" lon="0.117323">
+        <ele>553.9</ele>
+        <time>2017-11-26T13:12:30Z</time>
+      </trkpt>
+      <trkpt lat="42.417194" lon="0.117393">
+        <ele>553.3</ele>
+        <time>2017-11-26T13:13:08Z</time>
+      </trkpt>
+      <trkpt lat="42.417020" lon="0.117847">
+        <ele>553.0</ele>
+        <time>2017-11-26T13:13:37Z</time>
+      </trkpt>
+      <trkpt lat="42.416795" lon="0.118659">
+        <ele>552.4</ele>
+        <time>2017-11-26T13:14:26Z</time>
+      </trkpt>
+      <trkpt lat="42.416746" lon="0.118929">
+        <ele>552.4</ele>
+        <time>2017-11-26T13:14:42Z</time>
+      </trkpt>
+      <trkpt lat="42.416725" lon="0.119447">
+        <ele>551.9</ele>
+        <time>2017-11-26T13:15:16Z</time>
+      </trkpt>
+      <trkpt lat="42.416736" lon="0.119777">
+        <ele>551.5</ele>
+        <time>2017-11-26T13:15:36Z</time>
+      </trkpt>
+      <trkpt lat="42.416696" lon="0.120157">
+        <ele>551.0</ele>
+        <time>2017-11-26T13:15:58Z</time>
+      </trkpt>
+      <trkpt lat="42.416473" lon="0.120800">
+        <ele>550.0</ele>
+        <time>2017-11-26T13:16:42Z</time>
+      </trkpt>
+      <trkpt lat="42.416201" lon="0.121574">
+        <ele>550.1</ele>
+        <time>2017-11-26T13:17:29Z</time>
+      </trkpt>
+      <trkpt lat="42.415808" lon="0.122508">
+        <ele>549.0</ele>
+        <time>2017-11-26T13:18:35Z</time>
+      </trkpt>
+      <trkpt lat="42.415613" lon="0.123303">
+        <ele>545.3</ele>
+        <time>2017-11-26T13:19:25Z</time>
+      </trkpt>
+      <trkpt lat="42.415454" lon="0.123655">
+        <ele>542.4</ele>
+        <time>2017-11-26T13:19:51Z</time>
+      </trkpt>
+      <trkpt lat="42.414977" lon="0.124458">
+        <ele>538.9</ele>
+        <time>2017-11-26T13:20:50Z</time>
+      </trkpt>
+      <trkpt lat="42.414812" lon="0.124819">
+        <ele>538.9</ele>
+        <time>2017-11-26T13:21:14Z</time>
+      </trkpt>
+      <trkpt lat="42.414571" lon="0.125287">
+        <ele>539.9</ele>
+        <time>2017-11-26T13:21:51Z</time>
+      </trkpt>
+      <trkpt lat="42.414341" lon="0.125599">
+        <ele>551.5</ele>
+        <time>2017-11-26T13:22:20Z</time>
+      </trkpt>
+      <trkpt lat="42.414267" lon="0.125749">
+        <ele>540.8</ele>
+        <time>2017-11-26T13:22:31Z</time>
+      </trkpt>
+      <trkpt lat="42.414034" lon="0.126284">
+        <ele>542.3</ele>
+        <time>2017-11-26T13:23:09Z</time>
+      </trkpt>
+      <trkpt lat="42.414008" lon="0.126305">
+        <ele>541.9</ele>
+        <time>2017-11-26T13:23:11Z</time>
+      </trkpt>
+      <trkpt lat="42.413683" lon="0.126810">
+        <ele>541.9</ele>
+        <time>2017-11-26T13:23:52Z</time>
+      </trkpt>
+      <trkpt lat="42.413674" lon="0.127045">
+        <ele>541.3</ele>
+        <time>2017-11-26T13:24:08Z</time>
+      </trkpt>
+      <trkpt lat="42.413857" lon="0.127701">
+        <ele>540.5</ele>
+        <time>2017-11-26T13:24:50Z</time>
+      </trkpt>
+      <trkpt lat="42.413969" lon="0.128297">
+        <ele>539.5</ele>
+        <time>2017-11-26T13:25:28Z</time>
+      </trkpt>
+      <trkpt lat="42.414108" lon="0.129205">
+        <ele>538.4</ele>
+        <time>2017-11-26T13:26:26Z</time>
+      </trkpt>
+      <trkpt lat="42.414122" lon="0.129251">
+        <ele>538.0</ele>
+        <time>2017-11-26T13:26:29Z</time>
+      </trkpt>
+      <trkpt lat="42.414221" lon="0.130092">
+        <ele>537.0</ele>
+        <time>2017-11-26T13:27:19Z</time>
+      </trkpt>
+      <trkpt lat="42.414366" lon="0.130852">
+        <ele>536.5</ele>
+        <time>2017-11-26T13:28:06Z</time>
+      </trkpt>
+      <trkpt lat="42.414619" lon="0.132035">
+        <ele>536.0</ele>
+        <time>2017-11-26T13:29:21Z</time>
+      </trkpt>
+      <trkpt lat="42.414703" lon="0.132666">
+        <ele>534.7</ele>
+        <time>2017-11-26T13:30:02Z</time>
+      </trkpt>
+      <trkpt lat="42.414657" lon="0.133274">
+        <ele>534.2</ele>
+        <time>2017-11-26T13:30:41Z</time>
+      </trkpt>
+      <trkpt lat="42.414566" lon="0.133772">
+        <ele>533.7</ele>
+        <time>2017-11-26T13:31:14Z</time>
+      </trkpt>
+      <trkpt lat="42.414431" lon="0.134373">
+        <ele>532.7</ele>
+        <time>2017-11-26T13:31:47Z</time>
+      </trkpt>
+      <trkpt lat="42.414306" lon="0.134786">
+        <ele>531.7</ele>
+        <time>2017-11-26T13:32:12Z</time>
+      </trkpt>
+      <trkpt lat="42.414054" lon="0.135430">
+        <ele>532.3</ele>
+        <time>2017-11-26T13:32:56Z</time>
+      </trkpt>
+      <trkpt lat="42.413671" lon="0.136200">
+        <ele>531.3</ele>
+        <time>2017-11-26T13:33:52Z</time>
+      </trkpt>
+      <trkpt lat="42.413273" lon="0.136911">
+        <ele>531.2</ele>
+        <time>2017-11-26T13:34:45Z</time>
+      </trkpt>
+      <trkpt lat="42.413087" lon="0.137320">
+        <ele>530.3</ele>
+        <time>2017-11-26T13:35:17Z</time>
+      </trkpt>
+      <trkpt lat="42.412973" lon="0.137620">
+        <ele>530.7</ele>
+        <time>2017-11-26T13:35:34Z</time>
+      </trkpt>
+      <trkpt lat="42.412749" lon="0.138471">
+        <ele>529.8</ele>
+        <time>2017-11-26T13:36:29Z</time>
+      </trkpt>
+      <trkpt lat="42.412768" lon="0.139138">
+        <ele>530.4</ele>
+        <time>2017-11-26T13:37:12Z</time>
+      </trkpt>
+      <trkpt lat="42.412699" lon="0.139537">
+        <ele>529.8</ele>
+        <time>2017-11-26T13:37:38Z</time>
+      </trkpt>
+      <trkpt lat="42.412380" lon="0.139710">
+        <ele>538.5</ele>
+        <time>2017-11-26T13:38:06Z</time>
+      </trkpt>
+      <trkpt lat="42.412463" lon="0.139844">
+        <ele>529.8</ele>
+        <time>2017-11-26T13:38:35Z</time>
+      </trkpt>
+      <trkpt lat="42.412482" lon="0.139852">
+        <ele>528.4</ele>
+        <time>2017-11-26T13:40:58Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>

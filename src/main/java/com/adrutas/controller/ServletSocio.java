@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +19,7 @@ import com.adrutas.dao.EntityManagerFactories;
 import com.adrutas.model.Ficha;
 import com.adrutas.model.Persona;
 
-@WebServlet(name = "ServletSocio", urlPatterns = {"/socios/*"})
+//@WebServlet(name = "ServletSocio", urlPatterns = {"/socios/*"})
 public final class ServletSocio extends HttpServlet {
 	private static final long serialVersionUID = 3598377159851252896L;
 	private static final Logger log = Logger.getLogger(ServletSocio.class.getName());

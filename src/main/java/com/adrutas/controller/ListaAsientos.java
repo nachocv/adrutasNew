@@ -29,7 +29,7 @@ import fr.opensagres.xdocreport.document.registry.XDocReportRegistry;
 import fr.opensagres.xdocreport.template.IContext;
 import fr.opensagres.xdocreport.template.TemplateEngineKind;
 
-@WebServlet(name = "ListaAsientos", urlPatterns = {"/listaAsientos"})
+@WebServlet(name = "ListaAsientos", urlPatterns = {"/jd/listaAsientos"})
 public class ListaAsientos extends HttpServlet {
 	private static final long serialVersionUID = -1721119637702558047L;
 	private static final Logger log = Logger.getLogger(ListaAsientos.class.getName());
