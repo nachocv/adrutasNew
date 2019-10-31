@@ -28,19 +28,17 @@ import javax.persistence.TemporalType;
 @NamedQuery(name="Link.delete", query="DELETE Link l WHERE fecha<:fecha")
 @NamedQuery(name="Link.findOld", query="select l from Link l WHERE fecha<:fecha")
 public class Link implements Serializable {
-	private static final long serialVersionUID = 1L;
 
-//	@Id
+	@Id
+	private String link;
+
 //	@Column(name="id_persona")
 //	private int idPersona;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha;
 
-	private String link;
-
 	//bi-directional one-to-one association to Persona
-	@Id
 	@OneToOne
 	@JoinColumn(name="id_persona")
 	private Persona persona;
@@ -51,7 +49,7 @@ public class Link implements Serializable {
 //	public int getIdPersona() {
 //		return this.idPersona;
 //	}
-
+//
 //	public void setIdPersona(int idPersona) {
 //		this.idPersona = idPersona;
 //	}
@@ -77,7 +75,6 @@ public class Link implements Serializable {
 	}
 
 	public void setPersona(Persona persona) {
-//		idPersona = persona.getIdPersona();
 		this.persona = persona;
 	}
 

@@ -86,41 +86,44 @@ public class ExcelContable extends HttpServlet {
 	        row.createCell(col++).setCellValue("nombre");
 	        row.createCell(col++).setCellValue("apellido1");
 	        row.createCell(col++).setCellValue("apellido2");
-	        for (SalidaDetalle bean: salidaBean.getSalidaDetalles()) {
+            for (SalidaDetalle detalle: em.createNamedQuery("SalidaDetalle.find", SalidaDetalle.class)
+					.setParameter("salida", salida).getResultList()) {
 	            row = sContable.createRow(++fil1);
 	            col = 0;
-	            if ((object = bean.getBus())!=null) {
+	            if ((object = detalle.getBus())!=null) {
 	                row.createCell(col).setCellValue((Short) object);
 	            }
 	            col++;
-	            if ((object = bean.getAsiento())!=null) {
+	            if ((object = detalle.getAsiento())!=null) {
 	                row.createCell(col).setCellValue((Short) object);
 	            }
 	            col++;
-	            row.createCell(col++).setCellValue("34" + Constante.nF2.format((Integer) bean.getId().getIdPersona()));
-	            row.createCell(col++).setCellValue((Integer) bean.getRecibo().getIdRecibo());
+	            row.createCell(col++).setCellValue("34" + Constante.nF2.format((Integer) detalle.getId().getIdPersona()));
+	            row.createCell(col++).setCellValue((Integer) detalle.getRecibo().getIdRecibo());
 	            cell = row.createCell(col++);
-	            cell.setCellValue(bean.getRecibo().getFecha());
+	            cell.setCellValue(salidaBean.getFechaInicio());
 	            cell.setCellStyle(style);
-	            row.createCell(col++).setCellValue(((BigDecimal) bean.getImporte()).doubleValue());
-	            row.createCell(col++).setCellValue((object = bean.getSeguroDia())==null? false: (Byte) object==1);
-	            if ((object = bean.getBono())!=null) {
-	                row.createCell(col).setCellValue((String) object);
+	            row.createCell(col++).setCellValue(((BigDecimal) detalle.getImporte()).doubleValue());
+	            row.createCell(col++).setCellValue((object = detalle.getSeguroDia())==null? false: (Byte) object==1);
+	            if (detalle.getBonoDetalle()!=null) {
+	                row.createCell(col).setCellValue(String.valueOf(detalle.getBonoDetalle().getId().getBono()) + "-"
+	                    	+ String.valueOf(detalle.getBonoDetalle().getId().getUso()));
 	            }
 	            col++;
-	            row.createCell(col++).setCellValue((String) bean.getFp());
-	            row.createCell(col++).setCellValue(((BigDecimal) bean.getRecibo().getImporte()).doubleValue());
-	            row.createCell(col++).setCellValue(((BigDecimal) bean.getPago()).doubleValue());
-	            row.createCell(col++).setCellValue((String) bean.getObservacion());
+	            row.createCell(col++).setCellValue((String) detalle.getRecibo().getFormapago().getCodigo());
+//	            row.createCell(col++).setCellValue((String) detalle.getFp());
+	            row.createCell(col++).setCellValue(((BigDecimal) detalle.getRecibo().getImporte()).doubleValue());
+	            row.createCell(col++).setCellValue(((BigDecimal) detalle.getPago()).doubleValue());
+	            row.createCell(col++).setCellValue((String) detalle.getObservacion());
 	            row.createCell(col++).setCellValue(salida);
 	            row.createCell(col++).setCellValue(descripcion);
 	            row = sPersonas.createRow(++fil2);
 	            col = 0;
-	            row.createCell(col++).setCellValue(Constante.nF2.format((Integer) bean.getId().getIdPersona()));
-	            row.createCell(col++).setCellValue((String) bean.getPersona().getDni());
-	            row.createCell(col++).setCellValue((String) bean.getPersona().getNombre());
-	            row.createCell(col++).setCellValue((String) bean.getPersona().getApellido1());
-	            row.createCell(col++).setCellValue((String) bean.getPersona().getApellido2());
+	            row.createCell(col++).setCellValue(Constante.nF2.format((Integer) detalle.getId().getIdPersona()));
+	            row.createCell(col++).setCellValue((String) detalle.getPersona().getDni());
+	            row.createCell(col++).setCellValue((String) detalle.getPersona().getNombre());
+	            row.createCell(col++).setCellValue((String) detalle.getPersona().getApellido1());
+	            row.createCell(col++).setCellValue((String) detalle.getPersona().getApellido2());
 	        }
             wb.write(out);
 		} catch (Exception e) {

@@ -151,3 +151,4 @@ Se comprueba el estado con "git status"
 Se añade lo que falte con "git add ."
 Se guardan cambios en local con "git commit -m etiqeta"
 Se suben cambios a GitHub con "git push origin master"
+

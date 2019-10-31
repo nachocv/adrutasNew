@@ -24,7 +24,6 @@ import javax.persistence.TemporalType;
 import com.adrutas.dao.EntityManagerFactories;
 import com.adrutas.dao.Static;
 
-
 /**
  * The persistent class for the ficha database table.
  * 
@@ -32,8 +31,11 @@ import com.adrutas.dao.Static;
 @Entity@Table(name = "ficha")
 @NamedQuery(name="Ficha.findAll", query="SELECT f FROM Ficha f")
 @NamedQuery(name="Ficha.find",
-query="SELECT f FROM Ficha f WHERE f.id.idPersona=:idPersona and f.id.anyo=:anyo and f.id.idFicha=:idFicha")
+		query="SELECT f FROM Ficha f WHERE f.id.idPersona=:idPersona and f.id.anyo=:anyo and f.id.idFicha=:idFicha")
 @NamedQuery(name="Ficha.findByPersona",query="SELECT f FROM Ficha f WHERE f.id.idPersona=:idPersona ORDER BY f.id.anyo desc")
+@NamedQuery(name="Ficha.findSociosByAnyos",query=
+"SELECT f FROM Ficha f WHERE f.importecuota<>0 and f.id.anyo in :anyoList ORDER BY f.id.idPersona,f.id.anyo")
+
 public class Ficha implements Serializable {
 	private static final long serialVersionUID = 6097850077775371167L;
 
@@ -78,6 +80,10 @@ public class Ficha implements Serializable {
 		@JoinColumn(name = "id_ficha", referencedColumnName = "id_ficha")
 	})
 	private List<FichaOpcion> opciones;
+
+	//bi-directional many-to-one association to FichaAceptacion
+//	@OneToMany(mappedBy="ficha")
+//	private List<FichaAceptacion> fichaAceptacions;
 
 	public Ficha() {
 	}
@@ -153,6 +159,28 @@ public class Ficha implements Serializable {
 	public void setTipoLicencia(String tipoLicencia) {
 		this.tipoLicencia = tipoLicencia;
 	}
+
+//	public List<FichaAceptacion> getFichaAceptacions() {
+//		return this.fichaAceptacions;
+//	}
+//
+//	public void setFichaAceptacions(List<FichaAceptacion> fichaAceptacions) {
+//		this.fichaAceptacions = fichaAceptacions;
+//	}
+
+//	public FichaAceptacion addFichaAceptacion(FichaAceptacion fichaAceptacion) {
+//		getFichaAceptacions().add(fichaAceptacion);
+//		fichaAceptacion.setFicha(this);
+//
+//		return fichaAceptacion;
+//	}
+//
+//	public FichaAceptacion removeFichaAceptacion(FichaAceptacion fichaAceptacion) {
+//		getFichaAceptacions().remove(fichaAceptacion);
+//		fichaAceptacion.setFicha(null);
+//
+//		return fichaAceptacion;
+//	}
 
 	public Persona getPersona() {
 		return this.persona;

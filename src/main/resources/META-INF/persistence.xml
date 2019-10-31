@@ -58,6 +58,8 @@
         <class>com.adrutas.model.SocioTelefono</class>
         <class>com.adrutas.model.SocioTelefonoPK</class>
         <class>com.adrutas.model.Sociospresentado</class>
+        <class>com.adrutas.model1.FichaAceptacion</class>
+        <class>com.adrutas.model1.FichaAceptacionPK</class>
         <exclude-unlisted-classes/>
         <!-- <exclude-unlisted-classes>false</exclude-unlisted-classes> -->
 

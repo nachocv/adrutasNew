@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.adrutas.model.SalidaDetalle;
 
-@WebServlet(name = "ServletApunteSalida", urlPatterns = {"/jd/apunteSalida"})
+@WebServlet(name = "ServletApunteSalida", urlPatterns = {"/apunteSalida"})
 public class ServletApunteSalida extends HttpServlet {
 	private static final long serialVersionUID = 6622980861074142711L;
 

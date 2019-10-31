@@ -64,7 +64,7 @@ var persona = function() {
 
 function apunte(salida,id_persona,funcion) {
   $.ajax({
-    url: "/jd/apunteSalida?salida=" + salida + "&id_persona=" + id_persona,
+    url: "/apunteSalida?salida=" + salida + "&id_persona=" + id_persona,
     success: funcion,
     error : function(jqXHR, status, error) {
       alert(jqXHR.responseText);
@@ -808,6 +808,17 @@ function listaFicha() {
   field.attr("value", $("select#anyos").val());
   form.append(field);
   form.submit();
+}
+
+function excelSocios() {
+//  $("form[action='/jd/excelSocios']").submit();
+  $.ajax({
+    method: "POST",
+    url: "/jd/excelSocios",
+    error : function(jqXHR, status, error) {
+      alert(jqXHR.responseText);
+    }
+  });
 }
 
 function listaTelefonos() {
