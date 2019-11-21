@@ -1,24 +1,26 @@
 package com.adrutas.controller;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.util.Date;
-import java.util.List;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.channels.ReadableByteChannel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.adrutas.dao.EntityManagerFactories;
-import com.adrutas.model.Salida;
-
-import adrutas.com.Constante;
+import com.google.appengine.api.appidentity.AppIdentityService;
+import com.google.appengine.api.appidentity.AppIdentityServiceFactory;
+import com.google.appengine.tools.cloudstorage.GcsFilename;
+import com.google.appengine.tools.cloudstorage.GcsService;
+import com.google.appengine.tools.cloudstorage.GcsServiceFactory;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
 
 @WebServlet(name = "Prueba", urlPatterns = {"/prueba"})
 public class ServletPrueba extends HttpServlet {
@@ -27,45 +29,47 @@ public class ServletPrueba extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpServletRequest req = (HttpServletRequest) request;
-		String url = req.getRequestURL().toString();
-		String uri = req.getRequestURI().toString();
-		log.fine("URL: " + url + " URI: " + uri);
-    	ServletOutputStream out = response.getOutputStream();
-    	String fecha = request.getParameter("fecha");
-    	String pathname = request.getParameter("pathname");
-		Date date = null;
+	    OutputStream out = response.getOutputStream();
 		try {
-			date = Constante.dF11.parse(pathname.substring(0, 11));
-		} catch (Exception e) {}
-		if (date==null){
-			try {
-				date = Constante.dF3.parse(fecha);
-			} catch (ParseException e) {}
-		}
-		if (date==null) {
-			date = new Date();
-		}
-		EntityManager em = null;
-		List<Salida> list = null;
-        try {
-    		em = EntityManagerFactories.getEM_old();
-    		list = em.createNamedQuery("Salida.findByDate", Salida.class)
-    				.setParameter("date", date).setMaxResults(1).getResultList();
-        } catch (Exception e) {
-        	log.log(Level.SEVERE, "No lee Salida.findBySalida", e);
+			HttpServletRequest req = (HttpServletRequest) request;
+			String url = req.getRequestURL().toString();
+			String uri = req.getRequestURI().toString();
+			log.fine("URL: " + url + " URI: " + uri);
+//		      BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+//		      BlobKey blobKey = blobstoreService.createGsBlobKey(
+//		          "/gs/adrutasnew.appspot.com/2019/0819/index.html");
+//		      blobstoreService.serve(blobKey, resp);
+			Storage storage = StorageOptions.newBuilder()
+		            .setProjectId(projectId)
+		            .setCredentials(GoogleCredentials.fromStream(new FileInputStream(serviceAccountJSON)))
+		            .build()
+		            .getService();
+		Blob blob = storage.get(BUCKET_URL, OBJECT_URL);
+		String fileContent = new String(blob.getContent());			
+			
+			Storage storage = StorageOptions.getDefaultInstance().getService();
+		    AppIdentityService appIdentityService = AppIdentityServiceFactory.getAppIdentityService();
+		    String defaultBucket = appIdentityService.getDefaultGcsBucketName();
+//		    GcsFilename gcs_filename = new GcsFilename("adrutasnew.appspot.com", "/2019/0819/index.html");
+		    GcsFilename gcs_filename = new GcsFilename(defaultBucket, "/2019/0819/index.html");
+			GcsService service = GcsServiceFactory.createGcsService();
+			ReadableByteChannel rbc = service.openReadChannel(gcs_filename, 0);
+			InputStream in = java.nio.channels.Channels.newInputStream(rbc);
+			byte[] buffer = new byte[10240];
+		    for (int length = 0; (length = in.read(buffer)) > 0;) {
+		        out.write(buffer, 0, length);
+		    }
+			
+//			Storage storage = StorageOptions.getDefaultInstance().getService();
+////		    BlobId blobId = BlobId.of("gs://adrutasnew.appspot.com", "/2019/0819/index.html");
+//		    BlobId blobId = BlobId.of("adrutasnew.appspot.com", "/2019/0819/index.html");
+//		    byte[] content = storage.readAllBytes(blobId);
+//		    out.write(content);
+//			log.fine("content: " + content);
+		} catch (Exception e) {
+			log.log(Level.SEVERE,"No lee",e);
 		} finally {
-			if (em!=null) {
-				em.close();
-			}
+	    	out.close();
 		}
-    	if (list.isEmpty()) {
-			log.log(Level.SEVERE, "Se hardcodea la url");
-            out.println("/2018/1028/index.html");
-    	} else {
-			log.log(Level.SEVERE, "Se obtiene la url de la BBDD");
-    		out.println(list.get(0).getUrl());
-    	}
-    	out.close();
 	}
 }
