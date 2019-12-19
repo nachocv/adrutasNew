@@ -26,6 +26,7 @@ import com.adrutas.model.LicenciaOpcione;
 import com.adrutas.model.Property;
 import com.adrutas.model.PropiedadesAnuale;
 import com.adrutas.model.Salida;
+import com.google.gson.Gson;
 
 import adrutas.com.Constante;
 
@@ -91,8 +92,16 @@ public class Static extends HttpServlet {
     			}
     			mLicenciaTipo.put("nombre", licencia.getNombre());
     			mLicenciaTipo.put("importe", licencia.getImporte());
+    			mLicenciaTipo.put("importeJoven", licencia.getImporteJoven());
     			mLicenciaTipo.put("importeMenor", licencia.getImporteMenor());
     			mLicenciaTipo.put("descripcion", licencia.getDescripcion());
+    			if (licencia.getInicio()==null) {
+        			mLicenciaTipo.put("inicio", "");
+        			mLicenciaTipo.put("fin", "");
+    			} else {
+        			mLicenciaTipo.put("inicio", Constante.dF12.format(licencia.getInicio()));
+        			mLicenciaTipo.put("fin", Constante.dF12.format(licencia.getFin()));
+    			}
     			mLicenciaTipo.put("opciones", mOpcion = new HashMap<String, Map<String, Object>>());
     			for (LicenciaOpcione opcion: licencia.getLicenciaOpciones()) {
     				mOpcion.put(opcion.getId().getTipoOpcion(), mOpcionTipo = new HashMap<String, Object>());

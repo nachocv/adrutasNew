@@ -68,4 +68,10 @@ public final class FilterSocio implements Filter {
 		log.log(Level.SEVERE, "Se envía zonaSocio.html");
 		((HttpServletResponse) resp).sendRedirect("/zonaSocio.html");
 	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
+	}
 }

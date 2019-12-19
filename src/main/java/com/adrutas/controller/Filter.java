@@ -69,4 +69,10 @@ public final class Filter implements javax.servlet.Filter {
 //		}
 		chain.doFilter(req, resp);
 	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
+	}
 }

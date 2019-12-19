@@ -134,26 +134,32 @@ $(persona);
                     Cuota Socio Rutas: <input type="checkbox" id="essocio" onchange="calcula_importe()">
                   </td>
                   <td>
-                    Licencia: <select id="tipo_licencia" class="input_200" onchange="calcula_importe()"></select>
+                    Licencia:<select id="tipo_licencia" class="input_175" onchange="calcula_importe()"></select>
                   </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <div id="opciones" style="border: 1px solid; border-radius: 5px; padding: 2px 2px 2px 2px; overflow: hidden"></div>
-                  </td>
-                </tr>
-                <tr>
                   <td>
-                    Licencia con Rutas: <input type="checkbox" id="licencia" onchange="calcula_importe()">
+                    Con Rutas: <input type="checkbox" id="licencia" onchange="calcula_importe()">
                   </td>
+                </tr>
+                <tr>
                   <td>
                     Club: <input type="text" id="club">
                   </td>
+                  <td>
+                    Inicio: <input id="inicio" class="input_100" disabled/>
+                  </td>
+                  <td>
+                    Fin: <input id="fechavto" class="input_100" disabled/>
+                  </td>
                 </tr>
                 <tr>
-                  <td>Pago: <select id="fp" class="input_200"></select>
+                  <td colspan="3">
+                    <div id="descripcion"
+                      style="border: 2px solid; border-radius: 5px; padding: 5px 5px 5px 5px"></div>
                   </td>
-                  <td>Entregado Regalo: <input type="checkbox" id="regalo">
+                </tr>
+                <tr>
+                  <td colspan="3">
+                    <div id="opciones" style="border: 1px solid; border-radius: 5px; padding: 2px 2px 2px 2px; overflow: hidden"></div>
                   </td>
                 </tr>
                 <tr>
@@ -162,11 +168,14 @@ $(persona);
                     <input type="hidden" id="importecuota" value="0" />
                     <input type="hidden" id="importelicencia" value="0" />
                   </td>
+                  <td>
+                    Emisión: <input id="emision" class="input_100" disabled/>
+                  </td>
                 </tr>
                 <tr>
-                  <td colspan="2">
-                    <div id="descripcion"
-                      style="border: 2px solid; border-radius: 5px; padding: 5px 5px 5px 5px"></div>
+                  <td>Pago: <select id="fp" class="input_200"></select>
+                  </td>
+                  <td>Entregado Regalo: <input type="checkbox" id="regalo">
                   </td>
                 </tr>
                 <tr>

@@ -37,6 +37,9 @@ public class Licencia implements Serializable {
 
 	private BigDecimal importe;
 
+	@Column(name="importe_joven")
+	private BigDecimal importeJoven;
+
 	@Column(name="importe_menor")
 	private BigDecimal importeMenor;
 
@@ -46,7 +49,7 @@ public class Licencia implements Serializable {
 	private String nombre;
 
 	@Column(name="tipo_licencia_cont")
-	private int tipoLicenciaCont;
+	private Integer tipoLicenciaCont;
 
 	//bi-directional many-to-one association to LicenciaOpcione
 	@OneToMany(mappedBy="licencia")
@@ -87,6 +90,14 @@ public class Licencia implements Serializable {
 		this.importe = importe;
 	}
 
+	public BigDecimal getImporteJoven() {
+		return importeJoven;
+	}
+
+	public void setImporteJoven(BigDecimal importeJoven) {
+		this.importeJoven = importeJoven;
+	}
+
 	public BigDecimal getImporteMenor() {
 		return this.importeMenor;
 	}
@@ -111,11 +122,11 @@ public class Licencia implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public int getTipoLicenciaCont() {
+	public Integer getTipoLicenciaCont() {
 		return this.tipoLicenciaCont;
 	}
 
-	public void setTipoLicenciaCont(int tipoLicenciaCont) {
+	public void setTipoLicenciaCont(Integer tipoLicenciaCont) {
 		this.tipoLicenciaCont = tipoLicenciaCont;
 	}
 

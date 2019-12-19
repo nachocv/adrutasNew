@@ -1,8 +1,6 @@
 package com.adrutas.controller;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
 import com.adrutas.dao.EntityManagerFactories;
@@ -57,81 +54,77 @@ public class ExcelSocios extends HttpServlet {
         HSSFSheet sheet = wb.createSheet("Socios");
         ServletOutputStream out = res.getOutputStream();
 		try {
-	        Cell cell;
 	        Row row = sheet.createRow(0);
 	        int col = 0;
 	        for (String name: names) {
-	            cell = row.createCell(col++);
-	            cell.setCellValue(name);
+	            row.createCell(col++).setCellValue(name);
 	        }
 			em = EntityManagerFactories.getEM();
 	        int fil = 1;
 	        Map<Integer,Persona> mPersona = new TreeMap<Integer,Persona>();
-	    	List<Integer> list = new ArrayList<Integer>();
 	    	Calendar cal = new GregorianCalendar();
 	    	Integer year = cal.get(Calendar.YEAR);
-	        list.add(year);
-//	        if (cal.get(Calendar.MONTH)<2) {
-//	        	list.add(year-1);
-//	        }
-        	list.add(year-1);
+	        if (cal.get(Calendar.MONTH)<2) {
+	        	year = year-1;
+	        }
+//        	list.add(year-1);
 	        for (Ficha bean: em.createNamedQuery("Ficha.findSociosByAnyos", Ficha.class)
-					.setParameter("anyoList", list).getResultList()) {
+					.setParameter("anyo", year).getResultList()) {
 	        	mPersona.put(bean.getId().getIdPersona(),bean.getPersona());
 	        }
 	        for (Persona persona: mPersona.values()) {
 	            row = sheet.createRow(fil++);
-	            (cell = row.createCell(0)).setCellValue(persona.getIdPersona());
-                (cell = row.createCell(1)).setCellValue(persona.getUsuario());
-                (cell = row.createCell(2)).setCellValue(persona.getNombre());
-                (cell = row.createCell(3)).setCellValue(persona.getApellido1());
-                (cell = row.createCell(4)).setCellValue(persona.getApellido2());
-                (cell = row.createCell(5)).setCellValue(persona.getDomicilio());
-                (cell = row.createCell(6)).setCellValue(persona.getCodigoPostal());
-                (cell = row.createCell(7)).setCellValue(persona.getPoblacion());
-                (cell = row.createCell(8)).setCellValue(persona.getProvincia());
-                (cell = row.createCell(9)).setCellValue(persona.getDni());
-                (cell = row.createCell(10)).setCellValue(persona.getNota());
+	            row.createCell(0).setCellValue(persona.getIdPersona());
+                row.createCell(1).setCellValue(persona.getUsuario());
+                row.createCell(2).setCellValue(persona.getNombre());
+                row.createCell(3).setCellValue(persona.getApellido1());
+                row.createCell(4).setCellValue(persona.getApellido2());
+                row.createCell(5).setCellValue(persona.getDomicilio());
+                row.createCell(6).setCellValue(persona.getCodigoPostal());
+                row.createCell(7).setCellValue(persona.getPoblacion());
+                row.createCell(8).setCellValue(persona.getProvincia());
+                row.createCell(9).setCellValue(persona.getDni());
+                row.createCell(10).setCellValue(persona.getNota());
                 if ((date = persona.getNacimiento())!=null) {
-                	(cell = row.createCell(11)).setCellValue(date);
+                	row.createCell(11).setCellValue(date);
                 }
-                (cell = row.createCell(12)).setCellValue(persona.getSexo());
-                (cell = row.createCell(13)).setCellValue(persona.getVetado());
-                (cell = row.createCell(14)).setCellValue(persona.getVeto());
-                (cell = row.createCell(15)).setCellValue(persona.getPasaporte());
+                row.createCell(12).setCellValue(persona.getSexo());
+                row.createCell(13).setCellValue(persona.getVetado());
+                row.createCell(14).setCellValue(persona.getVeto());
+                row.createCell(15).setCellValue(persona.getPasaporte());
                 if ((date = persona.getCadPasaporte())!=null) {
-                	(cell = row.createCell(16)).setCellValue(date);
+                	row.createCell(16).setCellValue(date);
                 }
                 if (!(lEmails = persona.getSocioEmails()).isEmpty()) {
                     if ((size = lEmails.size())>0) {
-                    	(cell = row.createCell(17)).setCellValue(lEmails.get(0).getId().getEmail());
+                    	row.createCell(17).setCellValue(lEmails.get(0).getId().getEmail());
                         if (size>1) {
-                        	(cell = row.createCell(18)).setCellValue(lEmails.get(1).getId().getEmail());
+                        	row.createCell(18).setCellValue(lEmails.get(1).getId().getEmail());
                             if (size>2) {
-                            	(cell = row.createCell(19)).setCellValue(lEmails.get(2).getId().getEmail());
+                            	row.createCell(19).setCellValue(lEmails.get(2).getId().getEmail());
                             }
                         }
                     }
                 }
                 if (!(lTelefonos = persona.getSocioTelefonos()).isEmpty()) {
                     if ((size = lTelefonos.size())>0) {
-                    	(cell = row.createCell(20)).setCellValue(lTelefonos.get(0).getId().getTelefono());
+                    	row.createCell(20).setCellValue(lTelefonos.get(0).getId().getTelefono());
                         if (size>1) {
-                        	(cell = row.createCell(21)).setCellValue(lTelefonos.get(1).getId().getTelefono());
+                        	row.createCell(21).setCellValue(lTelefonos.get(1).getId().getTelefono());
                             if (size>2) {
-                            	(cell = row.createCell(21)).setCellValue(lTelefonos.get(2).getId().getTelefono());
+                            	row.createCell(21).setCellValue(lTelefonos.get(2).getId().getTelefono());
                             }
                         }
                     }
                 }
-                (cell = row.createCell(23)).setCellValue((ficha = persona.getFichas().get(0)).getImportelicencia().doubleValue());
-                (cell = row.createCell(24)).setCellValue(ficha.getImportecuota().doubleValue());
-                (cell = row.createCell(25)).setCellValue(ficha.getTipoLicencia());
-                (cell = row.createCell(26)).setCellValue((recibo = ficha.getRecibo()).getIdRecibo());
-                (cell = row.createCell(27)).setCellValue(recibo.getFormapago().getCodigo());
-                (cell = row.createCell(28)).setCellValue(recibo.getFecha());
-                (cell = row.createCell(29)).setCellValue(ficha.getClub());
-                (cell = row.createCell(30)).setCellValue(ficha.getId().getAnyo());
+                row.createCell(23).setCellValue((ficha = persona.getFichas().get(0)).getImportelicencia().doubleValue());
+                row.createCell(24).setCellValue(ficha.getImportecuota().doubleValue());
+                row.createCell(25).setCellValue(ficha.getTipoLicencia());
+                row.createCell(26).setCellValue((recibo = ficha.getRecibo()).getIdRecibo());
+                row.createCell(27).setCellValue(recibo.getFormapago().getCodigo());
+                row.createCell(28).setCellValue(recibo.getFecha());
+                row.createCell(29).setCellValue(ficha.getClub());
+                row.createCell(30).setCellValue(ficha.getId().getAnyo());
 	        }
 	        res.setContentType("application/vnd.ms-excel");
 	        res.setHeader("Content-Disposition", "attachment;filename=datos_socios_" + Constante.dF1.format(cal.getTime()) + ".xls");

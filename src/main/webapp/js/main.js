@@ -95,17 +95,6 @@ var salidaDetalle = function() {
 
 
 var salidaDetalle1 = function() {
-//  var detalles;
-//  $.ajax({
-//    url: "/jd/salidaDetalle?salida=" + $("select#salida").val(), 
-//    success: function(result) {
-//      detalles = JSON.parse(result);
-//      console.log("detalles: " + detalles);
-//    },
-//    error: function(jqXHR, status, error) {
-//      alert('Disculpe, existió un problema');
-//    }
-//  });
   var dataSet = [
     [ "Tiger Nixon", "System Architect", "Edinburgh", "5421", "2011/04/25", "$320,800" ],
     [ "Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", "$170,750" ],
@@ -144,7 +133,6 @@ var salidaDetalle1 = function() {
     [ "Martena Mccray", "Post-Sales support", "Edinburgh", "8240", "2011/03/09", "$324,050" ],
     [ "Unity Butler", "Marketing Designer", "San Francisco", "5384", "2009/12/09", "$85,675" ]
   ];
-  console.log("salidaDetalle1-Punto1");
   $('#apunteSalida').DataTable( {
     dom: "Blfrtip",
     data: dataSet,
@@ -159,7 +147,6 @@ var salidaDetalle1 = function() {
     ],
     select: true
   } );
-  console.log("salidaDetalle1-Punto2");
 }
 
 function cargaSalidaDetalle(salidaDetalles) {
@@ -266,7 +253,6 @@ var getSalidas = function() {
     salidas.array = new Array();
     var objects = $("object.puntos");
     objects.each(function() {
-      console.log($(this).parent().children("div.puntos").attr("id").substring(3));
       salidas.array.push($(this).attr("src"));
     });
     $.ajax({
@@ -274,22 +260,17 @@ var getSalidas = function() {
       success: function(result) {
         var resultado;
         var oSalida;
-        console.log("getSalidas result: " + result);
         var resultados = JSON.parse(result);
         $.each(resultados.especiales, function(key,value) {
-          console.log("getSalidas especial.key: " + key);
           var object = $("object.puntos[src='" + key + "']");
           var div = $("div#ex_" + key);
           resultado = "<br/><a href='#ex_" + key + "' rel='modal:open'>Tienes " + value.length + " puntos</a>";
-          console.log("getSalidas salida: " + key + "\nresultado: " + resultado);
           object.html(resultado);
           resultado = "<p>Tienes " + value.length + " puntos por participar en las siguientes salidas:</p>";
           value.forEach(function(salida) {
             oSalida = resultados.salidas[salida];
-            console.log("<p>Salida " + salida + " del " + oSalida.inicio + " a " + oSalida.descripcion + "</p>");
             resultado += "<p>Salida " + salida + " del " + oSalida.inicio + " a " + oSalida.descripcion + "</p>";
           });
-          console.log("getSalidas div.html: " + resultado);
           div.html(resultado);
         });
       },
@@ -811,14 +792,22 @@ function listaFicha() {
 }
 
 function excelSocios() {
-//  $("form[action='/jd/excelSocios']").submit();
-  $.ajax({
-    method: "POST",
-    url: "/jd/excelSocios",
-    error : function(jqXHR, status, error) {
-      alert(jqXHR.responseText);
-    }
-  });
+  var form = $('<form id="myForm" method="post" action="/jd/excelSocios"></form>').appendTo('body');
+  form.find("input[name='no_email']").val(false);
+  form.submit();
+//  $.ajax({
+//    method: "POST",
+//    url: "/jd/excelSocios",
+//    error : function(jqXHR, status, error) {
+//      alert(jqXHR.responseText);
+//    }
+//  });
+}
+
+function excelEtiquetasSocios(no_email) {
+  var form = $('<form id="myForm" method="post" action="/jd/excelEtiquetasSocios"></form>').appendTo('body');
+  form.find("input[name='no_email']").val(no_email);
+  form.submit();
 }
 
 function listaTelefonos() {
@@ -852,12 +841,6 @@ function excelContable(salida) {
   field.attr("value", $("select#salida").val());
   form.append(field);
   form.submit();
-}
-
-function excelEtiquetasSocios(no_email) {
-	var form = $("form[action='/excel_etiquetas_socios']");
-	form.find("input[name='no_email']").val(no_email);
-	form.submit();
 }
 
 function socios_correo() {
@@ -906,130 +889,155 @@ function llama(div) {
 }
 
 function calcula_importe() {
-	var importe = 0;
-	var anyoInt = $("select#anyos").val();
-	if (anyoInt==2015) {
-		if ($("input#essocio").prop('checked')) {
-			importe += 15;
-			if ($("input#licencia").prop('checked')) {
-				var licencia = fichas[anyoInt].licencias[$("select#tipo_licencia").val()];
-				importe += licencia.importe;
-				$("#opciones input:checked").each(function(key, value) {
-					importe += licencia.opciones[key.substring(7)].importe;
-				});
-			}
-		}
-	} else if (anyoInt==2016) {
-		var importecuota = 0;
-		var importelicencia = 0;
-		if ($("input#essocio").prop('checked')) {
-			var nacimiento = $("input#nacimiento").val();
-			if (nacimiento!="") {
-				var numbers = nacimiento.split("-");
-				nacimiento = new Date(numbers[0],numbers[1]-1,numbers[2]);
-			}
-			if (fichas[anyoInt-1]!==undefined && fichas[anyoInt-1].importecuota!=0) {
-				importecuota = 5;
-			} else {
-				var mayor41 = true;
-				if (nacimiento!="") {
-					var hace41anyos = new Date();
-					hace41anyos.setFullYear(hace41anyos.getFullYear()-41);
-					mayor41 = nacimiento<hace41anyos;
-				}
-				importecuota = mayor41? 15: 5;
-			}
-			if ($("input#licencia").prop('checked')) {
-				var mayor18 = true;
-				if (nacimiento!="") {
-					var hace18anyos = new Date();
-					hace18anyos.setFullYear(hace18anyos.getFullYear()-18);
-					mayor18 = nacimiento<hace18anyos;
-				}
-				var licencia = fichas[anyoInt].licencias[$("select#tipo_licencia").val()];
-				importelicencia += (mayor18 || licencia.importe_menor===null)? licencia.importe: licencia.importe_menor;
-				$("#opciones input:checked").each(function(key, value) {
-					importelicencia += licencia.opciones[value.id.substring(7)].importe;
-				});
-			}
-		}
-		importe = importecuota + importelicencia;
-	} else if (anyoInt==2017) {
-		var importecuota = 0;
-		var importelicencia = 0;
-		if ($("input#essocio").prop('checked')) {
-			var nacimiento = $("input#nacimiento").val();
-			if (nacimiento!="") {
-				var numbers = nacimiento.split("-");
-				nacimiento = new Date(numbers[0],numbers[1]-1,numbers[2]);
-			}
-			if (fichas[anyoInt-1]!==undefined && fichas[anyoInt-1].importecuota!=0) {
-				importecuota = 5;
-			} else {
-				var mayor41 = true;
-				if (nacimiento!="") {
-					var hace41anyos = new Date();
-					hace41anyos.setFullYear(hace41anyos.getFullYear()-41);
-					mayor41 = nacimiento<hace41anyos;
-				}
-				importecuota = mayor41? 15: 5;
-			}
-			if ($("input#licencia").prop('checked')) {
-				var mayor18 = true;
-				if (nacimiento!="") {
-					var hace18anyos = new Date();
-					hace18anyos.setFullYear(hace18anyos.getFullYear()-18);
-					mayor18 = nacimiento<hace18anyos;
-				}
-				var licencia = fichas[anyoInt].licencias[$("select#tipo_licencia").val()];
-				importelicencia += (mayor18 || licencia.importe_menor===null)? licencia.importe: licencia.importe_menor;
-				$("#opciones input:checked").each(function(key, value) {
-					importelicencia += licencia.opciones[value.id.substring(7)].importe;
-				});
-			}
-		}
-		importe = importecuota + importelicencia;
-		$("input#importecuota").val(importecuota);
-		$("input#importelicencia").val(importelicencia);
-	} else if (anyoInt>2017) {
-		var importecuota = 0;
-		var importelicencia = 0;
-		if ($("input#essocio").prop('checked')) {
-			var nacimiento = $("input#nacimiento").val();
-			if (nacimiento!="") {
-				var numbers = nacimiento.split("-");
-				nacimiento = new Date(numbers[0],numbers[1]-1,numbers[2]);
-			}
-			if (fichas[anyoInt-1]!=undefined && fichas[anyoInt-1].importecuota!=0) {
-				importecuota = 5;
-			} else {
-				var mayor41 = true;
-				if (nacimiento!="") {
-					var hace41anyos = new Date();
-					hace41anyos.setFullYear(hace41anyos.getFullYear()-41);
-					mayor41 = nacimiento<hace41anyos;
-				}
-				importecuota = mayor41? 15: 5;
-			}
-			if ($("input#licencia").prop('checked')) {
-				var mayor18 = true;
-				if (nacimiento!="") {
-					var hace18anyos = new Date();
-					hace18anyos.setFullYear(hace18anyos.getFullYear()-18);
-					mayor18 = nacimiento<hace18anyos;
-				}
-				var licencia = fichas[anyoInt].licencias[$("select#tipo_licencia").val()];
-				importelicencia += (mayor18 || licencia.importe_menor===null)? licencia.importe: licencia.importe_menor;
-				$("#opciones input:checked").each(function(key, value) {
-					importelicencia += licencia.opciones[value.id.substring(7)].importe;
-				});
-			}
-		}
-		importe = importecuota + importelicencia;
-		$("input#importecuota").val(importecuota);
-		$("input#importelicencia").val(importelicencia);
-	}
-	$("input#importe").val(importe);
+  var importe = 0;
+  var importecuota = 0;
+  var importelicencia = 0;
+  var anyoInt = $("select#anyos").val();
+  var essocio = $("input#essocio").prop('checked');
+  var tipo_licencia = $("select#tipo_licencia").val();
+  var ficha = fichas[anyoInt];
+  var licencia = ficha.licencias[tipo_licencia];
+  if (!essocio) {
+    $("input#licencia").prop('checked', false);
+  }
+  var nacimiento = $("input#nacimiento").val();
+  var year_nacimiento;
+  if (nacimiento!="") {
+    var numbers = nacimiento.split("-");
+    nacimiento = new Date(numbers[0],numbers[1]-1,numbers[2]);
+    year_nacimiento = numbers[0];
+  }
+  $("input#fechavto").prop("disabled",true);
+  if (licencia!=null) {
+    $("input#inicio").val(licencia.inicio);
+    $("input#fechavto").val(licencia.fin);
+  }
+  if (anyoInt==2015) {
+    if (essocio) {
+      importe += 15;
+      if ($("input#licencia").prop('checked')) {
+        importe += licencia.importe;
+        $("#opciones input:checked").each(function(key, value) {
+          importe += licencia.opciones[key.substring(7)].importe;
+        });
+      }
+    }
+  } else if (anyoInt==2016) {
+    if (essocio) {
+      if (fichas[anyoInt-1]!==undefined && fichas[anyoInt-1].importecuota!=0) {
+        importecuota = 5;
+      } else {
+        var mayor41 = true;
+        if (nacimiento!="") {
+          mayor41 = year_nacimiento<=anyoInt-41;
+        }
+        importecuota = mayor41? 15: 5;
+      }
+      if ($("input#licencia").prop('checked')) {
+        var mayor18 = true;
+        if (nacimiento!="") {
+          var hace18anyos = new Date();
+          hace18anyos.setFullYear(hace18anyos.getFullYear()-18);
+          mayor18 = nacimiento<hace18anyos;
+        }
+        importelicencia += (mayor18 || licencia.importe_menor===null)? licencia.importe: licencia.importe_menor;
+        $("#opciones input:checked").each(function(key, value) {
+          importelicencia += licencia.opciones[value.id.substring(7)].importe;
+        });
+      }
+    }
+    importe = importecuota + importelicencia;
+  } else if (anyoInt==2017) {
+    if (essocio) {
+      if (fichas[anyoInt-1]!==undefined && fichas[anyoInt-1].importecuota!=0) {
+        importecuota = 5;
+      } else {
+        var mayor41 = true;
+        if (nacimiento!="") {
+          mayor41 = year_nacimiento<=anyoInt-41;
+        }
+        importecuota = mayor41? 15: 5;
+      }
+      if ($("input#licencia").prop('checked')) {
+        var mayor18 = true;
+        if (nacimiento!="") {
+          var hace18anyos = new Date();
+          hace18anyos.setFullYear(hace18anyos.getFullYear()-18);
+          mayor18 = nacimiento<hace18anyos;
+        }
+        importelicencia += (mayor18 || licencia.importe_menor===null)? licencia.importe: licencia.importe_menor;
+        $("#opciones input:checked").each(function(key, value) {
+          importelicencia += licencia.opciones[value.id.substring(7)].importe;
+        });
+      }
+    }
+    importe = importecuota + importelicencia;
+    $("input#importecuota").val(importecuota);
+    $("input#importelicencia").val(importelicencia);
+  } else if (anyoInt>2017 && anyoInt<2020) {
+    if (essocio) {
+      if (fichas[anyoInt-1]!=undefined && fichas[anyoInt-1].importecuota!=0) {
+        importecuota = 5;
+      } else {
+        var mayor41 = true;
+        if (nacimiento!="") {
+          mayor41 = year_nacimiento<=anyoInt-41;
+        }
+        importecuota = mayor41? 15: 5;
+      }
+      if ($("input#licencia").prop('checked')) {
+        var mayor18 = true;
+        if (nacimiento!="") {
+          mayor18 = year_nacimiento<=anyoInt-18;
+        }
+        importelicencia += (mayor18 || licencia.importe_menor===null)? licencia.importe: licencia.importe_menor;
+        $("#opciones input:checked").each(function(key, value) {
+          importelicencia += licencia.opciones[value.id.substring(7)].importe;
+        });
+      }
+    }
+    importe = importecuota + importelicencia;
+    $("input#importecuota").val(importecuota);
+    $("input#importelicencia").val(importelicencia);
+  } else if (anyoInt==2020) {
+    var federado = tipo_licencia!="INT" && tipo_licencia!="";
+    if (tipo_licencia=="INT") {
+      $("input#licencia").prop("checked",false);
+      $("input#inicio").val("");
+      $("input#fechavto").prop("disabled",false);
+      $("input#fechavto").val(ficha.fechavto);
+    } else if (tipo_licencia=="") {
+        $("input#licencia").prop("checked",false);
+        $("input#inicio").val("");
+        $("input#fechavto").prop("disabled",true);
+        $("input#fechavto").val("");
+    }
+    if (essocio) {
+      importecuota = 15;
+      if ($("input#licencia").prop('checked')) {
+        var menor = false;
+        var joven = false;
+        if (nacimiento!="") {
+          menor = year_nacimiento>anyoInt-14;
+          joven = year_nacimiento>anyoInt-18;
+        }
+        if (menor && licencia.importeMenor!=null) {
+          importelicencia = licencia.importeMenor;
+        } else if (joven && licencia.importeJoven!=null) {
+          importelicencia = licencia.importeJoven;
+        } else {
+          importelicencia = licencia.importe;
+        }
+        $("#opciones input:checked").each(function(key, value) {
+          importelicencia += licencia.opciones[value.id.substring(7)].importe;
+        });
+      }
+    }
+    importe = importecuota + importelicencia;
+    $("input#importecuota").val(importecuota);
+    $("input#importelicencia").val(importelicencia);
+  }
+  $("input#importe").val(importe);
 }
 
 function putSocio(socio) {
@@ -1141,31 +1149,32 @@ function cargaPersona(data) {
 }
 
 function cargaFicha() {
-    var anyo = $("select#anyos option:selected").text();
-    var ficha = fichas[anyo];
-	var tipo_licencia = ficha.tipoLicencia;
-    $("input#essocio").prop("checked", ficha.importecuota!=0);
-    var select = $("select#tipo_licencia");
-    select.empty();
-    select.append("<option value=\"\"></option>");
-    $.each(ficha.licencias, function(key, value) {
-        select.append("<option value=\"" + key + "\">" + value.nombre + "</option>");
-    });
-    $('select#tipo_licencia option[value=\"' + tipo_licencia + '\"]').attr('selected','selected');
-	cambiaLicencia();
-    $("input#licencia").prop("checked", ficha.importelicencia!=0);
-    $("input#club").val(ficha.club);
-    $("select#fp").val(ficha.fp);
-    $("input#regalo").prop("checked", ficha.regalo);
-    if (anyo==FICHA_YEAR) {
-    	$("button#grabaFicha").show();
-    } else {
-    	$("button#grabaFicha").hide();
-    }
-	$.each(ficha.opciones, function(key, value) {
-		$("input#opcion_" + value.id.tipoOpcion).attr("checked", "checked");
-	});
-	calcula_importe();
+  var anyo = $("select#anyos option:selected").text();
+  var ficha = fichas[anyo];
+  var tipo_licencia = ficha.tipoLicencia;
+  $("input#essocio").prop("checked", ficha.importecuota!=0);
+  var select = $("select#tipo_licencia");
+  select.empty();
+  select.append("<option value=\"\"></option>");
+  $.each(ficha.licencias, function(key, value) {
+    select.append("<option value=\"" + key + "\">" + value.nombre + "</option>");
+  });
+  $('select#tipo_licencia option[value=\"' + tipo_licencia + '\"]').attr('selected','selected');
+  cambiaLicencia();
+  $("input#licencia").prop("checked", ficha.importelicencia!=0);
+  $("input#club").val(ficha.club);
+  $("select#fp").val(ficha.fp);
+  $("input#regalo").prop("checked", ficha.regalo);
+  if (anyo==FICHA_YEAR) {
+    $("button#grabaFicha").show();
+  } else {
+    $("button#grabaFicha").hide();
+  }
+  $.each(ficha.opciones, function(key, value) {
+    $("input#opcion_" + value.id.tipoOpcion).attr("checked", "checked");
+  });
+  $("input#emision").val(ficha.fecha);
+  calcula_importe();
 }
 
 function cambiaLicencia() {
@@ -1282,26 +1291,27 @@ function grabaPersona() {
 }
 
 function grabaFicha() {
-	var ficha = new Object();
-	var value;
-	ficha.id_persona = $("input#id_persona").val();
-	ficha.anyo = $("select#anyos").val();
-	ficha.tipo_licencia = $("select#tipo_licencia").val();
-	ficha.licencia = $("input#licencia").is(":checked");
-    ficha.club = $("input#club").val();
-    ficha.fp = $("select#fp").val();
-    ficha.regalo = $("input#regalo").is(":checked");
-    ficha.importecuota = $("input#importecuota").val();
-    ficha.importelicencia = $("input#importelicencia").val();
-    ficha.opciones = new Array();
-	$.each($("#opciones input:checked"), function(index, value) {
-		ficha.opciones.push(value.id.substring(7));
-	});
-	$.ajax({
-		url : "/jd/grabaFicha?ficha=" + JSON.stringify(ficha),
-		success : cargaPersona,
-		error : function(jqXHR, status, error) {
-			alert('Disculpe, existió un problema');
-		}
-	});
+  var ficha = new Object();
+  var value;
+  ficha.id_persona = $("input#id_persona").val();
+  ficha.anyo = $("select#anyos").val();
+  ficha.tipo_licencia = $("select#tipo_licencia").val();
+  ficha.licencia = $("input#licencia").is(":checked");
+  ficha.club = $("input#club").val();
+  ficha.fp = $("select#fp").val();
+  ficha.regalo = $("input#regalo").is(":checked");
+  ficha.importecuota = $("input#importecuota").val();
+  ficha.importelicencia = $("input#importelicencia").val();
+  ficha.fechavto = $("input#fechavto").val();
+  ficha.opciones = new Array();
+  $.each($("#opciones input:checked"), function(index, value) {
+    ficha.opciones.push(value.id.substring(7));
+  });
+  $.ajax({
+    url : "/jd/grabaFicha?ficha=" + JSON.stringify(ficha),
+    success : cargaPersona,
+    error : function(jqXHR, status, error) {
+      alert('Disculpe, existió un problema');
+    }
+  });
 }

@@ -18,7 +18,6 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -715,7 +714,8 @@ public class Persona implements Serializable {
             		mapBean1.put("regalo", ficha.getRegalo());
             		mapBean1.put("licencias", Static.getLicencia(ficha.getId().getAnyo()));
             		mapBean1.put("opciones", ficha.getOpciones());
-            		mapBean1.put("fecha", ficha.getFecha());
+            		mapBean1.put("fecha", Constante.dF12.format(ficha.getFecha()));
+            		mapBean1.put("fechavto", ficha.getFechavto()==null? "":Constante.dF12.format(ficha.getFechavto()));
         			ficha.getOpciones().iterator();
             	}
             	if (!mapBean2.containsKey(fichaYear)) {
@@ -728,6 +728,7 @@ public class Persona implements Serializable {
             		mapBean1.put("tipoLicencia", "");
             		mapBean1.put("regalo", 0);
             		mapBean1.put("licencias", Static.getLicencia(fichaYear));
+            		mapBean1.put("fechavto", "");
             	}
             }
         } catch (Exception e) {

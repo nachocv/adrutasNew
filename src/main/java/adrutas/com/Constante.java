@@ -61,9 +61,9 @@ public final class Constante {
     public static final Map<Integer, Boolean> anyosOpen = new HashMap<Integer, Boolean>();
     public static final Map<Pattern, List<DateFormat>> FORMATOS_FECHAS = new HashMap<>();
     public static final int numGS = 12;
-    public static final Set<String> ORDINARIAS = new HashSet<String>(Arrays.asList(new String[] {"BO", "ME", "TA", "TF"}));
+    public static final Set<String> ORDINARIAS = new HashSet<String>(Arrays.asList(new String[] {"BO","ME","TA","TF"}));
     public static final Set<String> SIN_IMPORTE = new HashSet<String>(Arrays.asList(
-                    new String[] {"", "AN", "BO", "FO", "GN", "GS"}));
+                    new String[] {"","AN","BO","FO","GN","GS","GC"}));
     public static final Pattern PATTERN_CEROS = Pattern.compile("^0*");
 
 	public static void init() {

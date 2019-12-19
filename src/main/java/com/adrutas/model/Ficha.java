@@ -32,9 +32,10 @@ import com.adrutas.dao.Static;
 @NamedQuery(name="Ficha.findAll", query="SELECT f FROM Ficha f")
 @NamedQuery(name="Ficha.find",
 		query="SELECT f FROM Ficha f WHERE f.id.idPersona=:idPersona and f.id.anyo=:anyo and f.id.idFicha=:idFicha")
+@NamedQuery(name="Ficha.findAnyo",query="SELECT f FROM Ficha f WHERE f.id.idPersona=:idPersona and f.id.anyo=:anyo")
 @NamedQuery(name="Ficha.findByPersona",query="SELECT f FROM Ficha f WHERE f.id.idPersona=:idPersona ORDER BY f.id.anyo desc")
 @NamedQuery(name="Ficha.findSociosByAnyos",query=
-"SELECT f FROM Ficha f WHERE f.importecuota<>0 and f.id.anyo in :anyoList ORDER BY f.id.idPersona,f.id.anyo")
+"SELECT f FROM Ficha f WHERE f.importecuota<>0 and f.id.anyo>=:anyo ORDER BY f.id.idPersona,f.id.anyo")
 
 public class Ficha implements Serializable {
 	private static final long serialVersionUID = 6097850077775371167L;
@@ -58,6 +59,8 @@ public class Ficha implements Serializable {
 	private BigDecimal importelicencia;
 
 	private byte regalo;
+
+	private Date fechavto;
 
 	@Column(name="tipo_licencia")
 	private String tipoLicencia;
@@ -182,6 +185,14 @@ public class Ficha implements Serializable {
 //		return fichaAceptacion;
 //	}
 
+	public Date getFechavto() {
+		return fechavto;
+	}
+
+	public void setFechavto(Date fechavto) {
+		this.fechavto = fechavto;
+	}
+
 	public Persona getPersona() {
 		return this.persona;
 	}
@@ -282,6 +293,7 @@ public class Ficha implements Serializable {
     		ficha.setImportecuota(importecuota);
     		ficha.setImportelicencia(importelicencia);
 			ficha.setRecibo(recibo);
+			ficha.setFechavto(Static.getDate((String) map.get("fechavto")));
 			em.createNamedQuery("FichaOpcion.del").setParameter("idPersona",idPersona).
 				setParameter("anyo",anyo).setParameter("idFicha",idFicha).executeUpdate();
 			for (String opcion: (List<String>) map.get("opciones")) {

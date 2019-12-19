@@ -33,7 +33,6 @@ public final class FilterJunta implements Filter {
 		StringBuffer url = ((HttpServletRequest) req).getRequestURL();
 		log.log(Level.SEVERE, "uri: " + uri + ". url: " + url);
     	Persona persona = (Persona) ((HttpServletRequest) req).getSession().getAttribute("yo");
-    	log.log(Level.SEVERE, "persona==null: " + (persona==null));
     	if (persona==null || !Directiva.isDirectivo(persona.getIdPersona())) {
     		log.log(Level.SEVERE, "Se envía error 403");
     		((HttpServletResponse) resp).sendError(403);
