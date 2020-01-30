@@ -862,6 +862,7 @@ public class Salida implements Serializable {
         	for (SalidaDetalle bean: em.createNamedQuery("SalidaDetalle.find", SalidaDetalle.class).
         			setParameter("salida", salida).getResultList()) {
         		mBean = new HashMap<String, Object>();
+        		mBean.put("participo", bean.isParticipo());
         		mBean.put("fp", bean.getRecibo().getFormapago().getCodigo());
         		mBean.put("bus", bean.getBus());
         		mBean.put("asiento", bean.getAsiento());

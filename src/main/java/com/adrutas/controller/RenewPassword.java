@@ -37,7 +37,7 @@ public class RenewPassword extends HttpServlet {
         mArgs.put("from", new InternetAddress("web@adrutas.com", "Administrador Web de ADRutas"));
         mArgs.put("to", new InternetAddress((String) map.get("email"), (String) map.get("nombre")));
         mArgs.put("subject", "Cuenta adrutas");
-        String link = map.get("server") + "changePassword?link=" + map.get("link");
+        String link = map.get("server") + "changePassword.html?link=" + map.get("link");
         mArgs.put("htmlBody", "Hola,<br/><br/>Este mensaje se ha generado desde la web \"adrutas.com\" porque alguien" +
         		" ha informado de que no dispones de la contraseña de tu cuenta.<br/><br/>Reactiva tu cuenta pulsando" +
         		" este enlace.<br/><br/><a href=\"" + link + "\">" + link +
@@ -77,7 +77,7 @@ public class RenewPassword extends HttpServlet {
         mArgs.put("from", new InternetAddress("adrutas.web@gmail.com", "Administrador Web de ADRutas"));
         mArgs.put("to", new InternetAddress(email,nombre));
         mArgs.put("subject", "Cuenta adrutas");
-        link = server + "sendLink?link=" + link;
+        link = server + "changePassword.html?link=" + link;
         mArgs.put("htmlBody", "Hola,<br/><br/>Este mensaje se ha generado desde la web \"adrutas.com\" porque alguien" +
         		" ha informado de que no dispones de la contraseña de tu cuenta.<br/><br/>Reactiva tu cuenta pulsando" +
         		" este enlace.<br/><br/><a href=\"" + link + "\">" + link +

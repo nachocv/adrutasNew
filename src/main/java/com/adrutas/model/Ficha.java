@@ -32,7 +32,7 @@ import com.adrutas.dao.Static;
 @NamedQuery(name="Ficha.findAll", query="SELECT f FROM Ficha f")
 @NamedQuery(name="Ficha.find",
 		query="SELECT f FROM Ficha f WHERE f.id.idPersona=:idPersona and f.id.anyo=:anyo and f.id.idFicha=:idFicha")
-@NamedQuery(name="Ficha.findAnyo",query="SELECT f FROM Ficha f WHERE f.id.idPersona=:idPersona and f.id.anyo=:anyo")
+@NamedQuery(name="Ficha.findAnyos",query="SELECT f FROM Ficha f WHERE f.id.idPersona=:idPersona and f.id.anyo in :setAnyos")
 @NamedQuery(name="Ficha.findByPersona",query="SELECT f FROM Ficha f WHERE f.id.idPersona=:idPersona ORDER BY f.id.anyo desc")
 @NamedQuery(name="Ficha.findSociosByAnyos",query=
 "SELECT f FROM Ficha f WHERE f.importecuota<>0 and f.id.anyo>=:anyo ORDER BY f.id.idPersona,f.id.anyo")

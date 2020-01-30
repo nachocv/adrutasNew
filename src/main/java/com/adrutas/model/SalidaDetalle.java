@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,9 +40,9 @@ import adrutas.com.Constante;
 @NamedQuery(name="SalidaDetalle.findCount", query = "SELECT s FROM SalidaDetalle s WHERE s.id.salida = :salida")
 @NamedQuery(name="SalidaDetalle.listAlfa", query = "SELECT s FROM SalidaDetalle s "
 		+ "WHERE s.id.salida = :salida ORDER BY s.persona.apellido1,s.persona.apellido2,s.persona.nombre")
-@NamedQuery(name="SalidaDetalle.find", query="SELECT new SalidaDetalle(s.id,s.bus,s.asiento,s.importe,s.pago,"
-		+ "s.seguroDia,s.observacion,s.recibo,s.persona,s.salidaBean,b) FROM SalidaDetalle s LEFT JOIN BonoDetalle b "
-		+ "ON s.id.salida=b.salidaBean.salida and s.id.idPersona=b.idPersona WHERE s.id.salida=:salida "
+@NamedQuery(name="SalidaDetalle.find", query="SELECT new SalidaDetalle(s.id,s.participo,s.bus,s.asiento,s.importe,"
+		+ "s.pago,s.seguroDia,s.observacion,s.recibo,s.persona,s.salidaBean,b) FROM SalidaDetalle s LEFT JOIN "
+		+ "BonoDetalle b ON s.id.salida=b.salidaBean.salida and s.id.idPersona=b.idPersona WHERE s.id.salida=:salida "
 		+ "ORDER BY s.bus,s.asiento,s.recibo.idRecibo")
 @NamedQuery(name="SalidaDetalle.findByPersona", query="SELECT s FROM SalidaDetalle s "
 		+ "WHERE s.id.salida=:salida and s.id.idPersona=:idPersona")
@@ -49,8 +51,11 @@ import adrutas.com.Constante;
 @NamedQuery(name="SalidaDetalle.countByPersonaAndSalidas", query="SELECT count(s.id.salida) FROM SalidaDetalle s "
 		+ "WHERE s.id.idPersona=:idPersona and s.id.salida >= :salidaIni and s.id.salida < :salidaFin")
 @NamedQuery(name="SalidaDetalle.getLast", query="SELECT s.contador FROM SalidaDetalle s order by s.contador desc")
-@NamedQuery(name="SalidaDetalle.findN",query="SELECT s FROM SalidaDetalle s WHERE salidaBean.tipo in ('N','R') and "
-		+ "(salidaBean.anyo=:anyo OR salidaBean.anyo=:anyo-1) AND id_persona=:id_persona ORDER BY s.salidaBean.salida")
+@NamedQuery(name="SalidaDetalle.findN",query="SELECT s FROM SalidaDetalle s WHERE "
+		+ "salidaBean.tipo in ('N','R') and s.recibo.formapago.codigo in :setFP "
+		+ "and salidaBean.anyo=:anyo AND id_persona=:id_persona ORDER BY s.salidaBean.salida")
+@NamedQuery(name="SalidaDetalle.findByAnyoAndPersona", query="SELECT s FROM SalidaDetalle s "
+		+ "WHERE s.salidaBean.anyo=:anyo and s.id.idPersona=:idPersona")
 
 public class SalidaDetalle implements Serializable {
 	private static final long serialVersionUID = -6755376347925749528L;
@@ -102,7 +107,7 @@ public class SalidaDetalle implements Serializable {
 //	private short salidabono;
 
 	@Column(name="seguro_dia")
-	private byte seguroDia;
+	private Byte seguroDia;
 
 	//bi-directional many-to-one association to Salida
 	@ManyToOne
@@ -134,12 +139,14 @@ public class SalidaDetalle implements Serializable {
 	@Transient
 	private short puntos;
 
+	private boolean participo = true;
 	public SalidaDetalle() {
 	}
 
-	public SalidaDetalle(SalidaDetallePK id, Short bus, Short asiento, BigDecimal importe, BigDecimal pago,
-			byte seguroDia, String observacion, Recibo recibo, Persona persona, Salida salidaBean, BonoDetalle bonoDetalle) {
+	public SalidaDetalle(SalidaDetallePK id, boolean participo, Short bus, Short asiento, BigDecimal importe, BigDecimal pago,
+			Byte seguroDia, String observacion, Recibo recibo, Persona persona, Salida salidaBean, BonoDetalle bonoDetalle) {
 		this.id = id;
+		this.participo = participo;
 		this.bus = bus;
 		this.asiento = asiento;
 		this.importe = importe;
@@ -312,11 +319,11 @@ public class SalidaDetalle implements Serializable {
 //		this.salidabono = salidabono;
 //	}
 
-	public byte getSeguroDia() {
+	public Byte getSeguroDia() {
 		return this.seguroDia;
 	}
 
-	public void setSeguroDia(byte seguroDia) {
+	public void setSeguroDia(Byte seguroDia) {
 		this.seguroDia = seguroDia;
 	}
 
@@ -382,6 +389,14 @@ public class SalidaDetalle implements Serializable {
 
 	public void setPuntos(short puntos) {
 		this.puntos = puntos;
+	}
+
+	public boolean isParticipo() {
+		return participo;
+	}
+
+	public void setParticipo(boolean participo) {
+		this.participo = participo;
 	}
 
 	public static SalidaDetalle findByPersona(String salida,int id_persona) {
@@ -450,17 +465,16 @@ public class SalidaDetalle implements Serializable {
 			}
 			Map<Integer,Ficha> mFicha = new HashMap<Integer,Ficha>();
 			int anyo = beanSalida.getAnyo();
-			for (Ficha ficha: em.createNamedQuery("Ficha.findAnyo", Ficha.class).setParameter("idPersona", idPersona)
-					.setParameter("anyo", anyo).getResultList()) {
+			Set<Integer> setAnyos = new HashSet<Integer>(Arrays.asList(new Integer[] {anyo,anyo-1}));
+			for (Ficha ficha: em.createNamedQuery("Ficha.findAnyos", Ficha.class).setParameter("idPersona", idPersona)
+					.setParameter("setAnyos", setAnyos).getResultList()) {
 				mFicha.put(ficha.getId().getAnyo(),ficha);
 			}
 			Date baja;
 			boolean isDirectivo = false;
-	        boolean esSocio = false;
 			Date fechaInicio = beanSalida.getFechaInicio();
-			Ficha ficha = null;
 			Ficha fichaAct = mFicha.get(anyo);
-	        boolean esSocioAct = fichaAct==null || fichaAct.getImportecuota().signum()==0;
+	        boolean esSocioAct = fichaAct!=null && fichaAct.getImportecuota().signum()>0;
 			if (fichaAct!=null) {
 				for (Directiva directiva: fichaAct.getPersona().getDirectivas()) {
 					if (fechaInicio.compareTo(directiva.getId().getAlta())>=0
@@ -470,37 +484,56 @@ public class SalidaDetalle implements Serializable {
 					}
 				}
 			}
+        	detalle.setFp("ME");
             if (isDirectivo) {
                 detalle.setFp("JD");
-            } else {
-            	Integer anyoAnt = 0;
-            	int contGS = 0;
-            	boolean tieneGC = false;
-            	detalle.setFp("ME");
-            	String formaPago;
+            } else if (esSocioAct) {
             	String tipo = beanSalida.getTipo();
-                if ("N".equals(tipo) || "R".equals(tipo)) {
-                    for (SalidaDetalle bean: em.createNamedQuery("SalidaDetalle.findN",SalidaDetalle.class).setParameter(
-                    		"anyo",beanSalida.getAnyo()).setParameter("id_persona",idPersona).getResultList()) {
-                    	if (!bean.getSalidaBean().getAnyo().equals(anyoAnt)) {
-                            anyoAnt = bean.getSalidaBean().getAnyo();
+                if (("N".equals(tipo) || "R".equals(tipo))) {
+                	int contGS = 0;
+                	boolean tieneGC = false;
+                	boolean tieneGS = false;
+                	String formaPago;
+                	Set<String> setFP2 = new HashSet<String>(Constante.ORDINARIAS);
+                	setFP2.add("GS");
+                	Set<String> setFP1 = new HashSet<String>(setFP2);
+                	setFP1.add("GC");
+                    for (SalidaDetalle bean: em.createNamedQuery("SalidaDetalle.findN",SalidaDetalle.class).
+                    		setParameter("anyo",beanSalida.getAnyo()).setParameter("setFP",setFP1).
+                    		setParameter("id_persona",idPersona).getResultList()) {
+                    	formaPago = bean.getRecibo().getFormapago().getCodigo();
+                        if ("GS".equals(formaPago)) {
                             contGS = 0;
-                	        esSocio = (ficha = mFicha.get(anyoAnt))!=null && ficha.getImportecuota().signum()!=0;
-                        }
-                        if ("GS".equals(formaPago = bean.getRecibo().getFormapago().getCodigo())) {
-                            contGS = 0;
-                        } else if ("GC".equals(formaPago) && anyoAnt==anyo) {
+                            tieneGS = true;
+                        } else if ("GC".equals(formaPago)) {
                         	tieneGC = true;
-                        }
-                        if (Constante.ORDINARIAS.contains(formaPago) && esSocio) {
+                        } else {
                             contGS++;
                         }
                     }
-                	if (contGS>=Constante.numGS) {
-                    	detalle.setFp("GS");
-                	} else if (!tieneGC && "N".equals(tipo) && esSocioAct) {
+                    Ficha fichaAnt = mFicha.get(anyo-1);
+                    if (!tieneGC && "N".equals(tipo)) {
                     	detalle.setFp("GC");
-                    } else {
+                    } else if (contGS>=Constante.numGS) {
+                    	detalle.setFp("GS");
+                    } else if (contGS==0 && !tieneGS && fichaAnt!=null && fichaAnt.getImportecuota().signum()>0) {
+
+                    	//Calcula si tiene derecho a GS por el año anterior
+                    	for (SalidaDetalle bean: em.createNamedQuery("SalidaDetalle.findN",SalidaDetalle.class).
+                    			setParameter("anyo",beanSalida.getAnyo()-1).setParameter("setFP",setFP2).
+                    			setParameter("id_persona",idPersona).getResultList()) {
+                    		formaPago = bean.getRecibo().getFormapago().getCodigo();
+                    		if ("GS".equals(formaPago)) {
+                    			contGS = 0;
+                    		} else {
+                    			contGS++;
+                    		}
+                    	}
+                    	if (contGS>=Constante.numGS) {
+                    		detalle.setFp("GS");
+                    	}
+                    }
+                    if ("ME".equals(detalle.getFp())) {
                     	List<BonoDetalle> lBonos = em.createNamedQuery("BonoDetalle.getUltimo",BonoDetalle.class)
                     			.setParameter("idPersona",idPersona).setMaxResults(1).getResultList();
                     	if (!lBonos.isEmpty()) {
@@ -539,6 +572,27 @@ public class SalidaDetalle implements Serializable {
 	        boolean seguro_dia = fichaAct==null || "".equals(fichaAct.getTipoLicencia());
 	        if (esSocioAct) {
 
+//	            Socio
+	            if (seguro_dia) {
+
+//	                Socio con seguro diario
+	                if ((importe = precio.get(3))==null) {
+
+//	                    Salida sin precio para socio sin federar
+	                    pago = impSegDia;
+	                    importe = precio.get(2).add(pago);
+	                } else {
+
+//	                    Salida con precio para socio sin federar
+	                    pago = importe.subtract(precio.get(2));
+	                }
+	            } else {
+
+//	                Socio federado
+	                importe = precio.get(2);
+	            }
+	        } else {
+
 //	            No socio
             	if (soloSocios) {
             		return "Salida solo para socios";
@@ -560,27 +614,6 @@ public class SalidaDetalle implements Serializable {
 
 //	                No socio federado
 	                importe = precio.get(5);
-	            }
-	        } else {
-
-//	            Socio
-	            if (seguro_dia) {
-
-//	                Socio con seguro diario
-	                if ((importe = precio.get(3))==null) {
-
-//	                    Salida sin precio para socio sin federar
-	                    pago = impSegDia;
-	                    importe = precio.get(2).add(pago);
-	                } else {
-
-//	                    Salida con precio para socio sin federar
-	                    pago = importe.subtract(precio.get(2));
-	                }
-	            } else {
-
-//	                Socio federado
-	                importe = precio.get(2);
 	            }
 	        }
 	        if (isDirectivo) {
@@ -657,6 +690,7 @@ public class SalidaDetalle implements Serializable {
 		    	detalle = querySalida.setParameter("idPersona",
 						idPersona = Integer.parseInt((String) map.get("id_persona"))).getSingleResult();
 				detalle.fp = (String) map.get("estado");
+				detalle.participo = (boolean) map.get("participo");
 				detalle.asiento = (asiento = (String) map.get("asiento")).isEmpty()? null :Short.parseShort(asiento);
 	        	detalle.bus = (bus = (String) map.get("bus")).isEmpty()? null : Short.parseShort(bus);
 	        	detalle.ingreso = new BigDecimal(Constante.nF4.parse((String) map.get("ingreso")).longValue());

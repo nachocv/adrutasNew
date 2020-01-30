@@ -62,6 +62,22 @@ var persona = function() {
   $("button#grabaFicha").click(grabaFicha);
 }
 
+var findSalidas = function() {
+  $.ajax({
+    url: "/findSalidas",
+    success: function(result) {
+        comprueba_identificacion(result);
+      },
+      error: function(jqXHR, status, error) {
+        alert('Disculpe, existió un problema');
+      }
+  });
+  $("select#anyos").change(cargaFicha);
+  $("select#tipo_licencia").change(cambiaLicencia);
+  $("input#grabar").click(grabaPersona);
+  $("button#grabaFicha").click(grabaFicha);
+}
+
 function apunte(salida,id_persona,funcion) {
   $.ajax({
     url: "/apunteSalida?salida=" + salida + "&id_persona=" + id_persona,
@@ -157,15 +173,19 @@ function cargaSalidaDetalle(salidaDetalles) {
   var salidas = salidaDetalles.salidas;
   var detalles = salidaDetalles.detalles;
   var select = $("select#salida");
+  var descripcion = "";
   $("object.apuntados").html(detalles.length);
   $.each(salidas, function(index, value) {
     select.append("<option value=" + value.salida + ">" + value.salida + "|" + value.fechaInicio
         + "|" + value.descripcion + "</option>");
+    if (salidaDetalles.salida==value.salida) {
+      descripcion = value.descripcion;
+    }
   });
   select.val(salidaDetalles.salida);
   var table = $("table#apuntados");
   $("table#apuntados tr").remove();
-  table.append("<tr align='center'><td>Sel</td><td>F.P.</td><td>Bus</td><td>Asiento</td><td>Puntos</td><td>Antigüedad" +
+  table.append("<tr align='center'><td>Sel</td><td>F.P.</td><td>Vino</td><td>Bus</td><td>Asiento</td><td>Puntos</td><td>Antigüedad" +
   		"</td><td>Importe</td><td>Ing.</td><td>Pag.</td><td>Bono</td><td>Socio</td><td>Nombre</td><td>Nota provisional" +
   		"</td><td>Nota permanente</td></tr>");
   $.each(detalles, function(index, value) {
@@ -189,6 +209,7 @@ function cargaSalidaDetalle(salidaDetalles) {
     table.append("<tr name='apuntado'>"
         + "<td class='todo'><input type='radio' name='id_persona' value='" + value.idPersona + "'></td>"
         + "<td class='todo'>" + select + "</td>"
+        + "<td class='todo'><input type='checkbox' name='participo' " + (value.participo?"checked":"") + "/></td>"
         + "<td class='todo'><input type='text' name='bus' value='" + bus + "' size='1'></td>"
         + "<td class='todo'><input type='text' name='asiento' value='" + asiento + "' size='1'></td>"
         + "<td class='todo'><input type='text' name='asiento' value='" + puntos + "' size='1'></td>"
@@ -209,6 +230,30 @@ function cargaSalidaDetalle(salidaDetalles) {
     + "<td colspan='14' align='center'><a href='javascript:void(0)' onclick='listaTelefonos();'>Lista Teléfonos</a>"
     + "<br/><a href='javascript:void(0)' onclick='listaAsientos();'>Lista Asientos</a>"
     + "<br/><a href='javascript:void(0)' onclick='excelContable();'>Excel contable</a></td></tr>");
+  $("input[type='checkbox'][name='participo']").change(function() {
+    var tr = $(this).parent().parent();
+    var estadoVal = tr.find("select[name='estado']").val();
+    if (estadoVal!="JD") {
+      var mensaje = tr.find("input[type='text'][name='mensaje']");
+      var append = "";
+      if (estadoVal=="AN" || estadoVal=="GC" || estadoVal=="GN" || estadoVal=="GS") {
+        append = " " + estadoVal + ": " + descripcion;
+      } else if (estadoVal=="BO") {
+        append = " " + tr.find("input[type='text'][name='bono']").val() + ": " + descripcion;
+      } else {
+        append = " " + descripcion;
+      }
+      if($(this).is(":checked")) {
+        var mensajeVal = mensaje.val();
+        var pos = mensajeVal.indexOf(append.trim());
+        if (pos!=-1) {
+          mensaje.val((mensajeVal.substring(0,pos).trim() + " " + mensajeVal.substring(pos+append.length-1).trim()).trim());
+        }
+      } else {
+        mensaje.val((mensaje.val() + append).trim());
+      }
+    }
+  });
 }
 
 var getInit = function() {
@@ -600,6 +645,7 @@ function mandaLista() {
 		apuntados.push(persona = new Object());
 		persona.id_persona = $(value).find("td[name='idPersona']").text();
 		persona.estado = $(value).find("select[name='estado']").val();
+    persona.participo = $(value).find("input[name='participo']").is(":checked");
 		persona.bus = $(value).find("input[name='bus']").val();
 		persona.asiento = $(value).find("input[name='asiento']").val();
 		persona.ingreso = $(value).find("input[name='ingreso']").val();
@@ -1107,6 +1153,7 @@ function contabilidadSocios() {
 }
 
 function cargaPersona(data) {
+  console.log("data: " + data);
   persona = JSON.parse(data);
   $("input#filtro").val("");
   $("input#id_persona").val(persona.id_persona);
@@ -1175,6 +1222,23 @@ function cargaFicha() {
   });
   $("input#emision").val(ficha.fecha);
   calcula_importe();
+  var article = $("article#salidas");
+  article.empty();
+  var contenido = "<table style='width:100%'><thead><tr align='center'><td>Salida</td><td>Fecha</td><td>Descripción" +
+  		"</td><td>Tipo</td><td>Vino</td><td>FP</td><td>Bono</td></tr></thead><tbody>";
+  $.each(ficha.salidas, function(key, value) {
+    contenido += "<tr>"
+        + "<td class='todo'>" + value.salida + "</td>"
+        + "<td class='todo'>" + value.fechIni + "</td>"
+        + "<td class='todo'>" + value.descripcion + "</td>"
+        + "<td class='todo'>" + value.tipo + "</td>"
+        + "<td class='todo'>" + value.vino + "</td>"
+        + "<td class='todo'>" + value.fp + "</td>"
+        + (value.bono==undefined? "<td class='todo'/>": "<td class='todo'>" + value.bono + "</td>")
+        + "</tr>";
+  });
+  contenido += "</tbody></table>";
+  article.append(contenido);
 }
 
 function cambiaLicencia() {

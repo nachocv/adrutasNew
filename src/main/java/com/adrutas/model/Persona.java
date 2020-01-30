@@ -18,10 +18,12 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.persistence.TypedQuery;
 
 import com.adrutas.dao.EntityManagerFactories;
 import com.adrutas.dao.Static;
@@ -168,10 +170,12 @@ public class Persona implements Serializable {
 
 	//bi-directional many-to-one association to SocioEmail
 	@OneToMany(mappedBy="persona")
+	@OrderBy("orden")
 	private List<SocioEmail> socioEmails;
 
 	//bi-directional many-to-one association to SocioTelefono
 	@OneToMany(mappedBy="persona")
+	@OrderBy("orden")
 	private List<SocioTelefono> socioTelefonos;
 
 	public Persona() {
@@ -741,6 +745,129 @@ public class Persona implements Serializable {
         return map;
 	}
 
+
+	public static Map<String, Object> findByIdPersona2(int idPersona) {
+		EntityManager em = null;
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	List<Map<String, Object>> list;
+    	Map<String, Object> mapBean1;
+    	Map<Integer,Map<String, Object>> mapBean2;
+    	Map<String, Object> mapBean3;
+    	int fichaYear;
+        try {
+    		em = EntityManagerFactories.getEM();
+    		Persona persona = em.createNamedQuery("Persona.findByIdPersona", Persona.class)
+    				.setParameter("idPersona", idPersona).getSingleResult();
+    		if (persona!=null) {
+    			List<BonoDetalle> lBonoDetalle;
+    			BonoDetalle bonoDetalle;
+    			String salida;
+    			TypedQuery<BonoDetalle> queryFindByIdPersona = em.createNamedQuery(
+    					"BonoDetalle.findByIdPersona",BonoDetalle.class);
+    			TypedQuery<SalidaDetalle>  queryFindByAnyoAndPersona = em.createNamedQuery(
+    					"SalidaDetalle.findByAnyoAndPersona",SalidaDetalle.class);
+            	map.put("id_persona", persona.getIdPersona());
+            	map.put("usuario", persona.getUsuario());
+            	map.put("dni", persona.getDni());
+            	map.put("nombre", persona.getNombre());
+            	map.put("apellido1", persona.getApellido1());
+            	map.put("apellido2", persona.getApellido2());
+            	map.put("codigoPostal", persona.getCodigoPostal());
+            	map.put("domicilio", persona.getDomicilio());
+            	map.put("poblacion", persona.getPoblacion());
+            	map.put("provincia", persona.getProvincia());
+            	map.put("correo", persona.getCorreo());
+            	map.put("sexo", persona.getSexo());
+//            	log.log(Level.WARNING, "persona.nacimiento: " + persona.getNacimiento().toString()
+//            			+ " Time: " + persona.getNacimiento().getTime()
+//            			+ " local.es: " + dF1.format(persona.getNacimiento())
+//            			+ " local.en: " + dF2.format(persona.getNacimiento()));
+            	map.put("nacimiento", persona.getNacimiento()==null? "": persona.getNacimiento().toString());
+            	map.put("pzCastilla", persona.getPzCastilla());
+            	map.put("pasaporte", persona.getPasaporte());
+            	map.put("cadPasaporte", persona.getCadPasaporte()==null? "": persona.getCadPasaporte().toString());
+            	map.put("nota", persona.getNota());
+            	map.put("vetado", persona.getVetado());
+            	map.put("veto", persona.getVeto());
+            	map.put("FICHA_YEAR", fichaYear=Static.getFichaYear());
+            	map.put("FPs", Static.getMfp());
+            	map.put("telefonos", list = new ArrayList<Map<String, Object>>());
+            	for (SocioTelefono bean: persona.getSocioTelefonos()) {
+                	list.add(mapBean1 = new HashMap<String, Object>());
+            		mapBean1.put("nota", bean.getNota());
+            		mapBean1.put("orden", bean.getOrden());
+            		mapBean1.put("telefono", bean.getId().getTelefono());
+            	}
+            	map.put("emails", list = new ArrayList<Map<String, Object>>());
+            	for (SocioEmail bean: persona.getSocioEmails()) {
+            		list.add(mapBean1 = new HashMap<String, Object>());
+            		mapBean1.put("nota", bean.getNota());
+            		mapBean1.put("orden", bean.getOrden());
+            		mapBean1.put("email", bean.getId().getEmail());
+            	}
+            	map.put("fichas", mapBean2 = new HashMap<Integer,Map<String, Object>>());
+            	int anyo = -1;
+            	for (Ficha ficha: persona.getFichas()) {
+            		if (anyo==-1) {
+            			if (persona.getIngreso()==null) {
+                        	map.put("ingreso", ficha.getFecha().toString());
+            			} else {
+                        	map.put("ingreso", persona.getIngreso().toString());
+            			}
+            		}
+            		mapBean2.put(anyo = ficha.getId().getAnyo(),mapBean1 = new HashMap<String, Object>());
+            		mapBean1.put("importecuota", ficha.getImportecuota());
+            		mapBean1.put("orden", ficha.getTipoLicencia());
+            		mapBean1.put("importelicencia", ficha.getImportelicencia());
+            		mapBean1.put("club", ficha.getClub());
+            		mapBean1.put("fp", ficha.getFp());
+            		mapBean1.put("tipoLicencia", ficha.getTipoLicencia());
+            		mapBean1.put("regalo", ficha.getRegalo());
+            		mapBean1.put("licencias", Static.getLicencia(ficha.getId().getAnyo()));
+            		mapBean1.put("opciones", ficha.getOpciones());
+            		mapBean1.put("fecha", Constante.dF12.format(ficha.getFecha()));
+            		mapBean1.put("fechavto", ficha.getFechavto()==null? "":Constante.dF12.format(ficha.getFechavto()));
+        			ficha.getOpciones().iterator();
+        			mapBean1.put("salidas",list = new ArrayList<Map<String, Object>>());
+            		for (SalidaDetalle bean: queryFindByAnyoAndPersona.setParameter("anyo", anyo).
+            				setParameter("idPersona", idPersona).getResultList()) {
+                		list.add(mapBean3 = new HashMap<String, Object>());
+                		mapBean3.put("salida", salida=bean.getSalidaBean().getSalida());
+                		mapBean3.put("fechIni", Constante.dF12.format(bean.getSalidaBean().getFechaInicio()));
+                		mapBean3.put("descripcion", bean.getSalidaBean().getDescripcion());
+            			mapBean3.put("vino",bean.isParticipo()? "Si": "No");
+            			mapBean3.put("tipo",bean.getSalidaBean().getTipo());
+            			mapBean3.put("fp",bean.getRecibo().getFormapago().getCodigo());
+            			if (!(lBonoDetalle = queryFindByIdPersona.setParameter("salida",salida).
+            					setParameter("idPersona", idPersona).getResultList()).isEmpty()) {
+            				mapBean3.put("bono",String.valueOf((bonoDetalle = lBonoDetalle.get(0)).getId().getBono())
+            						+ "-" + String.valueOf(bonoDetalle.getId().getUso()));
+            			}
+            		}
+            	}
+            	if (!mapBean2.containsKey(fichaYear)) {
+            		mapBean2.put(fichaYear,mapBean1 = new HashMap<String, Object>());
+            		mapBean1.put("importecuota", 0);
+            		mapBean1.put("orden", 0);
+            		mapBean1.put("importelicencia", 0);
+            		mapBean1.put("club", "");
+            		mapBean1.put("fp", "");
+            		mapBean1.put("tipoLicencia", "");
+            		mapBean1.put("regalo", 0);
+            		mapBean1.put("licencias", Static.getLicencia(fichaYear));
+            		mapBean1.put("fechavto", "");
+            	}
+            }
+        } catch (Exception e) {
+        	log.log(Level.SEVERE, "No lee Persona.find", e);
+		} finally {
+			if (em!=null) {
+				em.close();
+			}
+		}
+        return map;
+	}
+
 	public static List<Persona> findByEmail(String filtro,EntityManager em,int maxResults) {
     	List<Persona> list = new ArrayList<Persona>();
         if (Constante.PATTERN_INI_EMAIL.matcher(filtro).matches()) {
@@ -928,13 +1055,14 @@ public class Persona implements Serializable {
     		persona.setNota((String) map.get("nota"));
     		persona.setVetado((byte) ((Boolean) map.get("vetado")? 1: 0));
     		persona.setVeto((String) map.get("veto"));
-    		persona.setSocioTelefonos(new ArrayList<SocioTelefono>());
+    		List<SocioTelefono> lTelefonos = new ArrayList<SocioTelefono>();
+    		persona.setSocioTelefonos(lTelefonos);
     		SocioTelefono telefono;
     		SocioTelefonoPK telefonoPK;
     		int orden = 0;
 			em.createNamedQuery("SocioTelefono.del").setParameter("idPersona", idPersona).executeUpdate();
     		for (String bean: (List<String>) map.get("telefonos")) {
-    			telefono = new SocioTelefono();
+    			lTelefonos.add(telefono = new SocioTelefono());
     			telefono.setPersona(persona);
     			telefono.setOrden(orden++);
     			telefono.setId(telefonoPK = new SocioTelefonoPK());
@@ -943,6 +1071,7 @@ public class Persona implements Serializable {
     			em.persist(telefono);
     		}
     		List<SocioEmail> lEmails = new ArrayList<SocioEmail>();
+    		persona.setSocioEmails(lEmails);
     		SocioEmail email;
     		SocioEmailPK emailPK;
     		orden = 0;
@@ -964,6 +1093,6 @@ public class Persona implements Serializable {
 				em.close();
 			}
 		}
-        return findByIdPersona(idPersona);
+        return findByIdPersona2(idPersona);
     }
 }

@@ -37,7 +37,7 @@ public final class Constante {
     public static final DateFormat dF9 = new SimpleDateFormat("dd/MM/yyyy HH:mm", locale);
     public static final DateFormat dF10 = new SimpleDateFormat("HH:mm", locale);
     public static final DateFormat dF11 = new SimpleDateFormat("/yyyy/MMdd/");
-    public static final DateFormat dF12 = new SimpleDateFormat("yyyy-MM-dd");
+    public static final DateFormat dF12 = new SimpleDateFormat("yyyy-MM-dd", locale);
     public static final DateFormat dF13 = new SimpleDateFormat("d 'de' MMMM");
     public static int FICHA_YEAR;
     public static final String LETRAS_NIE = "TRWAGMYFPDXBNJZSQVHLCKE";

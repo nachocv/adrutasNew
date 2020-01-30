@@ -22,7 +22,7 @@ public class ServletFindByIdPersona extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	response.setCharacterEncoding("UTF-8");
     	PrintWriter out = response.getWriter();
-        out.println(new Gson().toJson(Persona.findByIdPersona(Integer.parseInt(request.getParameter("id_persona")))));
+        out.println(new Gson().toJson(Persona.findByIdPersona2(Integer.parseInt(request.getParameter("id_persona")))));
         out.close();
 	}
 }

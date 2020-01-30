@@ -25,7 +25,7 @@ public class ServletGrabaFicha extends HttpServlet {
 		Ficha ficha = Ficha.update(new Gson().fromJson(request.getParameter("ficha"), Map.class));
     	response.setCharacterEncoding("UTF-8");
     	PrintWriter out = response.getWriter();
-        out.println(new Gson().toJson(Persona.findByIdPersona(ficha.getId().getIdPersona())));
+        out.println(new Gson().toJson(Persona.findByIdPersona2(ficha.getId().getIdPersona())));
         out.close();
 	}
 }
