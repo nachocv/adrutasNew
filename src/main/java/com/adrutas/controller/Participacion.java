@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.adrutas.model.Persona;
 import com.google.gson.Gson;
 
-@WebServlet(name = "FindSalidas", urlPatterns = {"/findSalidas"})
-public class Salidas extends HttpServlet {
+@WebServlet(name = "GetParticipacion", urlPatterns = {"/getParticipacion"})
+public class Participacion extends HttpServlet {
 	private static final long serialVersionUID = -3650365287670454130L;
-	private static final Logger log = Logger.getLogger(Salidas.class.getName());
+	private static final Logger log = Logger.getLogger(Participacion.class.getName());
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

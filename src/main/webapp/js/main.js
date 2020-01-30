@@ -1379,3 +1379,38 @@ function grabaFicha() {
     }
   });
 }
+
+var getParticipacion = function() {
+  var sAnyos = $("select#anyos");
+  var article = $("article#salidas");
+  $.ajax({
+    url: "/getParticipacion",
+    success: function(result) {
+      fichas = JSON.parse(result).persona.fichas;
+      console.log("result: " + result);
+      article.empty();
+      sAnyos.empty();
+      $.each(JSON.parse(result).persona.fichas, function(anyo,ficha) {
+        sAnyos.append("<option value=\"" + anyo + "\">" + anyo + "</option>");
+        var contenido = "<table style='width:100%'><thead><tr align='center'><td>Salida</td><td>Fecha</td><td>Descripción" +
+            "</td><td>Tipo</td><td>Vino</td><td>FP</td><td>Bono</td></tr></thead><tbody>";
+        $.each(ficha.salidas, function(key, value) {
+          contenido += "<tr>"
+              + "<td class='todo'>" + value.salida + "</td>"
+              + "<td class='todo'>" + value.fechIni + "</td>"
+              + "<td class='todo'>" + value.descripcion + "</td>"
+              + "<td class='todo'>" + value.tipo + "</td>"
+              + "<td class='todo'>" + value.vino + "</td>"
+              + "<td class='todo'>" + value.fp + "</td>"
+              + (value.bono==undefined? "<td class='todo'/>": "<td class='todo'>" + value.bono + "</td>")
+              + "</tr>";
+        });
+        contenido += "</tbody></table>";
+        article.append(contenido);
+      });
+    },
+    error : function(jqXHR, status, error) {
+      alert('Disculpe, existió un problema');
+    }
+  });
+}
