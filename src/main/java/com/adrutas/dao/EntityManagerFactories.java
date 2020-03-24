@@ -26,6 +26,7 @@ public class EntityManagerFactories {
 			properties.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.GoogleDriver");
 //          properties.put("javax.persistence.jdbc.url", "jdbc:google:mysql://adrutas1:rutas/rutas?useServerPrepStmts=false");
 			properties.put("javax.persistence.jdbc.url", "jdbc:google:mysql://adrutas-new:europe-west1:rutas-new/rutas");
+//			properties.put("javax.persistence.jdbc.url", "jdbc:google:mysql://adrutas1:us-central1:rutas/rutas");
 //          properties.put("javax.persistence.jdbc.url", "jdbc:google:mysql://173.194.109.193:3306/rutas");
 			properties.put("javax.persistence.jdbc.user", "root");
 			properties.put("javax.persistence.jdbc.password", "1234");

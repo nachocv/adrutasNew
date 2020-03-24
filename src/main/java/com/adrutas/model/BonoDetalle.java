@@ -18,7 +18,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="bono_detalle")
 @NamedQuery(name="BonoDetalle.findAll", query="SELECT b FROM BonoDetalle b")
-@NamedQuery(name="BonoDetalle.getUltimo", query="SELECT b FROM BonoDetalle b WHERE idPersona=:idPersona ORDER BY bono desc,uso desc")
+@NamedQuery(name="BonoDetalle.getUltimo", query="SELECT b FROM BonoDetalle b "
+		+ "WHERE idPersona=:idPersona ORDER BY salida desc,bono desc,uso desc")
 @NamedQuery(name="BonoDetalle.getSalida", query="SELECT b FROM BonoDetalle b WHERE salidaBean.salida=:salida")
 @NamedQuery(name="BonoDetalle.findByIdPersona", query="SELECT b FROM BonoDetalle b WHERE salidaBean.salida=:salida and id_persona=:idPersona")
 public class BonoDetalle implements Serializable {

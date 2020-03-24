@@ -4,12 +4,14 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -46,14 +48,15 @@ import adrutas.com.Constante;
 		+ "ORDER BY s.bus,s.asiento,s.recibo.idRecibo")
 @NamedQuery(name="SalidaDetalle.findByPersona", query="SELECT s FROM SalidaDetalle s "
 		+ "WHERE s.id.salida=:salida and s.id.idPersona=:idPersona")
-@NamedQuery(name="SalidaDetalle.findByPersonaAndSalidas", query="SELECT s FROM SalidaDetalle s "
-		+ "WHERE s.id.idPersona=:idPersona and s.id.salida >= :salidaIni and s.id.salida < :salidaFin")
+@NamedQuery(name="SalidaDetalle.findByPersonaAndFechas", query="SELECT s FROM SalidaDetalle s WHERE s.id.idPersona="
+		+ ":idPersona and s.salidaBean.salida in (select f1.salidaBean.salida from SalidaFecha f1 where "
+		+ "f1.fechaTipoBean.fechaTipo=1 and f1.fecha>:fechaIni and f1.fecha<=:fechaFin)")
 @NamedQuery(name="SalidaDetalle.countByPersonaAndSalidas", query="SELECT count(s.id.salida) FROM SalidaDetalle s "
 		+ "WHERE s.id.idPersona=:idPersona and s.id.salida >= :salidaIni and s.id.salida < :salidaFin")
 @NamedQuery(name="SalidaDetalle.getLast", query="SELECT s.contador FROM SalidaDetalle s order by s.contador desc")
-@NamedQuery(name="SalidaDetalle.findN",query="SELECT s FROM SalidaDetalle s WHERE "
-		+ "salidaBean.tipo in ('N','R') and s.recibo.formapago.codigo in :setFP "
-		+ "and salidaBean.anyo=:anyo AND id_persona=:id_persona ORDER BY s.salidaBean.salida")
+@NamedQuery(name="SalidaDetalle.findN",query="SELECT s FROM SalidaDetalle s WHERE salidaBean.tipo in ('N','R') and "
+		+ "s.recibo.formapago.codigo in :setFP and salidaBean.anyo=:anyo "
+		+ "and salidaBean.salida<:salida AND id_persona=:idPersona ORDER BY s.salidaBean.salida")
 @NamedQuery(name="SalidaDetalle.findByAnyoAndPersona", query="SELECT s FROM SalidaDetalle s "
 		+ "WHERE s.salidaBean.anyo=:anyo and s.id.idPersona=:idPersona")
 
@@ -61,9 +64,10 @@ public class SalidaDetalle implements Serializable {
 	private static final long serialVersionUID = -6755376347925749528L;
 	private static final Logger log = Logger.getLogger(SalidaDetalle.class.getName());
 	private static final List<Integer> precioTipoNoSocio = Arrays.asList(new Integer[] {5,6,7,8});
+	private static final List<String> lTipos = Arrays.asList(new String[] {"ME","BO"});
 
 	@EmbeddedId
-	private SalidaDetallePK id;
+	private SalidaDetallePK id = new SalidaDetallePK();
 
 	private String anyo;
 
@@ -75,36 +79,17 @@ public class SalidaDetalle implements Serializable {
 
 	private Short bus;
 
-//	private byte contabilizado;
-//
-//	private byte contaContador;
-//
 	private int contador;
-//
-//	private String dondeRecoger;
-//
-//	@Temporal(TemporalType.DATE)
-//	private Date fechaconta;
 
 	private String fp;
 
-//	private String habitacion;
-
 	private BigDecimal importe;
-
-//	private String jd;
-//
-//	private String numero;
 
 	@Lob
 	@Column(name="observacion")
 	private String observacion;
 
 	private BigDecimal pago;
-
-//	private byte recoger;
-//
-//	private short salidabono;
 
 	@Column(name="seguro_dia")
 	private Byte seguroDia;
@@ -140,7 +125,13 @@ public class SalidaDetalle implements Serializable {
 	private short puntos;
 
 	private boolean participo = true;
+
 	public SalidaDetalle() {
+	}
+
+	public SalidaDetalle(String salida,int idPersona) {
+		id.setIdPersona(idPersona);
+		id.setSalida(salida);
 	}
 
 	public SalidaDetalle(SalidaDetallePK id, boolean participo, Short bus, Short asiento, BigDecimal importe, BigDecimal pago,
@@ -207,22 +198,6 @@ public class SalidaDetalle implements Serializable {
 		this.bus = bus;
 	}
 
-//	public byte getContabilizado() {
-//		return this.contabilizado;
-//	}
-//
-//	public void setContabilizado(byte contabilizado) {
-//		this.contabilizado = contabilizado;
-//	}
-//
-//	public byte getContaContador() {
-//		return this.contaContador;
-//	}
-//
-//	public void setContaContador(byte contaContador) {
-//		this.contaContador = contaContador;
-//	}
-
 	public int getContador() {
 		return this.contador;
 	}
@@ -230,22 +205,6 @@ public class SalidaDetalle implements Serializable {
 	public void setContador(int contador) {
 		this.contador = contador;
 	}
-
-//	public String getDondeRecoger() {
-//		return this.dondeRecoger;
-//	}
-//
-//	public void setDondeRecoger(String dondeRecoger) {
-//		this.dondeRecoger = dondeRecoger;
-//	}
-//
-//	public Date getFechaconta() {
-//		return this.fechaconta;
-//	}
-//
-//	public void setFechaconta(Date fechaconta) {
-//		this.fechaconta = fechaconta;
-//	}
 
 	public String getFp() {
 		return this.fp;
@@ -255,14 +214,6 @@ public class SalidaDetalle implements Serializable {
 		this.fp = fp;
 	}
 
-//	public String getHabitacion() {
-//		return this.habitacion;
-//	}
-//
-//	public void setHabitacion(String habitacion) {
-//		this.habitacion = habitacion;
-//	}
-
 	public BigDecimal getImporte() {
 		return this.importe;
 	}
@@ -270,22 +221,6 @@ public class SalidaDetalle implements Serializable {
 	public void setImporte(BigDecimal importe) {
 		this.importe = importe;
 	}
-
-//	public String getJd() {
-//		return this.jd;
-//	}
-//
-//	public void setJd(String jd) {
-//		this.jd = jd;
-//	}
-//
-//	public String getNumero() {
-//		return this.numero;
-//	}
-//
-//	public void setNumero(String numero) {
-//		this.numero = numero;
-//	}
 
 	public String getObservacion() {
 		return this.observacion;
@@ -418,7 +353,7 @@ public class SalidaDetalle implements Serializable {
 	public static Map<String, Object> find(Map<String,Object> map) {
 		EntityManager em = null;
 		Map<String,Object> mResult = new HashMap<String,Object>();
-		Map<String,Map<String,String>> mSalidas = new HashMap<String,Map<String,String>>();
+		Map<String,Map<String,String>> mSalidas = new TreeMap<String,Map<String,String>>();
 		Map<String,List<String>> mEspeciales = new HashMap<String,List<String>>();
 		List<String> lEspeciales;
 		Map<String,String> mBean;
@@ -431,9 +366,12 @@ public class SalidaDetalle implements Serializable {
         		Salida beanSalida = em.createNamedQuery("Salida.findBySalida", Salida.class)
         				.setParameter("salida",salida).getSingleResult();
         		mEspeciales.put(salida, lEspeciales=new ArrayList<String>());
-        		for (SalidaDetalle salidaDetalle: em.createNamedQuery("SalidaDetalle.findByPersonaAndSalidas",
-        				SalidaDetalle.class).setParameter("idPersona",idPersona).setParameter("salidaIni",
-        				beanSalida.getSalidaDesde()).setParameter("salidaFin",salida).getResultList()) {
+        		Calendar cal = Calendar.getInstance();
+        		cal.setTime(beanSalida.getFechaFin());
+        		cal.add(Calendar.YEAR,-1);
+        		for (SalidaDetalle salidaDetalle: em.createNamedQuery("SalidaDetalle.findByPersonaAndFechas",
+        				SalidaDetalle.class).setParameter("idPersona",idPersona).setParameter("fechaIni",
+        				cal.getTime()).setParameter("fechaFin",beanSalida.getFechaPreapunteIni()).getResultList()) {
         			mSalidas.put(salidaDetalle.getId().getSalida(), mBean = new HashMap<String,String>());
         			mBean.put("descripcion",salidaDetalle.getSalidaBean().getDescripcion());
         			mBean.put("inicio",Constante.dF12.format(salidaDetalle.getSalidaBean().getFechaInicio()));
@@ -452,199 +390,10 @@ public class SalidaDetalle implements Serializable {
 
 	public static synchronized String insert(String salida,int idPersona) {
 		EntityManager em = null;
-    	SalidaDetalle detalle = new SalidaDetalle();
         try {
     		em = EntityManagerFactories.getEM();
 			em.getTransaction().begin();
-        	SalidaDetallePK id = new SalidaDetallePK();
-        	Recibo recibo = new Recibo();
-			Salida beanSalida = em.createNamedQuery("Salida.findBySalida",Salida.class)
-					.setParameter("salida",salida).getSingleResult();
-			if (beanSalida.getPlazas()<=beanSalida.getSalidaDetalles().size()) {
-				return "Ya no hay plazas";
-			}
-			Map<Integer,Ficha> mFicha = new HashMap<Integer,Ficha>();
-			int anyo = beanSalida.getAnyo();
-			Set<Integer> setAnyos = new HashSet<Integer>(Arrays.asList(new Integer[] {anyo,anyo-1}));
-			for (Ficha ficha: em.createNamedQuery("Ficha.findAnyos", Ficha.class).setParameter("idPersona", idPersona)
-					.setParameter("setAnyos", setAnyos).getResultList()) {
-				mFicha.put(ficha.getId().getAnyo(),ficha);
-			}
-			Date baja;
-			boolean isDirectivo = false;
-			Date fechaInicio = beanSalida.getFechaInicio();
-			Ficha fichaAct = mFicha.get(anyo);
-	        boolean esSocioAct = fichaAct!=null && fichaAct.getImportecuota().signum()>0;
-			if (fichaAct!=null) {
-				for (Directiva directiva: fichaAct.getPersona().getDirectivas()) {
-					if (fechaInicio.compareTo(directiva.getId().getAlta())>=0
-							&& ((baja = directiva.getBaja())==null || fechaInicio.compareTo(baja)<=0)) {
-						isDirectivo = true;
-						break;
-					}
-				}
-			}
-        	detalle.setFp("ME");
-            if (isDirectivo) {
-                detalle.setFp("JD");
-            } else if (esSocioAct) {
-            	String tipo = beanSalida.getTipo();
-                if (("N".equals(tipo) || "R".equals(tipo))) {
-                	int contGS = 0;
-                	boolean tieneGC = false;
-                	boolean tieneGS = false;
-                	String formaPago;
-                	Set<String> setFP2 = new HashSet<String>(Constante.ORDINARIAS);
-                	setFP2.add("GS");
-                	Set<String> setFP1 = new HashSet<String>(setFP2);
-                	setFP1.add("GC");
-                    for (SalidaDetalle bean: em.createNamedQuery("SalidaDetalle.findN",SalidaDetalle.class).
-                    		setParameter("anyo",beanSalida.getAnyo()).setParameter("setFP",setFP1).
-                    		setParameter("id_persona",idPersona).getResultList()) {
-                    	formaPago = bean.getRecibo().getFormapago().getCodigo();
-                        if ("GS".equals(formaPago)) {
-                            contGS = 0;
-                            tieneGS = true;
-                        } else if ("GC".equals(formaPago)) {
-                        	tieneGC = true;
-                        } else {
-                            contGS++;
-                        }
-                    }
-                    Ficha fichaAnt = mFicha.get(anyo-1);
-                    if (!tieneGC && "N".equals(tipo)) {
-                    	detalle.setFp("GC");
-                    } else if (contGS>=Constante.numGS) {
-                    	detalle.setFp("GS");
-                    } else if (contGS==0 && !tieneGS && fichaAnt!=null && fichaAnt.getImportecuota().signum()>0) {
-
-                    	//Calcula si tiene derecho a GS por el año anterior
-                    	for (SalidaDetalle bean: em.createNamedQuery("SalidaDetalle.findN",SalidaDetalle.class).
-                    			setParameter("anyo",beanSalida.getAnyo()-1).setParameter("setFP",setFP2).
-                    			setParameter("id_persona",idPersona).getResultList()) {
-                    		formaPago = bean.getRecibo().getFormapago().getCodigo();
-                    		if ("GS".equals(formaPago)) {
-                    			contGS = 0;
-                    		} else {
-                    			contGS++;
-                    		}
-                    	}
-                    	if (contGS>=Constante.numGS) {
-                    		detalle.setFp("GS");
-                    	}
-                    }
-                    if ("ME".equals(detalle.getFp())) {
-                    	List<BonoDetalle> lBonos = em.createNamedQuery("BonoDetalle.getUltimo",BonoDetalle.class)
-                    			.setParameter("idPersona",idPersona).setMaxResults(1).getResultList();
-                    	if (!lBonos.isEmpty()) {
-                        	BonoDetalle bono = lBonos.get(0);
-                        	if (bono.getId().getUso()<10) {
-                        		BonoDetalle bonoDetalle = new BonoDetalle();
-                        		bonoDetalle.setIdPersona(idPersona);
-                        		bonoDetalle.setSalidaBean(beanSalida);
-                        		BonoDetallePK bonoDetallePK = new BonoDetallePK();
-                        		bonoDetalle.setId(bonoDetallePK);
-                        		bonoDetallePK.setBono(bono.getId().getBono());
-                        		bonoDetallePK.setUso((short) (bono.getId().getUso()+1));
-                        		detalle.setBonoDetalle(bonoDetalle);
-                        		detalle.setFp("BO");
-                        		em.persist(bonoDetalle);
-                        	}
-                    	}
-                    }
-                }
-            }
-
-//			Calculo del precio
-	        Map<Object, BigDecimal> precio = new HashMap<Object, BigDecimal>();
-	        boolean soloSocios = true;
-	        int precioTipo;
-			for (SalidaPrecio salidaPrecio: beanSalida.getSalidaPrecios()) {
-	            precio.put((precioTipo = salidaPrecio.getPrecioTipoBean().getPrecioTipo()), salidaPrecio.getPrecio());
-            	if (precioTipoNoSocio.contains(precioTipo)) {
-            		soloSocios = false;
-            	}
-	        }
-	        BigDecimal importe;
-	        BigDecimal ingreso;
-	        BigDecimal pago = BigDecimal.ZERO;
-        	BigDecimal impSegDia = new BigDecimal(Static.getPropiedadesanuales(beanSalida.getAnyo(),"S1D"));
-	        boolean seguro_dia = fichaAct==null || "".equals(fichaAct.getTipoLicencia());
-	        if (esSocioAct) {
-
-//	            Socio
-	            if (seguro_dia) {
-
-//	                Socio con seguro diario
-	                if ((importe = precio.get(3))==null) {
-
-//	                    Salida sin precio para socio sin federar
-	                    pago = impSegDia;
-	                    importe = precio.get(2).add(pago);
-	                } else {
-
-//	                    Salida con precio para socio sin federar
-	                    pago = importe.subtract(precio.get(2));
-	                }
-	            } else {
-
-//	                Socio federado
-	                importe = precio.get(2);
-	            }
-	        } else {
-
-//	            No socio
-            	if (soloSocios) {
-            		return "Salida solo para socios";
-            	}
-	            if (seguro_dia) {
-
-//	                No socio sin federar
-	                if ((importe = precio.get(6))==null) {
-
-//	                    Salida sin precio para no socio sin federar
-	                    pago = impSegDia;
-	                    importe = precio.get(5).add(pago);
-	                } else {
-
-//	                    Salida con precio para no socio sin federar
-	                    pago = importe.subtract(precio.get(5));
-	                }
-	            } else {
-
-//	                No socio federado
-	                importe = precio.get(5);
-	            }
-	        }
-	        if (isDirectivo) {
-	            if ((ingreso = precio.get(4))==null) {
-	                ingreso = BigDecimal.ZERO;
-	            }
-	        } else {
-	            if (Constante.SIN_IMPORTE.contains(detalle.getFp())) {
-	                importe = pago;
-	            }
-	            ingreso = importe;
-	        }
-			recibo.setIdRecibo(em.createNamedQuery("Recibo.getLast", Integer.class)
-					.setMaxResults(1).getSingleResult() + 1);
-			recibo.setTabla("salida_detalle");
-			recibo.setFecha(new Date());
-			recibo.setImporte(importe);
-			recibo.setFormapago(Static.mFormaPagoAll.get(detalle.getFp()));
-			detalle.setIngreso(ingreso);
-			detalle.setSalidaBean(beanSalida);
-			detalle.setId(id);
-        	id.setIdPersona(idPersona);
-        	id.setSalida(salida);
-        	detalle.setRecibo(recibo);
-        	detalle.setPago(pago);
-        	detalle.setSeguroDia((byte) (seguro_dia? 1: 0));
-        	detalle.setImporte(importe);
-        	detalle.setContador(em.createNamedQuery("SalidaDetalle.getLast", Integer.class)
-					.setMaxResults(1).getSingleResult() + 1);
-			em.persist(recibo);
-			em.persist(detalle);
+			insert(em,salida,idPersona);
 			em.getTransaction().commit();
         } catch (Exception e) {
         	log.log(Level.SEVERE, "SalidaDetalle.insert", e);
@@ -657,6 +406,219 @@ public class SalidaDetalle implements Serializable {
         return null;
 	}
 
+	public static synchronized String insert(String salida,List<Integer> lPersonas) {
+		EntityManager em = null;
+        try {
+    		em = EntityManagerFactories.getEM();
+			em.getTransaction().begin();
+			for (Integer idPersona: lPersonas) {
+				del(em,salida,idPersona);
+				insert(em,salida,idPersona);
+			}
+			em.getTransaction().commit();
+        } catch (Exception e) {
+        	log.log(Level.SEVERE, "SalidaDetalle.insert", e);
+        	return e.getMessage();
+		} finally {
+			if (em!=null) {
+				em.close();
+			}
+		}
+        return null;
+	}
+
+	private static void insert(EntityManager em,String salida,int idPersona) throws Exception {
+		Salida beanSalida = em.createNamedQuery("Salida.findBySalida",Salida.class)
+				.setParameter("salida",salida).getSingleResult();
+		if (beanSalida.getPlazas()<=beanSalida.getSalidaDetalles().size()) {
+    		throw new Exception("Ya no hay plazas");
+		}
+    	SalidaDetalle detalle = new SalidaDetalle(salida,idPersona);
+    	detalle.setSalidaBean(beanSalida);
+    	detalle.putImporte(em);
+    	detalle.setContador(em.createNamedQuery("SalidaDetalle.getLast", Integer.class).setMaxResults(1).getSingleResult()+1);
+    	Recibo recibo = new Recibo();
+		recibo.setIdRecibo(em.createNamedQuery("Recibo.getLast", Integer.class)
+				.setMaxResults(1).getSingleResult() + 1);
+		recibo.setTabla("salida_detalle");
+		recibo.setFecha(new Date());
+		recibo.setImporte(detalle.getImporte());
+		recibo.setFormapago(Static.mFormaPagoAll.get(detalle.getFp()));
+    	detalle.setRecibo(recibo);
+		em.persist(recibo);
+		em.persist(detalle);
+	}
+
+	private void putImporte(EntityManager em) throws Exception {
+		int idPersona;
+		Map<Integer,Ficha> mFicha = new HashMap<Integer,Ficha>();
+		int anyo = salidaBean.getAnyo();
+		Set<Integer> setAnyos = new HashSet<Integer>(Arrays.asList(new Integer[] {anyo,anyo-1}));
+		for (Ficha ficha: em.createNamedQuery("Ficha.findAnyos", Ficha.class).setParameter("idPersona",
+				idPersona=id.getIdPersona()).setParameter("setAnyos", setAnyos).getResultList()) {
+			mFicha.put(ficha.getId().getAnyo(),ficha);
+		}
+		Date baja;
+		boolean isDirectivo = false;
+		Date fechaInicio = salidaBean.getFechaInicio();
+		Ficha fichaAct = mFicha.get(anyo);
+        boolean esSocioAct = fichaAct!=null && fichaAct.getImportecuota().signum()>0;
+		if (fichaAct!=null) {
+			for (Directiva directiva: fichaAct.getPersona().getDirectivas()) {
+				if (fechaInicio.compareTo(directiva.getId().getAlta())>=0
+						&& ((baja = directiva.getBaja())==null || fechaInicio.compareTo(baja)<=0)) {
+					isDirectivo = true;
+					break;
+				}
+			}
+		}
+    	setFp("ME");
+        if (isDirectivo) {
+            setFp("JD");
+        } else if (esSocioAct) {
+        	String tipo = salidaBean.getTipo();
+            if (("N".equals(tipo) || "R".equals(tipo))) {
+            	int contGS = 0;
+            	boolean tieneGC = false;
+            	boolean tieneGS = false;
+            	String formaPago;
+            	Set<String> setFP2 = new HashSet<String>(Constante.ORDINARIAS);
+            	setFP2.add("GS");
+            	Set<String> setFP1 = new HashSet<String>(setFP2);
+            	setFP1.add("GC");
+            	for (SalidaDetalle bean: em.createNamedQuery("SalidaDetalle.findN",SalidaDetalle.class).
+            			setParameter("setFP",setFP1).setParameter("anyo",salidaBean.getAnyo()).
+                		setParameter("salida",salidaBean.getSalida()).setParameter("idPersona",id.getIdPersona()).getResultList()) {
+                	formaPago = bean.getRecibo().getFormapago().getCodigo();
+                    if ("GS".equals(formaPago)) {
+                        contGS = 0;
+                        tieneGS = true;
+                    } else if ("GC".equals(formaPago)) {
+                    	tieneGC = true;
+                    } else {
+                        contGS++;
+                    }
+                }
+                Ficha fichaAnt = mFicha.get(anyo-1);
+                if (!tieneGC && "N".equals(tipo)) {
+                	setFp("GC");
+                } else if (contGS>=Constante.numGS) {
+                	setFp("GS");
+                } else if (contGS==0 && !tieneGS && fichaAnt!=null && fichaAnt.getImportecuota().signum()>0) {
+
+                	//Calcula si tiene derecho a GS por el año anterior
+                	for (SalidaDetalle bean: em.createNamedQuery("SalidaDetalle.findN",SalidaDetalle.class).
+                			setParameter("setFP",setFP2).setParameter("anyo",salidaBean.getAnyo()-1).
+                    		setParameter("salida",salidaBean.getSalida()).setParameter("idPersona",id.getIdPersona()).getResultList()) {
+                		formaPago = bean.getRecibo().getFormapago().getCodigo();
+                		if ("GS".equals(formaPago)) {
+                			contGS = 0;
+                		} else {
+                			contGS++;
+                		}
+                	}
+                	if (contGS>=Constante.numGS) {
+                		setFp("GS");
+                	}
+                }
+                if ("ME".equals(fp)) {
+                	if (bonoDetalle==null) {
+                    	List<BonoDetalle> lBonos = em.createNamedQuery("BonoDetalle.getUltimo",BonoDetalle.class)
+                    			.setParameter("idPersona",idPersona).setMaxResults(1).getResultList();
+                    	if (!lBonos.isEmpty()) {
+                        	BonoDetalle bono = lBonos.get(0);
+                        	if (!bono.getSalidaBean().getSalida().equals(this.salidaBean.getSalida())
+                        			&& bono.getId().getUso()<10) {
+                        		bonoDetalle = new BonoDetalle();
+                        		bonoDetalle.setIdPersona(idPersona);
+                        		bonoDetalle.setSalidaBean(salidaBean);
+                        		BonoDetallePK bonoDetallePK = new BonoDetallePK();
+                        		bonoDetalle.setId(bonoDetallePK);
+                        		bonoDetallePK.setBono(bono.getId().getBono());
+                        		bonoDetallePK.setUso((short) (bono.getId().getUso()+1));
+                        		fp = "BO";
+                        		em.persist(bonoDetalle);
+                        	}
+                    	}
+                	} else {
+                		fp = "BO";
+                	}
+                }
+            }
+        }
+
+//		Calculo del precio
+        Map<Object, BigDecimal> precio = new HashMap<Object, BigDecimal>();
+        boolean soloSocios = true;
+        int precioTipo;
+		for (SalidaPrecio salidaPrecio: salidaBean.getSalidaPrecios()) {
+            precio.put((precioTipo = salidaPrecio.getPrecioTipoBean().getPrecioTipo()), salidaPrecio.getPrecio());
+        	if (precioTipoNoSocio.contains(precioTipo)) {
+        		soloSocios = false;
+        	}
+        }
+        pago = BigDecimal.ZERO;
+    	BigDecimal impSegDia = new BigDecimal(Static.getPropiedadesanuales(salidaBean.getAnyo(),"S1D"));
+        boolean seguro_dia = fichaAct==null || "".equals(fichaAct.getTipoLicencia());
+        if (esSocioAct) {
+
+//            Socio
+            if (seguro_dia) {
+
+//                Socio con seguro diario
+                if ((importe = precio.get(3))==null) {
+
+//                    Salida sin precio para socio sin federar
+                    pago = impSegDia;
+                    importe = precio.get(2).add(pago);
+                } else {
+
+//                    Salida con precio para socio sin federar
+                    pago = importe.subtract(precio.get(2));
+                }
+            } else {
+
+//                Socio federado
+                importe = precio.get(2);
+            }
+        } else {
+
+//            No socio
+        	if (soloSocios) {
+        		throw new Exception("Salida solo para socios");
+        	}
+            if (seguro_dia) {
+
+//                No socio sin federar
+                if ((importe = precio.get(6))==null) {
+
+//                    Salida sin precio para no socio sin federar
+                    pago = impSegDia;
+                    importe = precio.get(5).add(pago);
+                } else {
+
+//                    Salida con precio para no socio sin federar
+                    pago = importe.subtract(precio.get(5));
+                }
+            } else {
+
+//                No socio federado
+                importe = precio.get(5);
+            }
+        }
+        if (isDirectivo) {
+            if ((ingreso = precio.get(4))==null) {
+                ingreso = BigDecimal.ZERO;
+            }
+        } else {
+            if (Constante.SIN_IMPORTE.contains(getFp())) {
+                importe = pago;
+            }
+            ingreso = importe;
+        }
+    	setSeguroDia((byte) (seguro_dia? 1: 0));
+	}
+
 	public static synchronized void update(Map<String,Object> listaApuntados) {
 		EntityManager em = null;
     	String bonoUso;
@@ -666,7 +628,6 @@ public class SalidaDetalle implements Serializable {
     	String mensaje;
     	String asiento;
     	String bus;
-    	SalidaDetalle detalle;
     	Recibo recibo;
     	String salida = (String) listaApuntados.get("salida");
     	List<PersonaMensaje> lMensajes;
@@ -677,19 +638,26 @@ public class SalidaDetalle implements Serializable {
         try {
     		em = EntityManagerFactories.getEM();
 			em.getTransaction().begin();
-			TypedQuery<SalidaDetalle> querySalida = em.createNamedQuery(
-					"SalidaDetalle.findByPersona",SalidaDetalle.class).setParameter("salida",salida);
 			TypedQuery<PersonaMensaje> queryMensaje = em.createNamedQuery(
 					"PersonaMensaje.find",PersonaMensaje.class).setParameter("salida", salida);
-			
+			Salida beanSalida = em.createNamedQuery("Salida.findBySalida",Salida.class)
+					.setParameter("salida",salida).getSingleResult();
 			for (BonoDetalle bean:em.createNamedQuery("BonoDetalle.getSalida",BonoDetalle.class).
 					setParameter("salida", salida).getResultList()) {
 				mBonoDetalle.put(bean.getIdPersona(),bean);
 			}
-			for (Map<String,Object> map: (List<Map<String,Object>>) listaApuntados.get("apuntados")) {
-		    	detalle = querySalida.setParameter("idPersona",
-						idPersona = Integer.parseInt((String) map.get("id_persona"))).getSingleResult();
-				detalle.fp = (String) map.get("estado");
+			Map<Integer,Map<String,Object>> mApuntados = new HashMap<Integer,Map<String,Object>>();
+			Map<String,Object> map;
+			for (Map<String,Object> bean: (List<Map<String,Object>>) listaApuntados.get("apuntados")) {
+				mApuntados.put(Integer.parseInt((String) bean.get("id_persona")),bean);
+			}
+			for (SalidaDetalle detalle: beanSalida.getSalidaDetalles()) {
+		    	map = mApuntados.get(idPersona = detalle.getId().getIdPersona());
+		    	detalle.setBonoDetalle(mBonoDetalle.get(idPersona));
+		    	detalle.putImporte(em);
+		    	if (lTipos.contains(detalle.fp)) {
+					detalle.fp = (String) map.get("estado");
+		    	}
 				detalle.participo = (boolean) map.get("participo");
 				detalle.asiento = (asiento = (String) map.get("asiento")).isEmpty()? null :Short.parseShort(asiento);
 	        	detalle.bus = (bus = (String) map.get("bus")).isEmpty()? null : Short.parseShort(bus);
@@ -705,14 +673,21 @@ public class SalidaDetalle implements Serializable {
 		        		if (bonoDetalle==null) {
 		        			bonoDetalle = new BonoDetalle(Short.parseShort((bono = bonoUso.split("-"))[0]),
 		        					Short.parseShort(bono[1]),detalle.salidaBean,idPersona);
+		        			detalle.bonoDetalle = bonoDetalle;
+		        			em.persist(detalle.bonoDetalle);
 		        		} else {
 		        			bonoDetalle.getId().setBono(Short.parseShort((bono = bonoUso.split("-"))[0]));
 		        			bonoDetalle.getId().setUso(Short.parseShort(bono[1]));
 		        		}
-	        			em.persist(bonoDetalle);
 		        	}
-	        	} else if (bonoDetalle!=null) {
-	        		em.remove(bonoDetalle);
+	        	} else {
+	        		if (bonoDetalle!=null) {
+	        			em.remove(bonoDetalle);
+	        		}
+	        		if (detalle.bonoDetalle!=null) {
+	        			em.remove(detalle.bonoDetalle);
+	        			detalle.bonoDetalle = null;
+	        		}
 	        	}
 	        	if ((observacion = (String) map.get("observacion")).isEmpty()) {
 	        		detalle.setObservacion(null);
@@ -754,7 +729,6 @@ public class SalidaDetalle implements Serializable {
 	        			} else {
 	        				if (personaMensaje.getId().getSalida().equals(salida)) {
 	        					personaMensaje.setMensaje(mensaje);
-//	        					em.persist(personaMensaje);
 	        				} else {
 	        					em.persist(new PersonaMensaje(salida,idPersona,now,mensaje));
 	        				}
@@ -762,10 +736,8 @@ public class SalidaDetalle implements Serializable {
 	        		}
 	        	}
 	        	recibo = detalle.recibo;
-				recibo.setFecha(now);
 				recibo.setFormapago(Static.mFormaPagoAll.get(detalle.fp));
 				recibo.setImporte(detalle.ingreso);
-//				em.persist(detalle);
 			}
 			em.getTransaction().commit();
         } catch (Exception e) {
@@ -782,17 +754,7 @@ public class SalidaDetalle implements Serializable {
         try {
     		em = EntityManagerFactories.getEM();
 			em.getTransaction().begin();
-			SalidaDetalle detalle = em.createNamedQuery("SalidaDetalle.findByPersona",SalidaDetalle.class)
-					.setParameter("salida",salida).setParameter("idPersona",idPersona).getSingleResult();
-        	for (PersonaMensaje bean: em.createNamedQuery("PersonaMensaje.findSalida",PersonaMensaje.class)
-        			.setParameter("salida", salida).setParameter("idPersona", idPersona).getResultList()) {
-    			em.remove(bean);
-        	}
-        	for (BonoDetalle bean: em.createNamedQuery("BonoDetalle.findByIdPersona",BonoDetalle.class)
-        			.setParameter("salida",salida).setParameter("idPersona",idPersona).getResultList()) {
-    			em.remove(bean);
-        	}
-			em.remove(detalle);
+			del(em,salida,idPersona);
 			em.getTransaction().commit();
         } catch (Exception e) {
         	log.log(Level.SEVERE, "SalidaDetalle.del", e);
@@ -801,5 +763,19 @@ public class SalidaDetalle implements Serializable {
 				em.close();
 			}
 		}
+	}
+
+	public static void del(EntityManager em,String salida,int idPersona) {
+		SalidaDetalle detalle = em.createNamedQuery("SalidaDetalle.findByPersona",SalidaDetalle.class)
+				.setParameter("salida",salida).setParameter("idPersona",idPersona).getSingleResult();
+    	for (PersonaMensaje bean: em.createNamedQuery("PersonaMensaje.findSalida",PersonaMensaje.class)
+    			.setParameter("salida", salida).setParameter("idPersona", idPersona).getResultList()) {
+			em.remove(bean);
+    	}
+    	for (BonoDetalle bean: em.createNamedQuery("BonoDetalle.findByIdPersona",BonoDetalle.class)
+    			.setParameter("salida",salida).setParameter("idPersona",idPersona).getResultList()) {
+			em.remove(bean);
+    	}
+		em.remove(detalle);
 	}
 }

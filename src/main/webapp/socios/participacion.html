@@ -13,17 +13,27 @@
 
 <body>
   <div id="contenedor">
-    <table>
-      <tr class="top">
-        <td><object class="include" src="/2019/bienvenida.html"></object></td>
-        <td>
-          <div class="caja_l">
-            <h3>SALIDAS AÑO: <select id="anyos"></select></h3>
-            <article id="salidas"/>
-          </div>
+    <div id="header"></div>
+    <table class="tabla_contenedor art-article">
+      <tr>
+        <td class="td_contenedor">
+          <table>
+            <tr class="top">
+              <td>
+                <object class="include" src="/2020/bienvenida.html"></object>
+              </td>
+              <td>
+                <div class="caja_l">
+                  <h3>SALIDAS AÑO: <select id="anyos"></select></h3>
+                  <article id="salidas" />
+                </div>
+              </td>
+            </tr>
+          </table>
         </td>
       </tr>
     </table>
+    <object class="include" src="/txt/footer.txt"></object>
   </div>
 </body>
 </html>

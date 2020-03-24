@@ -647,92 +647,44 @@ public class Persona implements Serializable {
 		return new ArrayList<Persona>();
 	}
 
-	public static Map<String, Object> findByIdPersona(int idPersona) {
+	public static Map<String, Object> findByIdPersona2(int idPersona) {
 		EntityManager em = null;
-    	Map<String, Object> map = new HashMap<String, Object>();
-    	List<Map<String, Object>> list;
-    	Map<String, Object> mapBean1;
-    	Map<Integer,Map<String, Object>> mapBean2;
-    	int fichaYear;
+    	Map<String, Object> mPersona = new HashMap<String, Object>();
         try {
     		em = EntityManagerFactories.getEM();
     		Persona persona = em.createNamedQuery("Persona.findByIdPersona", Persona.class)
     				.setParameter("idPersona", idPersona).getSingleResult();
     		if (persona!=null) {
-            	map.put("id_persona", persona.getIdPersona());
-            	map.put("usuario", persona.getUsuario());
-            	map.put("dni", persona.getDni());
-            	map.put("nombre", persona.getNombre());
-            	map.put("apellido1", persona.getApellido1());
-            	map.put("apellido2", persona.getApellido2());
-            	map.put("codigoPostal", persona.getCodigoPostal());
-            	map.put("domicilio", persona.getDomicilio());
-            	map.put("poblacion", persona.getPoblacion());
-            	map.put("provincia", persona.getProvincia());
-            	map.put("correo", persona.getCorreo());
-            	map.put("sexo", persona.getSexo());
-//            	log.log(Level.WARNING, "persona.nacimiento: " + persona.getNacimiento().toString()
-//            			+ " Time: " + persona.getNacimiento().getTime()
-//            			+ " local.es: " + dF1.format(persona.getNacimiento())
-//            			+ " local.en: " + dF2.format(persona.getNacimiento()));
-            	map.put("nacimiento", persona.getNacimiento()==null? "": persona.getNacimiento().toString());
-            	map.put("pzCastilla", persona.getPzCastilla());
-            	map.put("pasaporte", persona.getPasaporte());
-            	map.put("cadPasaporte", persona.getCadPasaporte()==null? "": persona.getCadPasaporte().toString());
-            	map.put("nota", persona.getNota());
-            	map.put("vetado", persona.getVetado());
-            	map.put("veto", persona.getVeto());
-            	map.put("FICHA_YEAR", fichaYear=Static.getFichaYear());
-            	map.put("FPs", Static.getMfp());
-            	map.put("telefonos", list = new ArrayList<Map<String, Object>>());
-            	for (SocioTelefono bean: persona.getSocioTelefonos()) {
-                	list.add(mapBean1 = new HashMap<String, Object>());
-            		mapBean1.put("nota", bean.getNota());
-            		mapBean1.put("orden", bean.getOrden());
-            		mapBean1.put("telefono", bean.getId().getTelefono());
-            	}
-            	map.put("emails", list = new ArrayList<Map<String, Object>>());
-            	for (SocioEmail bean: persona.getSocioEmails()) {
-            		list.add(mapBean1 = new HashMap<String, Object>());
-            		mapBean1.put("nota", bean.getNota());
-            		mapBean1.put("orden", bean.getOrden());
-            		mapBean1.put("email", bean.getId().getEmail());
-            	}
-            	map.put("fichas", mapBean2 = new HashMap<Integer,Map<String, Object>>());
+    	    	List<Map<String, Object>> lSalidas;
+    	    	Map<String, Object> mSalida;
+    			List<BonoDetalle> lBonoDetalle;
+    			BonoDetalle bonoDetalle;
+    			String salida;
+    	    	Map<Integer,List<Map<String, Object>>> mFichas = new TreeMap<Integer,List<Map<String, Object>>>();
+            	mPersona.put("usuario", persona.getUsuario());
+            	mPersona.put("fichas", mFichas);
+    			TypedQuery<BonoDetalle> queryFindByIdPersona = em.createNamedQuery(
+    					"BonoDetalle.findByIdPersona",BonoDetalle.class);
+    			TypedQuery<SalidaDetalle>  queryFindByAnyoAndPersona = em.createNamedQuery(
+    					"SalidaDetalle.findByAnyoAndPersona",SalidaDetalle.class);
             	int anyo = -1;
             	for (Ficha ficha: persona.getFichas()) {
-            		if (anyo==-1) {
-            			if (persona.getIngreso()==null) {
-                        	map.put("ingreso", ficha.getFecha().toString());
-            			} else {
-                        	map.put("ingreso", persona.getIngreso().toString());
+            		mFichas.put(anyo = ficha.getId().getAnyo(),lSalidas = new ArrayList<Map<String, Object>>());
+            		for (SalidaDetalle bean: queryFindByAnyoAndPersona.setParameter("anyo", anyo).
+            				setParameter("idPersona", idPersona).getResultList()) {
+                		lSalidas.add(mSalida = new HashMap<String, Object>());
+                		mSalida.put("salida", salida=bean.getSalidaBean().getSalida());
+                		mSalida.put("fechIni", Constante.dF12.format(bean.getSalidaBean().getFechaInicio()));
+                		mSalida.put("descripcion", bean.getSalidaBean().getDescripcion());
+            			mSalida.put("vino",bean.isParticipo()? "Si": "No");
+            			mSalida.put("tipo",bean.getSalidaBean().getTipo());
+            			mSalida.put("fp",bean.getRecibo().getFormapago().getCodigo());
+            			if (!(lBonoDetalle = queryFindByIdPersona.setParameter("salida",salida).
+            					setParameter("idPersona", idPersona).getResultList()).isEmpty()) {
+            				mSalida.put("bono",String.valueOf((bonoDetalle = lBonoDetalle.get(0)).getId().getBono())
+            						+ "-" + String.valueOf(bonoDetalle.getId().getUso()));
             			}
             		}
-            		mapBean2.put(anyo = ficha.getId().getAnyo(),mapBean1 = new HashMap<String, Object>());
-            		mapBean1.put("importecuota", ficha.getImportecuota());
-            		mapBean1.put("orden", ficha.getTipoLicencia());
-            		mapBean1.put("importelicencia", ficha.getImportelicencia());
-            		mapBean1.put("club", ficha.getClub());
-            		mapBean1.put("fp", ficha.getFp());
-            		mapBean1.put("tipoLicencia", ficha.getTipoLicencia());
-            		mapBean1.put("regalo", ficha.getRegalo());
-            		mapBean1.put("licencias", Static.getLicencia(ficha.getId().getAnyo()));
-            		mapBean1.put("opciones", ficha.getOpciones());
-            		mapBean1.put("fecha", Constante.dF12.format(ficha.getFecha()));
-            		mapBean1.put("fechavto", ficha.getFechavto()==null? "":Constante.dF12.format(ficha.getFechavto()));
-        			ficha.getOpciones().iterator();
-            	}
-            	if (!mapBean2.containsKey(fichaYear)) {
-            		mapBean2.put(fichaYear,mapBean1 = new HashMap<String, Object>());
-            		mapBean1.put("importecuota", 0);
-            		mapBean1.put("orden", 0);
-            		mapBean1.put("importelicencia", 0);
-            		mapBean1.put("club", "");
-            		mapBean1.put("fp", "");
-            		mapBean1.put("tipoLicencia", "");
-            		mapBean1.put("regalo", 0);
-            		mapBean1.put("licencias", Static.getLicencia(fichaYear));
-            		mapBean1.put("fechavto", "");
             	}
             }
         } catch (Exception e) {
@@ -742,11 +694,11 @@ public class Persona implements Serializable {
 				em.close();
 			}
 		}
-        return map;
+        return mPersona;
 	}
 
 
-	public static Map<String, Object> findByIdPersona2(int idPersona) {
+	public static Map<String, Object> findByIdPersona(int idPersona) {
 		EntityManager em = null;
     	Map<String, Object> map = new HashMap<String, Object>();
     	List<Map<String, Object>> list;
@@ -778,10 +730,6 @@ public class Persona implements Serializable {
             	map.put("provincia", persona.getProvincia());
             	map.put("correo", persona.getCorreo());
             	map.put("sexo", persona.getSexo());
-//            	log.log(Level.WARNING, "persona.nacimiento: " + persona.getNacimiento().toString()
-//            			+ " Time: " + persona.getNacimiento().getTime()
-//            			+ " local.es: " + dF1.format(persona.getNacimiento())
-//            			+ " local.en: " + dF2.format(persona.getNacimiento()));
             	map.put("nacimiento", persona.getNacimiento()==null? "": persona.getNacimiento().toString());
             	map.put("pzCastilla", persona.getPzCastilla());
             	map.put("pasaporte", persona.getPasaporte());
@@ -1093,6 +1041,6 @@ public class Persona implements Serializable {
 				em.close();
 			}
 		}
-        return findByIdPersona2(idPersona);
+        return findByIdPersona(idPersona);
     }
 }

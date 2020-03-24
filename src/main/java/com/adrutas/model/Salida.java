@@ -214,6 +214,9 @@ public class Salida implements Serializable {
 						return comparacion;
 					}
 					// Continuamos con la antiguedad
+					if ((comparacion = ((String) o1.get("antiguedad")).compareTo((String) o2.get("antiguedad")))!=0) {
+						return comparacion;
+					}
 					return (int) o1.get("idPers")-(int) o2.get("idPers");
 				}
 			}
@@ -755,7 +758,7 @@ public class Salida implements Serializable {
         				.setParameter("salida",salida).setMaxResults(1).getSingleResult();
     		} else {
         		beanSalida = em.createNamedQuery("Salida.findByDate", Salida.class)
-        				.setParameter("date",date).setMaxResults(1).getSingleResult();
+        				.setParameter("date",now).setMaxResults(1).getSingleResult();
     		}
         	map.put("salida", beanSalida.getSalida());
         	beanSalida.putFechas();
