@@ -49,8 +49,8 @@ import adrutas.com.Constante;
 @NamedQuery(name="SalidaDetalle.findByPersona", query="SELECT s FROM SalidaDetalle s "
 		+ "WHERE s.id.salida=:salida and s.id.idPersona=:idPersona")
 @NamedQuery(name="SalidaDetalle.findByPersonaAndFechas", query="SELECT s FROM SalidaDetalle s WHERE s.id.idPersona="
-		+ ":idPersona and s.salidaBean.salida in (select f1.salidaBean.salida from SalidaFecha f1 where "
-		+ "f1.fechaTipoBean.fechaTipo=1 and f1.fecha>:fechaIni and f1.fecha<=:fechaFin)")
+		+ ":idPersona and s.participo=1 and s.salidaBean.salida in (select f1.salidaBean.salida from SalidaFecha f1 where "
+		+ "f1.fechaTipoBean.fechaTipo=1 and f1.salidaBean.salida>=:salidaIni and f1.fecha<=:fechaFin)")
 @NamedQuery(name="SalidaDetalle.countByPersonaAndSalidas", query="SELECT count(s.id.salida) FROM SalidaDetalle s "
 		+ "WHERE s.id.idPersona=:idPersona and s.id.salida >= :salidaIni and s.id.salida < :salidaFin")
 @NamedQuery(name="SalidaDetalle.getLast", query="SELECT s.contador FROM SalidaDetalle s order by s.contador desc")
@@ -362,16 +362,18 @@ public class SalidaDetalle implements Serializable {
         try {
     		em = EntityManagerFactories.getEM();
     		int idPersona = ((Double) map.get("id_persona")).intValue();
+    		Date fechaFin = null;
     		for (String salida: (List<String>) map.get("array")) {
         		Salida beanSalida = em.createNamedQuery("Salida.findBySalida", Salida.class)
         				.setParameter("salida",salida).getSingleResult();
         		mEspeciales.put(salida, lEspeciales=new ArrayList<String>());
-        		Calendar cal = Calendar.getInstance();
-        		cal.setTime(beanSalida.getFechaFin());
-        		cal.add(Calendar.YEAR,-1);
+        		fechaFin = beanSalida.getFechaPreapunteIni();
+        		if (fechaFin==null) {
+        			fechaFin = beanSalida.getFechaInicio();
+        		}
         		for (SalidaDetalle salidaDetalle: em.createNamedQuery("SalidaDetalle.findByPersonaAndFechas",
-        				SalidaDetalle.class).setParameter("idPersona",idPersona).setParameter("fechaIni",
-        				cal.getTime()).setParameter("fechaFin",beanSalida.getFechaPreapunteIni()).getResultList()) {
+        				SalidaDetalle.class).setParameter("idPersona",idPersona).setParameter("salidaIni",
+        				beanSalida.getSalidaDesde()).setParameter("fechaFin",fechaFin).getResultList()) {
         			mSalidas.put(salidaDetalle.getId().getSalida(), mBean = new HashMap<String,String>());
         			mBean.put("descripcion",salidaDetalle.getSalidaBean().getDescripcion());
         			mBean.put("inicio",Constante.dF12.format(salidaDetalle.getSalidaBean().getFechaInicio()));

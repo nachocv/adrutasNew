@@ -29,7 +29,7 @@ public class ServletInit extends HttpServlet {
             out.println("/2018/1028/index.html");
     	} else {
 			log.log(Level.SEVERE, "Se obtiene la url de la BBDD");
-    		out.println(Index.getUrl(request.getParameter("fecha"), request.getParameter("pathname")));
+    		out.println(url);
     	}
     	out.close();
 //        request.getRequestDispatcher(index.getSalida().getUrl()).forward(request, response);

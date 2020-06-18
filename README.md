@@ -144,7 +144,7 @@ Some things to try next:
 C:\Program Files\MySQL\MySQL Server 5.5\bin>mysqldump.exe --host=173.194.109.193 --order-by-primary=TRUE --protocol=tcp --user=root --compress=TRUE --port=3306 --default-character-set=utf8 --skip-triggers "rutas" > C:\Users\nachocv\Documents\dumps\Dump20200210.sql
 
 ##Copia de BBDD con password
-C:\Program Files\MySQL\MySQL Server 5.5\bin>mysqldump.exe --host=35.187.86.126 --order-by-primary=TRUE --protocol=tcp --user=root --password=1234 --compress=TRUE --port=3306 --default-character-set=utf8 --skip-triggers "rutas" > C:\Users\nachocv\Documents\dumps\Dump20200321.sql
+C:\Program Files\MySQL\MySQL Server 5.5\bin>mysqldump.exe --host=35.187.86.126 --order-by-primary=TRUE --protocol=tcp --user=root --password=1234 --compress=TRUE --port=3306 --default-character-set=utf8 --skip-triggers "rutas" > C:\Users\nachocv\Documents\dumps\Dump20200325.sql
 
 ##Subir cambios a GitHub
 Se comprueba el estado con "git status"

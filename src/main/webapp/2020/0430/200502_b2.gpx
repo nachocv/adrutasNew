@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="CompeGPS" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <link href="http://www.compegps.com">
+      <text>CompeGPS TEAM, SL</text>
+    </link>
+    <time>2020-04-01T17:04:45Z</time>
+    <bounds maxlat="43.342682" maxlon="-6.959759" minlat="43.342296" minlon="-6.961197"/>
+  </metadata>
+  <trk>
+    <name>200502_b2</name>
+    <trkseg>
+      <trkpt lat="43.342682" lon="-6.961197">
+        <ele>758.0</ele>
+        <time>2020-03-30T21:16:12Z</time>
+      </trkpt>
+      <trkpt lat="43.342672" lon="-6.961003">
+        <ele>753.8</ele>
+        <time>2020-03-30T21:16:31Z</time>
+      </trkpt>
+      <trkpt lat="43.342658" lon="-6.960873">
+        <ele>750.6</ele>
+        <time>2020-03-30T21:16:43Z</time>
+      </trkpt>
+      <trkpt lat="43.342611" lon="-6.960761">
+        <ele>746.1</ele>
+        <time>2020-03-30T21:16:56Z</time>
+      </trkpt>
+      <trkpt lat="43.342580" lon="-6.960642">
+        <ele>742.4</ele>
+        <time>2020-03-30T21:17:08Z</time>
+      </trkpt>
+      <trkpt lat="43.342577" lon="-6.960509">
+        <ele>739.5</ele>
+        <time>2020-03-30T21:17:21Z</time>
+      </trkpt>
+      <trkpt lat="43.342553" lon="-6.960388">
+        <ele>736.3</ele>
+        <time>2020-03-30T21:17:33Z</time>
+      </trkpt>
+      <trkpt lat="43.342504" lon="-6.960280">
+        <ele>732.4</ele>
+        <time>2020-03-30T21:17:46Z</time>
+      </trkpt>
+      <trkpt lat="43.342499" lon="-6.960155">
+        <ele>729.8</ele>
+        <time>2020-03-30T21:17:58Z</time>
+      </trkpt>
+      <trkpt lat="43.342492" lon="-6.960023">
+        <ele>727.5</ele>
+        <time>2020-03-30T21:18:11Z</time>
+      </trkpt>
+      <trkpt lat="43.342432" lon="-6.959928">
+        <ele>726.3</ele>
+        <time>2020-03-30T21:18:23Z</time>
+      </trkpt>
+      <trkpt lat="43.342341" lon="-6.959879">
+        <ele>726.2</ele>
+        <time>2020-03-30T21:18:36Z</time>
+      </trkpt>
+      <trkpt lat="43.342296" lon="-6.959759">
+        <ele>725.0</ele>
+        <time>2020-03-30T21:18:49Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>

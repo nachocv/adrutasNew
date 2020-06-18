@@ -40,6 +40,8 @@ import adrutas.com.Constante;
 @NamedQuery(name="Salida.quedanPlazas", query="SELECT s FROM Salida s LEFT JOIN s.salidaDetalles")
 @NamedQuery(name="Salida.findByDate", query="SELECT s FROM Salida s LEFT JOIN s.salidaFechas f WHERE "
 		+ "f.fechaTipoBean.fechaTipo=2 and f.fecha>=:date and s.url is not null ORDER BY f.fecha")
+@NamedQuery(name="Salida.findOrderDate", query="SELECT s FROM Salida s LEFT JOIN s.salidaFechas f WHERE "
+		+ "f.fechaTipoBean.fechaTipo=2 and s.url is not null ORDER BY f.fecha desc")
 @NamedQuery(name="Salida.findByFechaDesde", query="SELECT s FROM Salida s LEFT JOIN s.salidaFechas f WHERE "
 		+ "f.fechaTipoBean.fechaTipo=2 and f.fecha>:date ORDER BY f.fecha,s.salida")
 @NamedQuery(name="Salida.findByFechaHasta", query="SELECT s FROM Salida s LEFT JOIN s.salidaFechas f WHERE "
@@ -954,6 +956,9 @@ public class Salida implements Serializable {
     		em = EntityManagerFactories.getEM();
     		List<Salida> list = em.createNamedQuery("Salida.findByDate", Salida.class)
     				.setParameter("date", date).setMaxResults(1).getResultList();
+    		if (list.isEmpty()) {
+        		list = em.createNamedQuery("Salida.findOrderDate", Salida.class).setMaxResults(1).getResultList();
+    		}
     		if (!list.isEmpty()) {
     			return list.get(0);
     		}
