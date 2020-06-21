@@ -844,21 +844,18 @@ public class Salida implements Serializable {
         		salidaBean = lSalidas.get(0);
         		salida = salidaBean.getSalida();
         	}
-        	String salidaDesde = null;
         	String salidaHasta = null;
         	if ("E".equals(salidaBean.getTipo())) {
         		Calendar cal = Calendar.getInstance();
         		cal.setTime(salidaBean.getFechaFin());
         		cal.add(Calendar.YEAR, -1);
-        		salidaDesde = em.createNamedQuery("Salida.findByFechaDesde",Salida.class).
-        				setParameter("date", cal.getTime()).setMaxResults(1).getSingleResult().getSalida();
         		Date dateFin = salidaBean.getFechaPreapunteIni();
         		dateFin = dateFin==null? salidaBean.getFechaApunte(): dateFin;
         		salidaHasta = em.createNamedQuery("Salida.findByFechaHasta",Salida.class).
         				setParameter("date", dateFin==null? salidaBean.getFechaInicio(): dateFin).
         				setMaxResults(1).getSingleResult().getSalida();
             	log.log(Level.INFO, "Salida " + salidaBean.getSalida() + " empieza con "
-        				+ salidaDesde + " y termina con " + salidaHasta);
+        				+ salidaBean.getSalidaDesde() + " y termina con " + salidaHasta);
         	}
         	map.put("salida", salida);
         	Set<Map<String, Object>> list = new TreeSet<Map<String, Object>>(myComparator);
@@ -873,10 +870,10 @@ public class Salida implements Serializable {
         		mBean.put("asiento", bean.getAsiento());
         		mBean.put("idPers", idPersona = bean.getId().getIdPersona());
         		mBean.put("idPersona", Constante.nF2.format(idPersona));
-        		if (salidaDesde!=null) {
+            	if ("E".equals(bean.getSalidaBean().getTipo())) {
             		mBean.put("puntos", em.createNamedQuery("SalidaDetalle.countByPersonaAndSalidas",
             				Long.class).setParameter("idPersona",idPersona).setParameter("salidaIni",
-            				salidaDesde).setParameter("salidaFin",salidaHasta).getSingleResult());
+            				bean.getSalidaBean().getSalidaDesde()).setParameter("salidaFin",salidaHasta).getSingleResult());
         		}
         		mBean.put("idRecibo",bean.getRecibo().getIdRecibo());
         		mBean.put("importe", (bean.getSeguroDia()==0? "": "SD ") + Constante.nF4.format(bean.getImporte()));

@@ -52,7 +52,7 @@ import adrutas.com.Constante;
 		+ ":idPersona and s.participo=1 and s.salidaBean.salida in (select f1.salidaBean.salida from SalidaFecha f1 where "
 		+ "f1.fechaTipoBean.fechaTipo=1 and f1.salidaBean.salida>=:salidaIni and f1.fecha<=:fechaFin)")
 @NamedQuery(name="SalidaDetalle.countByPersonaAndSalidas", query="SELECT count(s.id.salida) FROM SalidaDetalle s "
-		+ "WHERE s.id.idPersona=:idPersona and s.id.salida >= :salidaIni and s.id.salida < :salidaFin")
+		+ "WHERE s.id.idPersona=:idPersona and s.id.salida >= :salidaIni and s.id.salida < :salidaFin and s.participo=1")
 @NamedQuery(name="SalidaDetalle.getLast", query="SELECT s.contador FROM SalidaDetalle s order by s.contador desc")
 @NamedQuery(name="SalidaDetalle.findN",query="SELECT s FROM SalidaDetalle s WHERE salidaBean.tipo in ('N','R') and "
 		+ "s.recibo.formapago.codigo in :setFP and salidaBean.anyo=:anyo "
