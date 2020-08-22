@@ -40,8 +40,12 @@ import adrutas.com.Constante;
 @Table(name="salida_detalle")
 @NamedQuery(name="SalidaDetalle.findAll", query="SELECT s FROM SalidaDetalle s")
 @NamedQuery(name="SalidaDetalle.findCount", query = "SELECT s FROM SalidaDetalle s WHERE s.id.salida = :salida")
-@NamedQuery(name="SalidaDetalle.listAlfa", query = "SELECT s FROM SalidaDetalle s "
-		+ "WHERE s.id.salida = :salida ORDER BY s.persona.apellido1,s.persona.apellido2,s.persona.nombre")
+@NamedQuery(name="SalidaDetalle.listAlfa", query = "SELECT s FROM SalidaDetalle s WHERE s.participo=1 and "
+		+ "s.id.salida = :salida ORDER BY s.persona.apellido1,s.persona.apellido2,s.persona.nombre")
+@NamedQuery(name="SalidaDetalle.listAsientos", query="SELECT new SalidaDetalle(s.id,s.participo,s.bus,s.asiento,"
+		+ "s.importe,s.pago,s.seguroDia,s.observacion,s.recibo,s.persona,s.salidaBean,b) FROM SalidaDetalle s "
+		+ "LEFT JOIN BonoDetalle b ON s.id.salida=b.salidaBean.salida and s.id.idPersona=b.idPersona WHERE "
+		+ "s.participo=1 and s.id.salida=:salida ORDER BY s.bus,s.asiento,s.recibo.idRecibo")
 @NamedQuery(name="SalidaDetalle.find", query="SELECT new SalidaDetalle(s.id,s.participo,s.bus,s.asiento,s.importe,"
 		+ "s.pago,s.seguroDia,s.observacion,s.recibo,s.persona,s.salidaBean,b) FROM SalidaDetalle s LEFT JOIN "
 		+ "BonoDetalle b ON s.id.salida=b.salidaBean.salida and s.id.idPersona=b.idPersona WHERE s.id.salida=:salida "

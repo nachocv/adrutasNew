@@ -64,7 +64,7 @@ public class ListaAsientos extends HttpServlet {
             context.put("salida", salida);
             context.put("descripcion", salidaBean.getDescripcion());
             context.put("fecha", Constante.dF4.format(salidaBean.getFechaInicio()));
-            for (SalidaDetalle detalle: em.createNamedQuery("SalidaDetalle.find", SalidaDetalle.class)
+            for (SalidaDetalle detalle: em.createNamedQuery("SalidaDetalle.listAsientos", SalidaDetalle.class)
 					.setParameter("salida", salida).getResultList()) {
             	list.add(map = new HashMap<String,String>());
             	map.put("asiento",(asiento = detalle.getAsiento())==null? "": String.valueOf(asiento));
