@@ -633,6 +633,7 @@ function log(item) {
 	change_check($("input[name='regalo']"), item.ficha.regalo);
 	change_select_h($("select#tlfns"), item.telefonos, "telefono", $("input[name='telefonos']"));
 	change_select_h($("select#emls"), item.emails, "email", $("input[name='emails']"));
+  change_check($("input[name='essocio']"), item.ficha.importecuota!=0);
 }
 
 function change_telefono(coleccion, hidden1) {
@@ -935,10 +936,26 @@ function llama(div) {
 	  }
 }
 
+function change_licencia() {
+  var licencia = $("input#licencia").prop('checked');
+  if ($("input#emision").val()=="" && licencia) {
+    var hoy = new Date();
+    $("input#dsc_fmm").prop("checked",hoy.getFullYear()<FICHA_YEAR || hoy.getMonth()<2);
+  }
+  if (licencia) {
+    $("input#club").val("");
+    $("input#club").prop("disabled",true);
+  } else {
+    $("input#club").prop("disabled",false);
+  }
+  calcula_importe();
+}
+
 function calcula_importe() {
   var importe = 0;
   var importecuota = 0;
   var importelicencia = 0;
+  var dsc_fmm = 0;
   var anyoInt = $("select#anyos").val();
   var essocio = $("input#essocio").prop('checked');
   var tipo_licencia = $("select#tipo_licencia").val();
@@ -1083,8 +1100,47 @@ function calcula_importe() {
     importe = importecuota + importelicencia;
     $("input#importecuota").val(importecuota);
     $("input#importelicencia").val(importelicencia);
+  } else {
+    var federado = tipo_licencia!="INT" && tipo_licencia!="";
+    if (tipo_licencia=="INT") {
+      $("input#licencia").prop("checked",false);
+      $("input#inicio").val("");
+      $("input#fechavto").prop("disabled",false);
+      $("input#fechavto").val(ficha.fechavto);
+    } else if (tipo_licencia=="") {
+        $("input#licencia").prop("checked",false);
+        $("input#inicio").val("");
+        $("input#fechavto").prop("disabled",true);
+        $("input#fechavto").val("");
+    }
+    if (essocio) {
+      importecuota = 15;
+      if ($("input#licencia").prop('checked')) {
+        var menor = false;
+        var joven = false;
+        if (nacimiento!="") {
+          menor = year_nacimiento>anyoInt-14;
+          joven = year_nacimiento>anyoInt-18;
+        }
+        if (menor && licencia.importeMenor!=null) {
+          importelicencia = licencia.importeMenor;
+        } else if (joven && licencia.importeJoven!=null) {
+          importelicencia = licencia.importeJoven;
+        } else {
+          importelicencia = licencia.importe;
+        }
+        $("#opciones input:checked").each(function(key, value) {
+          importelicencia += licencia.opciones[value.id.substring(7)].importe;
+        });
+        dsc_fmm = $("input#dsc_fmm").prop("checked")? 7: 0;
+      }
+    }
+    importe = importecuota + importelicencia - dsc_fmm;
+    $("input#importecuota").val(importecuota);
+    $("input#importelicencia").val(importelicencia);
   }
   $("input#importe").val(importe);
+  $("input#dsc_fmm").prop('checked', dsc_fmm!=0);
 }
 
 function putSocio(socio) {
@@ -1210,6 +1266,7 @@ function cargaFicha() {
   $('select#tipo_licencia option[value=\"' + tipo_licencia + '\"]').attr('selected','selected');
   cambiaLicencia();
   $("input#licencia").prop("checked", ficha.importelicencia!=0);
+  $("input#dsc_fmm").prop("checked", ficha.dsc_fmm!=0);
   $("input#club").val(ficha.club);
   $("select#fp").val(ficha.fp);
   $("input#regalo").prop("checked", ficha.regalo);
@@ -1367,6 +1424,7 @@ function grabaFicha() {
   ficha.regalo = $("input#regalo").is(":checked");
   ficha.importecuota = $("input#importecuota").val();
   ficha.importelicencia = $("input#importelicencia").val();
+  ficha.dsc_fmm = $("input#dsc_fmm").is("checked")? 7: 0;
   ficha.fechavto = $("input#fechavto").val();
   ficha.opciones = new Array();
   $.each($("#opciones input:checked"), function(index, value) {

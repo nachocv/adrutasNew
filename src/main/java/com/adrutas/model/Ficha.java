@@ -2,6 +2,7 @@ package com.adrutas.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import com.adrutas.dao.EntityManagerFactories;
 import com.adrutas.dao.Static;
@@ -58,6 +60,8 @@ public class Ficha implements Serializable {
 
 	private BigDecimal importelicencia;
 
+	private BigDecimal dsc_fmm;
+
 	private byte regalo;
 
 	private Date fechavto;
@@ -87,6 +91,8 @@ public class Ficha implements Serializable {
 	//bi-directional many-to-one association to FichaAceptacion
 //	@OneToMany(mappedBy="ficha")
 //	private List<FichaAceptacion> fichaAceptacions;
+	@Transient
+	private static BigDecimal DESCUENTO_FMM = new BigDecimal(7); 
 
 	public Ficha() {
 	}
@@ -145,6 +151,14 @@ public class Ficha implements Serializable {
 
 	public void setImportelicencia(BigDecimal importelicencia) {
 		this.importelicencia = importelicencia;
+	}
+
+	public BigDecimal getDsc_fmm() {
+		return dsc_fmm;
+	}
+
+	public void setDsc_fmm(BigDecimal dsc_fmm) {
+		this.dsc_fmm = dsc_fmm;
 	}
 
 	public byte getRegalo() {
@@ -261,14 +275,14 @@ public class Ficha implements Serializable {
     		int idPersona = Integer.parseInt((String) map.get("id_persona"));
     		int anyo = Integer.parseInt((String) map.get("anyo"));
     		short idFicha = 0;
-    		Date fecha = new Date();
+    		Calendar fecha = Calendar.getInstance();
     		em = EntityManagerFactories.getEM();
 			em.getTransaction().begin();
     		int idRecibo = em.createNamedQuery("Recibo.getLast", Integer.class).setMaxResults(1).getSingleResult() + 1;
     		ficha = find(em,idPersona,anyo,idFicha);
     		recibo = new Recibo();
     		recibo.setIdRecibo(idRecibo);
-    		recibo.setFecha(fecha);
+    		recibo.setFecha(fecha.getTime());
     		recibo.setFormapago(Static.getMformapago().get(formapago = (String) map.get("fp")));
     		recibo.setTabla("ficha");
     		recibo.setImporte((importecuota = new BigDecimal((String) map.get("importecuota"))).
@@ -281,10 +295,11 @@ public class Ficha implements Serializable {
     			fichaPK.setIdPersona(idPersona);
     			fichaPK.setAnyo(anyo);
     			fichaPK.setIdFicha(idFicha);
-        		ficha.setFecha(fecha);
+        		ficha.setFecha(fecha.getTime());
+    			ficha.setDsc_fmm(fecha.get(Calendar.YEAR)<anyo || fecha.get(Calendar.MONTH)<2? DESCUENTO_FMM: BigDecimal.ZERO);
     			em.persist(ficha);
     		} else {
-        		ficha.setFecha(fecha);
+        		ficha.setFecha(fecha.getTime());
     		}
     		ficha.setTipoLicencia((String) map.get("tipo_licencia"));
     		ficha.setClub((String) map.get("club"));

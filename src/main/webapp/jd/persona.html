@@ -131,24 +131,24 @@ $(persona);
               <table width="100%" border="0" cellpadding="2" cellspacing="2">
                 <tr>
                   <td>
-                    Cuota Socio Rutas: <input type="checkbox" id="essocio" onchange="calcula_importe()">
+                    Cuota Socio Rutas<input type="checkbox" id="essocio" onchange="calcula_importe()">
                   </td>
                   <td>
-                    Licencia:<select id="tipo_licencia" class="input_175" onchange="calcula_importe()"></select>
+                    Licencia<select id="tipo_licencia" class="input_175" onchange="calcula_importe()"></select>
                   </td>
                   <td>
-                    Con Rutas: <input type="checkbox" id="licencia" onchange="calcula_importe()">
+                    Con Rutas<input type="checkbox" id="licencia" onchange="change_licencia()">
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    Club: <input type="text" id="club">
+                    Club<input type="text" id="club">
                   </td>
                   <td>
-                    Inicio: <input id="inicio" class="input_100" disabled/>
+                    Inicio<input id="inicio" class="input_100" disabled/>
                   </td>
                   <td>
-                    Fin: <input id="fechavto" class="input_100" disabled/>
+                    Fin<input id="fechavto" class="input_100" disabled/>
                   </td>
                 </tr>
                 <tr>
@@ -164,19 +164,22 @@ $(persona);
                 </tr>
                 <tr>
                   <td>
-                    Importe: <input type="text" id="importe" value="0" />
+                    Importe<input type="text" id="importe" value="0" />
                     <input type="hidden" id="importecuota" value="0" />
                     <input type="hidden" id="importelicencia" value="0" />
                   </td>
                   <td>
-                    Emisión: <input id="emision" class="input_100" disabled/>
+                    Emisión<input id="emision" class="input_100" disabled/>
+                  </td>
+                  <td>
+                    Descuento FMM<input type="checkbox" id="dsc_fmm" onchange="calcula_importe()"/>
                   </td>
                 </tr>
                 <tr>
-                  <td>Pago: <select id="fp" class="input_200"></select>
+                  <td>Pago<select id="fp" class="input_200"></select>
                   </td>
-                  <td>Entregado Regalo: <input type="checkbox" id="regalo">
-                  </td>
+                  <!-- <td>Entregado Regalo<input type="checkbox" id="regalo">
+                  </td> -->
                 </tr>
                 <tr>
                   <td colspan="3" align="center">

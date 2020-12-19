@@ -1,7 +1,6 @@
 package com.adrutas.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -63,13 +62,13 @@ public class ExcelSocios extends HttpServlet {
 	        int fil = 1;
 	        Map<Integer,Persona> mPersona = new TreeMap<Integer,Persona>();
 	    	Calendar cal = new GregorianCalendar();
-	    	Integer year = cal.get(Calendar.YEAR);
+	    	Integer anyo = cal.get(Calendar.YEAR);
 	        if (cal.get(Calendar.MONTH)<2) {
-	        	year = year-1;
+	        	anyo = anyo-1;
 	        }
 //        	list.add(year-1);
 	        for (Ficha bean: em.createNamedQuery("Ficha.findSociosByAnyos", Ficha.class)
-					.setParameter("anyo", year).getResultList()) {
+					.setParameter("anyo", anyo).getResultList()) {
 	        	mPersona.put(bean.getId().getIdPersona(),bean.getPersona());
 	        }
 	        for (Persona persona: mPersona.values()) {
@@ -117,7 +116,7 @@ public class ExcelSocios extends HttpServlet {
                         }
                     }
                 }
-                row.createCell(23).setCellValue((ficha = persona.getFichas().get(0)).getImportelicencia().doubleValue());
+                row.createCell(23).setCellValue((ficha = persona.getFicha(anyo)).getImportelicencia().doubleValue());
                 row.createCell(24).setCellValue(ficha.getImportecuota().doubleValue());
                 row.createCell(25).setCellValue(ficha.getTipoLicencia());
                 row.createCell(26).setCellValue((recibo = ficha.getRecibo()).getIdRecibo());

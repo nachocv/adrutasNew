@@ -162,7 +162,7 @@ public class Persona implements Serializable {
 	private List<Ficha> fichas;
 
 	@Transient
-	private Map<Integer,Ficha> mFichas = new TreeMap<Integer,Ficha>();
+	private Map<Integer,Ficha> mFichas = null;
 
 	//bi-directional many-to-one association to SalidaDetalle
 	@OneToMany(mappedBy="persona")
@@ -509,41 +509,33 @@ public class Persona implements Serializable {
 		return this.fichas;
 	}
 
-	public Map<Integer,Ficha> putFichas() {
-		if (mFichas==null || mFichas.isEmpty()) {
+	public Ficha getFicha(int anyo) {
+		if (mFichas==null) {
 			mFichas = new TreeMap<Integer,Ficha>();
 			for (Ficha ficha: fichas) {
 				mFichas.put(ficha.getId().getAnyo(), ficha);
 			}
 		}
-		return mFichas;
+		return mFichas.get(anyo);
 	}
 
 	public void setFichas(List<Ficha> fichas) {
 		this.fichas = fichas;
-		for (Ficha ficha: fichas) {
-			mFichas.put(ficha.getId().getAnyo(), ficha);
-		}
 	}
 
 	public Ficha addFicha(Ficha ficha) {
 		getFichas().add(ficha);
 		ficha.setPersona(this);
-		mFichas.put(ficha.getId().getAnyo(), ficha);
-
+		mFichas = null;
 		return ficha;
 	}
 
 	public Ficha removeFicha(Ficha ficha) {
 		getFichas().remove(ficha);
 		ficha.setPersona(null);
-		mFichas.remove(ficha.getId().getAnyo());
+		mFichas = null;
 
 		return ficha;
-	}
-
-	public Map<Integer, Ficha> getmFichas() {
-		return mFichas;
 	}
 
 	public List<SalidaDetalle> getSalidaDetalles() {
@@ -613,7 +605,7 @@ public class Persona implements Serializable {
 	}
 
 	public boolean esSocio(int anyo) {
-        Ficha ficha = putFichas().get(anyo);
+        Ficha ficha = getFicha(anyo);
         return ficha!=null && ficha.getImportecuota().signum()!=0;
 	}
 
