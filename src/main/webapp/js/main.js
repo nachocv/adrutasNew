@@ -1424,7 +1424,7 @@ function grabaFicha() {
   ficha.regalo = $("input#regalo").is(":checked");
   ficha.importecuota = $("input#importecuota").val();
   ficha.importelicencia = $("input#importelicencia").val();
-  ficha.dsc_fmm = $("input#dsc_fmm").is("checked")? 7: 0;
+  ficha.dsc_fmm = $("input#dsc_fmm").is(":checked")? 7: 0;
   ficha.fechavto = $("input#fechavto").val();
   ficha.opciones = new Array();
   $.each($("#opciones input:checked"), function(index, value) {

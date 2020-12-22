@@ -767,6 +767,7 @@ public class Persona implements Serializable {
             		mapBean1.put("opciones", ficha.getOpciones());
             		mapBean1.put("fecha", Constante.dF12.format(ficha.getFecha()));
             		mapBean1.put("fechavto", ficha.getFechavto()==null? "":Constante.dF12.format(ficha.getFechavto()));
+            		mapBean1.put("dsc_fmm", ficha.getDsc_fmm());
         			ficha.getOpciones().iterator();
         			mapBean1.put("salidas",list = new ArrayList<Map<String, Object>>());
             		for (SalidaDetalle bean: queryFindByAnyoAndPersona.setParameter("anyo", anyo).

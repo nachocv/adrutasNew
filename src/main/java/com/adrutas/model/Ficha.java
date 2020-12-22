@@ -271,6 +271,7 @@ public class Ficha implements Serializable {
     		Recibo recibo = null;
     		BigDecimal importecuota = null;
     		BigDecimal importelicencia = null;
+    		BigDecimal dsc_fmm = null;
     		String formapago = null;
     		int idPersona = Integer.parseInt((String) map.get("id_persona"));
     		int anyo = Integer.parseInt((String) map.get("anyo"));
@@ -286,7 +287,8 @@ public class Ficha implements Serializable {
     		recibo.setFormapago(Static.getMformapago().get(formapago = (String) map.get("fp")));
     		recibo.setTabla("ficha");
     		recibo.setImporte((importecuota = new BigDecimal((String) map.get("importecuota"))).
-    				add(importelicencia = new BigDecimal((String) map.get("importelicencia"))));
+    				add(importelicencia = new BigDecimal((String) map.get("importelicencia"))).
+    				subtract(dsc_fmm = new BigDecimal((Double) map.get("dsc_fmm"))));
     		recibo.setDirectivo("0367");
 			em.persist(recibo);
 			if (ficha==null) {
@@ -309,6 +311,7 @@ public class Ficha implements Serializable {
     		ficha.setImportelicencia(importelicencia);
 			ficha.setRecibo(recibo);
 			ficha.setFechavto(Static.getDate((String) map.get("fechavto")));
+			ficha.setDsc_fmm(dsc_fmm);
 			em.createNamedQuery("FichaOpcion.del").setParameter("idPersona",idPersona).
 				setParameter("anyo",anyo).setParameter("idFicha",idFicha).executeUpdate();
 			for (String opcion: (List<String>) map.get("opciones")) {
