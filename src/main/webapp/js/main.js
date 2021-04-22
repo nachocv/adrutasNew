@@ -8,6 +8,9 @@ var url;
 var datos;
 var fichas;
 var persona;
+var ficha;
+var fichaOld;
+var fueSocio;
 
 function filtrar(funcion) {
   $("input#filtro").autocomplete({
@@ -959,7 +962,6 @@ function calcula_importe() {
   var anyoInt = $("select#anyos").val();
   var essocio = $("input#essocio").prop('checked');
   var tipo_licencia = $("select#tipo_licencia").val();
-  var ficha = fichas[anyoInt];
   var licencia = ficha.licencias[tipo_licencia];
   if (!essocio) {
     $("input#licencia").prop('checked', false);
@@ -988,7 +990,7 @@ function calcula_importe() {
     }
   } else if (anyoInt==2016) {
     if (essocio) {
-      if (fichas[anyoInt-1]!==undefined && fichas[anyoInt-1].importecuota!=0) {
+      if (fueSocio) {
         importecuota = 5;
       } else {
         var mayor41 = true;
@@ -1013,7 +1015,7 @@ function calcula_importe() {
     importe = importecuota + importelicencia;
   } else if (anyoInt==2017) {
     if (essocio) {
-      if (fichas[anyoInt-1]!==undefined && fichas[anyoInt-1].importecuota!=0) {
+      if (fueSocio) {
         importecuota = 5;
       } else {
         var mayor41 = true;
@@ -1040,7 +1042,7 @@ function calcula_importe() {
     $("input#importelicencia").val(importelicencia);
   } else if (anyoInt>2017 && anyoInt<2020) {
     if (essocio) {
-      if (fichas[anyoInt-1]!=undefined && fichas[anyoInt-1].importecuota!=0) {
+      if (fueSocio) {
         importecuota = 5;
       } else {
         var mayor41 = true;
@@ -1132,7 +1134,7 @@ function calcula_importe() {
         $("#opciones input:checked").each(function(key, value) {
           importelicencia += licencia.opciones[value.id.substring(7)].importe;
         });
-        dsc_fmm = $("input#dsc_fmm").prop("checked")? 7: 0;
+        dsc_fmm = fueSocio && fichaOld.importelicencia!=0 && $("input#dsc_fmm").prop("checked")? 7: 0;
       }
     }
     importe = importecuota + importelicencia - dsc_fmm;
@@ -1254,7 +1256,9 @@ function cargaPersona(data) {
 
 function cargaFicha() {
   var anyo = $("select#anyos option:selected").text();
-  var ficha = fichas[anyo];
+  ficha = fichas[anyo];
+  fichaOld = fichas[anyo-1];
+  fueSocio = fichaOld!=undefined && fichaOld.importecuota!=0;
   var tipo_licencia = ficha.tipoLicencia;
   $("input#essocio").prop("checked", ficha.importecuota!=0);
   var select = $("select#tipo_licencia");
@@ -1306,7 +1310,7 @@ function cambiaLicencia() {
 		$("#descripcion").html("");
 		opciones = "No hay Opciones";
 	} else {
-		var licencia = fichas[$("select#anyos").val()].licencias[tipo_licencia];
+		var licencia = ficha.licencias[tipo_licencia];
 		$("#descripcion").html("Caracter&iacute;sticas:<br/>" + licencia.descripcion);
 		if (undefined==licencia["opciones"]) {
 			opciones = "No hay Opciones";
@@ -1471,8 +1475,6 @@ var getParticipacion = function() {
 function cargaSalidas() {
   var article = $("article#salidas");
   article.empty();
-  var anyo = $("select#anyos option:selected").text();
-  var ficha = fichas[anyo];
   var contenido = "<table style='width:100%'><thead><tr align='center'><td>Salida</td><td>Fecha</td><td>Descripción" +
   "</td><td>Tipo</td><td>Vino</td><td>FP</td><td>Bono</td></tr></thead><tbody>";
   $.each(ficha, function(key, value) {

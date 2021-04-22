@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.adrutas.model.Persona;
 import com.adrutas.model.Salida;
@@ -31,9 +32,11 @@ public class ServletLog extends HttpServlet {
                 if (list.size()==1) {
                     Persona persona = list.get(0);
                     if (req.getParameter("password").equals(persona.getPassword())) {
-                    	req.getSession().setAttribute("yo", persona);
+                    	HttpSession session = req.getSession(true);
+                    	log.log(Level.SEVERE, "session.id: " + session.getId());
+                    	session.setAttribute("yo", persona);
             			out.println(new Gson().toJson(Salida.find(req.getParameter("salida"),
-            					null,(Persona) req.getSession().getAttribute("yo"))));
+            					null,(Persona) session.getAttribute("yo"))));
                     }
                 }
             }

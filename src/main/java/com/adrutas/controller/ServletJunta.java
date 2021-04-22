@@ -4,12 +4,15 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.adrutas.model.Directiva;
 import com.adrutas.model.Persona;
@@ -18,10 +21,13 @@ import com.adrutas.model.Persona;
 public final class ServletJunta extends HttpServlet {
 	private static final long serialVersionUID = -5634101072538352882L;
 	private static final int BUFSIZE = 4096;
+	private static final Logger log = Logger.getLogger(ServletJunta.class.getName());
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Persona persona = (Persona) ((HttpServletRequest) req).getSession().getAttribute("yo");
+    	HttpSession session = req.getSession(true);
+    	log.log(Level.SEVERE, "session.id: " + session.getId());
+		Persona persona = (Persona) session.getAttribute("yo");
     	if (persona==null || !Directiva.isDirectivo(persona.getIdPersona())) {
     		resp.sendError(403);
     	} else {

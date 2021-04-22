@@ -2,6 +2,7 @@ package com.adrutas.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.adrutas.model.Persona;
 import com.google.gson.Gson;
@@ -20,7 +22,9 @@ public class Participacion extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Persona persona = (Persona) req.getSession().getAttribute("yo");
+    	HttpSession session = req.getSession(true);
+    	log.log(Level.SEVERE, "session.id: " + session.getId());
+		Persona persona = (Persona) session.getAttribute("yo");
     	resp.setCharacterEncoding("UTF-8");
     	PrintWriter out = resp.getWriter();
         out.println(new Gson().toJson(Persona.findByIdPersona2(persona.getIdPersona())));

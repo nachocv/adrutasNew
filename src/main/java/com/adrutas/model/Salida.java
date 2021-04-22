@@ -50,6 +50,8 @@ import adrutas.com.Constante;
 public class Salida implements Serializable {
 	private static final long serialVersionUID = 8476007606083178837L;
 	private static final Logger log = Logger.getLogger(Salida.class.getName());
+//    private static Instrumentation instrumentation;
+
 	@Id
 	private String salida;
 
@@ -762,6 +764,7 @@ public class Salida implements Serializable {
         		beanSalida = em.createNamedQuery("Salida.findByDate", Salida.class)
         				.setParameter("date",now).setMaxResults(1).getSingleResult();
     		}
+//        	log.log(Level.SEVERE, "Tamaño de beanSalida: " + instrumentation.getObjectSize(beanSalida));
         	map.put("salida", beanSalida.getSalida());
         	beanSalida.putFechas();
             Date fechaApunte = beanSalida.fechaApunte;

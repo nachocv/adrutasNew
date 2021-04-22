@@ -19,6 +19,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -757,13 +758,16 @@ public class SalidaDetalle implements Serializable {
 
 	public static synchronized void del(String salida,int idPersona) {
 		EntityManager em = null;
+		EntityTransaction t = null;
         try {
     		em = EntityManagerFactories.getEM();
-			em.getTransaction().begin();
+    		t = em.getTransaction();
+    		t.begin();
 			del(em,salida,idPersona);
-			em.getTransaction().commit();
+			t.commit();
         } catch (Exception e) {
         	log.log(Level.SEVERE, "SalidaDetalle.del", e);
+        	t.rollback();
 		} finally {
 			if (em!=null) {
 				em.close();

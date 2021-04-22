@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.adrutas.model.Persona;
 import com.adrutas.model.Salida;
@@ -27,8 +28,10 @@ public class ServletUser extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     	PrintWriter out = resp.getWriter();
         try {
-			out.println(new Gson().toJson(Salida.find(null,Constante.dF11.parse(
-					req.getParameter("pathname").substring(0, 11)),(Persona) req.getSession().getAttribute("yo"))));
+        	HttpSession session = req.getSession(true);
+        	log.log(Level.CONFIG, "session.id: " + session.getId());
+			out.println(new Gson().toJson(Salida.find(null,Constante.dF11.parse(req.getParameter("pathname").
+					substring(0, 11)),(Persona) session.getAttribute("yo"))));
 		} catch (ParseException e) {
         	log.log(Level.SEVERE, "ServletUser", e);
 		} finally {

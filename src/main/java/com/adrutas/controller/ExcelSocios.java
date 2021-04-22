@@ -116,7 +116,10 @@ public class ExcelSocios extends HttpServlet {
                         }
                     }
                 }
-                row.createCell(23).setCellValue((ficha = persona.getFicha(anyo)).getImportelicencia().doubleValue());
+                if ((ficha = persona.getFicha(anyo+1))==null) {
+                	ficha = persona.getFicha(anyo);
+                }
+                row.createCell(23).setCellValue(ficha.getImportelicencia().doubleValue());
                 row.createCell(24).setCellValue(ficha.getImportecuota().doubleValue());
                 row.createCell(25).setCellValue(ficha.getTipoLicencia());
                 row.createCell(26).setCellValue((recibo = ficha.getRecibo()).getIdRecibo());

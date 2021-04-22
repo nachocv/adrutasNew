@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.adrutas.dao.EntityManagerFactories;
 import com.adrutas.model.Link;
@@ -43,7 +44,9 @@ public class ChangePassword extends HttpServlet {
             		em.remove(link1);
         		}
     			em.getTransaction().commit();
-            	req.getSession().setAttribute("yo", persona);
+            	HttpSession session = req.getSession(true);
+            	log.log(Level.SEVERE, "session.id: " + session.getId());
+            	session.setAttribute("yo", persona);
             } catch (Exception e) {
             	error = "No recupera el link " + sLink + ": " + e.getMessage();
                 log.log(Level.SEVERE, "No recupera la cuenta ", e);

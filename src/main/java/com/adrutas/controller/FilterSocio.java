@@ -15,9 +15,9 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.adrutas.dao.EntityManagerFactories;
-import com.adrutas.model.Directiva;
 import com.adrutas.model.Ficha;
 import com.adrutas.model.Persona;
 
@@ -33,11 +33,9 @@ public final class FilterSocio implements Filter {
 	}
 
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
-		String uri = ((HttpServletRequest) req).getRequestURI();
-		StringBuffer url = ((HttpServletRequest) req).getRequestURL();
-		log.log(Level.SEVERE, "uri: " + uri + ". url: " + url);
-    	Persona persona = (Persona) ((HttpServletRequest) req).getSession().getAttribute("yo");
-    	log.log(Level.SEVERE, "persona==null: " + (persona==null));
+    	HttpSession session = ((HttpServletRequest) req).getSession(true);
+    	log.log(Level.SEVERE, "session.id: " + session.getId());
+    	Persona persona = (Persona) session.getAttribute("yo");
     	if (persona!=null) {
 			log.log(Level.SEVERE, "Recupera el atributo yo");
     		EntityManager em = null;

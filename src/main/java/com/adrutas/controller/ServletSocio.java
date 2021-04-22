@@ -14,6 +14,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.adrutas.dao.EntityManagerFactories;
 import com.adrutas.model.Ficha;
@@ -27,7 +28,9 @@ public final class ServletSocio extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Persona persona = (Persona) ((HttpServletRequest) req).getSession().getAttribute("yo");
+    	HttpSession session = req.getSession(true);
+    	log.log(Level.SEVERE, "session.id: " + session.getId());
+		Persona persona = (Persona) session.getAttribute("yo");
     	if (persona!=null) {
 			log.log(Level.SEVERE, "Recupera el atributo yo");
     		EntityManager em = null;
