@@ -484,7 +484,7 @@ public class SalidaDetalle implements Serializable {
             setFp("JD");
         } else if (esSocioAct) {
         	String tipo = salidaBean.getTipo();
-            if (("N".equals(tipo) || "R".equals(tipo))) {
+            if ("N".equals(tipo)) {
             	int contGS = 0;
             	boolean tieneGC = false;
             	boolean tieneGS = false;

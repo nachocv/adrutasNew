@@ -918,7 +918,9 @@ public class Salida implements Serializable {
         				break;
         			}
         		}
-        		if (antiguedad!=null) {
+        		if (antiguedad==null) {
+            		mBean.put("antiguedad",Constante.dF12.format(bean.getSalidaBean().fechaInicio));
+        		} else {
             		mBean.put("antiguedad",Constante.dF12.format(antiguedad));
             		mBean.put("fecha",antiguedad);
         		}
